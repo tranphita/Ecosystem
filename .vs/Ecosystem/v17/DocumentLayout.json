@@ -1,0 +1,210 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Startup\\Ecosystem\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{0B102DF6-F709-4785-B7F6-523FE6FFF523}|src\\Ecosystem.Persistence.ReadDb\\Ecosystem.Persistence.ReadDb.csproj|d:\\startup\\ecosystem\\src\\ecosystem.persistence.readdb\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B102DF6-F709-4785-B7F6-523FE6FFF523}|src\\Ecosystem.Persistence.ReadDb\\Ecosystem.Persistence.ReadDb.csproj|solutionrelative:src\\ecosystem.persistence.readdb\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D0688E8-7310-44C4-8445-EC2975667167}|src\\Ecosystem.Infrastructure\\Ecosystem.Infrastructure.csproj|d:\\startup\\ecosystem\\src\\ecosystem.infrastructure\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D0688E8-7310-44C4-8445-EC2975667167}|src\\Ecosystem.Infrastructure\\Ecosystem.Infrastructure.csproj|solutionrelative:src\\ecosystem.infrastructure\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A78135C1-7DB0-4FBD-BA35-8DD7EE97DB52}|src\\Ecosystem.WebApi\\Ecosystem.WebApi.csproj|d:\\startup\\ecosystem\\src\\ecosystem.webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A78135C1-7DB0-4FBD-BA35-8DD7EE97DB52}|src\\Ecosystem.WebApi\\Ecosystem.WebApi.csproj|solutionrelative:src\\ecosystem.webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A78135C1-7DB0-4FBD-BA35-8DD7EE97DB52}|src\\Ecosystem.WebApi\\Ecosystem.WebApi.csproj|d:\\startup\\ecosystem\\src\\ecosystem.webapi\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A78135C1-7DB0-4FBD-BA35-8DD7EE97DB52}|src\\Ecosystem.WebApi\\Ecosystem.WebApi.csproj|solutionrelative:src\\ecosystem.webapi\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DEC46DFA-6B50-4645-88F9-EE34BB1BF5B8}|src\\Ecosystem.Domain\\Ecosystem.Domain.csproj|d:\\startup\\ecosystem\\src\\ecosystem.domain\\aggregates\\user\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DEC46DFA-6B50-4645-88F9-EE34BB1BF5B8}|src\\Ecosystem.Domain\\Ecosystem.Domain.csproj|solutionrelative:src\\ecosystem.domain\\aggregates\\user\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F962713A-57A4-4B6E-A68D-BE730B881B69}|src\\Ecosystem.Application\\Ecosystem.Application.csproj|d:\\startup\\ecosystem\\src\\ecosystem.application\\features\\users\\queries\\getuser\\getuserbyidqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F962713A-57A4-4B6E-A68D-BE730B881B69}|src\\Ecosystem.Application\\Ecosystem.Application.csproj|solutionrelative:src\\ecosystem.application\\features\\users\\queries\\getuser\\getuserbyidqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F962713A-57A4-4B6E-A68D-BE730B881B69}|src\\Ecosystem.Application\\Ecosystem.Application.csproj|d:\\startup\\ecosystem\\src\\ecosystem.application\\features\\users\\queries\\getuser\\getuserbyidquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F962713A-57A4-4B6E-A68D-BE730B881B69}|src\\Ecosystem.Application\\Ecosystem.Application.csproj|solutionrelative:src\\ecosystem.application\\features\\users\\queries\\getuser\\getuserbyidquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{18337E7F-CE58-4E45-8B35-91828AF3C70E}|src\\Ecosystem.AppHost\\Ecosystem.AppHost.csproj|d:\\startup\\ecosystem\\src\\ecosystem.apphost\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{18337E7F-CE58-4E45-8B35-91828AF3C70E}|src\\Ecosystem.AppHost\\Ecosystem.AppHost.csproj|solutionrelative:src\\ecosystem.apphost\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A78135C1-7DB0-4FBD-BA35-8DD7EE97DB52}|src\\Ecosystem.WebApi\\Ecosystem.WebApi.csproj|d:\\startup\\ecosystem\\src\\ecosystem.webapi\\controllers\\apicontrollerbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A78135C1-7DB0-4FBD-BA35-8DD7EE97DB52}|src\\Ecosystem.WebApi\\Ecosystem.WebApi.csproj|solutionrelative:src\\ecosystem.webapi\\controllers\\apicontrollerbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A78135C1-7DB0-4FBD-BA35-8DD7EE97DB52}|src\\Ecosystem.WebApi\\Ecosystem.WebApi.csproj|d:\\startup\\ecosystem\\src\\ecosystem.webapi\\openapi\\bearersecurityschemetransformer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A78135C1-7DB0-4FBD-BA35-8DD7EE97DB52}|src\\Ecosystem.WebApi\\Ecosystem.WebApi.csproj|solutionrelative:src\\ecosystem.webapi\\openapi\\bearersecurityschemetransformer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 7,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:133:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Startup\\Ecosystem\\src\\Ecosystem.WebApi\\Program.cs",
+              "RelativeDocumentMoniker": "src\\Ecosystem.WebApi\\Program.cs",
+              "ToolTip": "D:\\Startup\\Ecosystem\\src\\Ecosystem.WebApi\\Program.cs",
+              "RelativeToolTip": "src\\Ecosystem.WebApi\\Program.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAhwDEAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-10T10:10:41.618Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DependencyInjection.cs",
+              "DocumentMoniker": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Infrastructure\\DependencyInjection.cs",
+              "RelativeDocumentMoniker": "src\\Ecosystem.Infrastructure\\DependencyInjection.cs",
+              "ToolTip": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Infrastructure\\DependencyInjection.cs",
+              "RelativeToolTip": "src\\Ecosystem.Infrastructure\\DependencyInjection.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-10T10:23:44.495Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DependencyInjection.cs",
+              "DocumentMoniker": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Persistence.ReadDb\\DependencyInjection.cs",
+              "RelativeDocumentMoniker": "src\\Ecosystem.Persistence.ReadDb\\DependencyInjection.cs",
+              "ToolTip": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Persistence.ReadDb\\DependencyInjection.cs",
+              "RelativeToolTip": "src\\Ecosystem.Persistence.ReadDb\\DependencyInjection.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-10T11:36:53.302Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Startup\\Ecosystem\\src\\Ecosystem.AppHost\\Program.cs",
+              "RelativeDocumentMoniker": "src\\Ecosystem.AppHost\\Program.cs",
+              "ToolTip": "D:\\Startup\\Ecosystem\\src\\Ecosystem.AppHost\\Program.cs",
+              "RelativeToolTip": "src\\Ecosystem.AppHost\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-10T11:18:37.481Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "GetUserByIdQuery.cs",
+              "DocumentMoniker": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Application\\Features\\Users\\Queries\\GetUser\\GetUserByIdQuery.cs",
+              "RelativeDocumentMoniker": "src\\Ecosystem.Application\\Features\\Users\\Queries\\GetUser\\GetUserByIdQuery.cs",
+              "ToolTip": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Application\\Features\\Users\\Queries\\GetUser\\GetUserByIdQuery.cs",
+              "RelativeToolTip": "src\\Ecosystem.Application\\Features\\Users\\Queries\\GetUser\\GetUserByIdQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAkAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-10T11:20:21.654Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "D:\\Startup\\Ecosystem\\src\\Ecosystem.WebApi\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "src\\Ecosystem.WebApi\\Controllers\\UsersController.cs",
+              "ToolTip": "D:\\Startup\\Ecosystem\\src\\Ecosystem.WebApi\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "src\\Ecosystem.WebApi\\Controllers\\UsersController.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAQwB0AAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-10T11:17:51.529Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "GetUserByIdQueryHandler.cs",
+              "DocumentMoniker": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Application\\Features\\Users\\Queries\\GetUser\\GetUserByIdQueryHandler.cs",
+              "RelativeDocumentMoniker": "src\\Ecosystem.Application\\Features\\Users\\Queries\\GetUser\\GetUserByIdQueryHandler.cs",
+              "ToolTip": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Application\\Features\\Users\\Queries\\GetUser\\GetUserByIdQueryHandler.cs",
+              "RelativeToolTip": "src\\Ecosystem.Application\\Features\\Users\\Queries\\GetUser\\GetUserByIdQueryHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-10T11:20:40.898Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "User.cs",
+              "DocumentMoniker": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Domain\\Aggregates\\User\\User.cs",
+              "RelativeDocumentMoniker": "src\\Ecosystem.Domain\\Aggregates\\User\\User.cs",
+              "ToolTip": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Domain\\Aggregates\\User\\User.cs",
+              "RelativeToolTip": "src\\Ecosystem.Domain\\Aggregates\\User\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-10T11:27:11.294Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ApiControllerBase.cs",
+              "DocumentMoniker": "D:\\Startup\\Ecosystem\\src\\Ecosystem.WebApi\\Controllers\\ApiControllerBase.cs",
+              "RelativeDocumentMoniker": "src\\Ecosystem.WebApi\\Controllers\\ApiControllerBase.cs",
+              "ToolTip": "D:\\Startup\\Ecosystem\\src\\Ecosystem.WebApi\\Controllers\\ApiControllerBase.cs",
+              "RelativeToolTip": "src\\Ecosystem.WebApi\\Controllers\\ApiControllerBase.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-10T11:17:21.739Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "BearerSecuritySchemeTransformer.cs",
+              "DocumentMoniker": "D:\\Startup\\Ecosystem\\src\\Ecosystem.WebApi\\OpenApi\\BearerSecuritySchemeTransformer.cs",
+              "RelativeDocumentMoniker": "src\\Ecosystem.WebApi\\OpenApi\\BearerSecuritySchemeTransformer.cs",
+              "ToolTip": "D:\\Startup\\Ecosystem\\src\\Ecosystem.WebApi\\OpenApi\\BearerSecuritySchemeTransformer.cs",
+              "RelativeToolTip": "src\\Ecosystem.WebApi\\OpenApi\\BearerSecuritySchemeTransformer.cs",
+              "ViewState": "AgIAACgAAAAAAAAAAAAAAAgAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-10T11:09:55.243Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

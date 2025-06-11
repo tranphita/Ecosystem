@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+      <PackageReference Include="coverlet.collector" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />
+      <PackageReference Include="Microsoft.NET.Test.Sdk" />
+      <PackageReference Include="xunit" />
+      <PackageReference Include="xunit.runner.visualstudio" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Ecosystem.Application\Ecosystem.Application.csproj" />
+    <ProjectReference Include="..\..\src\Ecosystem.Domain\Ecosystem.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Ecosystem.Infrastructure\Ecosystem.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Ecosystem.Persistence.ReadDb\Ecosystem.Persistence.ReadDb.csproj" />
+    <ProjectReference Include="..\..\src\Ecosystem.Persistence.WriteDb\Ecosystem.Persistence.WriteDb.csproj" />
+    <ProjectReference Include="..\..\src\Ecosystem.Shared\Ecosystem.Shared.csproj" />
+    <ProjectReference Include="..\..\src\Ecosystem.WebApi\Ecosystem.WebApi.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+</Project>

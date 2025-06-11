@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <ItemGroup>
+        <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" />
+        <PackageReference Include="MediatR" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />
+        <PackageReference Include="NSwag.AspNetCore" />
+        <PackageReference Include="Scalar.AspNetCore" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+        <ProjectReference Include="..\Ecosystem.Application\Ecosystem.Application.csproj" />
+        <ProjectReference Include="..\Ecosystem.Infrastructure\Ecosystem.Infrastructure.csproj" />
+        <ProjectReference Include="..\Ecosystem.Persistence.ReadDb\Ecosystem.Persistence.ReadDb.csproj" />
+        <ProjectReference Include="..\Ecosystem.Persistence.WriteDb\Ecosystem.Persistence.WriteDb.csproj" />
+        <ProjectReference Include="..\Ecosystem.Shared\Ecosystem.Shared.csproj" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <Folder Include="Contracts\Responses\" />
+      <Folder Include="Contracts\Requests\" />
+      <Folder Include="Endpoints\" />
+      <Folder Include="Authorization\" />
+      <Folder Include="Configuration\" />
+    </ItemGroup>
+
+</Project>

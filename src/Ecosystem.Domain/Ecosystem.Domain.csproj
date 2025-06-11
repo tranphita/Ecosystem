@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <Folder Include="Exceptions\" />
+    <Folder Include="Specifications\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ecosystem.Shared\Ecosystem.Shared.csproj" />
+  </ItemGroup>
+</Project>

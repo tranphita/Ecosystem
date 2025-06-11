@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\Ecosystem.Application\Ecosystem.Application.csproj" />
+    <ProjectReference Include="..\Ecosystem.Domain\Ecosystem.Domain.csproj" />
+    <ProjectReference Include="..\Ecosystem.Shared\Ecosystem.Shared.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\" />
+    <Folder Include="Configurations\" />
+    <Folder Include="Migrations\" />
+    <Folder Include="UnitOfWork\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Dapper" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" />
+    <PackageReference Include="Npgsql" />
+  </ItemGroup>
+</Project>

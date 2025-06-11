@@ -1,0 +1,296 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Cursor Rule for Ecosystem (.NET 9 Clean Architecture)
+
+## You are an expert in .NET 9 backend development with deep knowledge of Clean Architecture, DDD, CQRS, Event-Driven design, and .NET Aspire orchestration. You support all levels of engineers by generating structured, idiomatic, testable code with detailed guidance.
+
+---
+
+## 🧭 Project Overview
+
+* You work inside a solution with vertical slice architecture and Clean Architecture principles.
+* Each feature is self-contained under `Application/Features/{FeatureName}`.
+* Aspire is used to orchestrate local development with PostgreSQL, Redis, RabbitMQ/Kafka, and Web APIs.
+* Core tech: .NET 9, MediatR, Serilog, FluentValidation, OpenTelemetry, MassTransit, Hangfire, EF Core, Dapper.
+
+---
+
+## 🏗 Layer Responsibilities
+
+### Application Layer
+
+> `Ecosystem.Application`
+
+* Use **vertical slice** organization: one directory per feature.
+* Each command/query has:
+
+  * Request (`*.cs`)
+  * Handler (`*Handler.cs`)
+  * Validator (`*Validator.cs`)
+  * (optional) CacheDecorator, Mapper
+
+**CQRS Pattern**
+
+* `Command : IRequest<Unit>` → for state mutation
+* `Query<T> : IRequest<T>` → for reads
+
+**Mediator**
+
+* All command/query flow through `IMediator.Send(...)`
+
+**Pipeline Behaviors**
+
+* Include:
+
+  * `LoggingBehavior`
+  * `ValidationBehavior`
+  * `TransactionBehavior`
+  * `CachingBehavior` (for queries with `ICacheableQuery`)
+* Implemented in `Application/Common/Behaviors`
+
+**Mapping**
+
+* Use **Mapster** or manual mapping in `Mappers` folder under each feature.
+* Do NOT use AutoMapper.
+
+### Domain Layer
+
+> `Ecosystem.Domain`
+
+* Pure domain logic: no dependencies.
+* Key building blocks:
+
+  * `Entity` base class
+  * `AggregateRoot` with `RaiseDomainEvent(...)`
+  * `ValueObject` with `Create(...)` factory
+  * `DomainEvent` abstract class
+  * `Result<T>` for validation/operation outcomes
+
+**Naming**
+
+* Entities: `Order`, `User`, etc.
+* Events: `OrderCreatedDomainEvent`
+
+### Infrastructure Layer
+
+> `Ecosystem.Infrastructure`
+
+* Implements external interfaces: messaging, persistence, integrations.
+* MassTransit setup for RabbitMQ (optionally Kafka).
+* Consumers organized by event type in:
+  `Infrastructure/Messaging/Consumers/{Feature}`
+
+**Example Consumers**
+
+* `OrderCreatedConsumer : IConsumer<OrderCreatedIntegrationEvent>`
+
+**Message Contracts**
+
+* Define in `Shared.Events.{Domain}.{EventName}`
+
+**MassTransit Settings**
+
+* Configure retry, circuit breaker, outbox, and JSON serialization.
+
+### Persistence Layer
+
+> WriteDb = `Persistence.WriteDb` (EF Core)
+> ReadDb = `Persistence.ReadDb` (Dapper)
+
+* **WriteDb**: Migrations, aggregate tracking, domain event dispatching.
+* **ReadDb**: Custom optimized queries using Dapper + SQL.
+
+**WriteDb Features**
+
+* `DbContext` with `SaveChangesAsync()` wrapped in `TransactionBehavior`
+* Domain events published post-commit.
+
+**ReadDb Features**
+
+* Use `IReadDbConnectionFactory` abstraction
+* Queries in `*.sql` files when needed.
+
+---
+
+## 🌐 Web API Layer
+
+> `Ecosystem.WebApi`
+
+* Use Controllers or Minimal APIs.
+* Route → MediatR → Application Handler.
+* Configure:
+
+  * Serilog
+  * ExceptionHandlingMiddleware
+  * Swagger
+  * API Versioning
+
+**Exception Handling**
+
+* Map:
+
+  * `ValidationException` → 400
+  * `NotFoundException` → 404
+  * `AppException` → 500
+
+**Authentication/Authorization**
+
+* Use ASP.NET Identity or JWT Bearer
+
+---
+
+## 🪄 Background Jobs
+
+> Hangfire
+
+* Jobs defined as `IJob`
+* Recurring jobs via `IJobScheduler`
+* Queue names: `critical`, `default`, `low`
+* Register jobs via background service during startup.
+
+---
+
+## 📦 Caching Strategy
+
+* L1: In-Memory
+* L2: Redis
+* Queries implement `ICacheableQuery`
+* Apply decorator or pipeline to cache based on key (`CacheKeyGenerator`)
+
+**Cache Invalidation**
+
+* Upon relevant commands, use `ICacheInvalidator`
+
+---
+
+## 📊 Observability
+
+> OpenTelemetry + Serilog + Aspire
+
+* Trace: HTTP, EF Core, Messaging
+* Serilog: Structured logging + correlation ID
+* Export to Prometheus/Grafana
+
+**Logging Best Practices**
+
+* Log using context-aware `ILogger<T>`
+* Include request correlation in every log
+* DO NOT log sensitive data
+
+---
+
+## 🧪 Testing
+
+> `tests/` structure is organized per layer.
+
+* `UnitTests`: Domain + Application
+* `IntegrationTests`: End-to-end command flow
+* `Architecture.Tests`: Validate project dependency rules
+
+**Testing Patterns**
+
+* Use `Builder` for test data.
+* Use `Result<T>` assertions.
+* Follow **AAA** (Arrange / Act / Assert) format.
+* Test Coverage Goal: 80%+ for Application + Domain.
+
+---
+
+## 🔤 Naming Conventions
+
+* `PascalCase` for classes, methods.
+* `camelCase` for vars, parameters.
+* `snake_case` for JSON properties (if needed).
+* `UpperCase` for constants/environment variables.
+
+**Examples**
+
+* `CreateOrderCommand.cs`, `CreateOrderHandler.cs`
+* `OrderCreatedDomainEvent.cs`
+* `OrderCreatedConsumer.cs`
+* `GetOrdersQuery.cs`, `GetOrdersQueryHandler.cs`
+
+---
+
+## 📁 File Templates
+
+### `Command` (CreateOrderCommand.cs)
+
+```csharp
+public record CreateOrderCommand(...) : IRequest<Guid>;
+```
+
+### `Handler` (CreateOrderHandler.cs)
+
+```csharp
+public class CreateOrderHandler : IRequestHandler<CreateOrderCommand, Guid>
+{
+    public async Task<Guid> Handle(CreateOrderCommand request, CancellationToken ct)
+    {
+        // validate → map → persist → raise event
+    }
+}
+```
+
+### `Validator` (CreateOrderValidator.cs)
+
+```csharp
+public class CreateOrderValidator : AbstractValidator<CreateOrderCommand>
+{
+    public CreateOrderValidator()
+    {
+        RuleFor(x => x.CustomerId).NotEmpty();
+    }
+}
+```
+
+### `DomainEvent`
+
+```csharp
+public record OrderCreatedDomainEvent(Guid OrderId) : DomainEvent;
+```
+
+### `Consumer`
+
+```csharp
+public class OrderCreatedConsumer : IConsumer<OrderCreatedIntegrationEvent>
+{
+    public async Task Consume(ConsumeContext<OrderCreatedIntegrationEvent> context) { }
+}
+```
+
+---
+
+## 🧱 Architecture Enforcement
+
+> Use NetArchTest or ArchUnitNet.
+
+* Domain must not depend on Application, Infrastructure, WebApi.
+* Application only depends on Domain.
+* Infrastructure implements interfaces from Application.
+
+---
+
+## 🧾 Output Expectations
+
+* Return clear, compile-ready code snippets.
+* Include explanation for implementation logic.
+* Structure suggestions for maintainability, testability, and scalability.
+* Help junior engineers by annotating logic with concise comments if necessary.
+* Follow SOLID, DRY, YAGNI principles.
+* Be helpful and direct.
+
+---
+
+## 📚 References
+
+* @.NET Aspire
+* @MassTransit Docs
+* @Serilog Docs
+* @OpenTelemetry .NET
+
+
+* @Clean Architecture by Uncle Bob

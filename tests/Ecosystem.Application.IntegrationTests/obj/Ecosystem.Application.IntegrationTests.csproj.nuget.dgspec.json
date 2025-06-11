@@ -1,0 +1,1107 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\Startup\\Ecosystem\\tests\\Ecosystem.Application.IntegrationTests\\Ecosystem.Application.IntegrationTests.csproj": {}
+  },
+  "projects": {
+    "D:\\Startup\\Ecosystem\\src\\Ecosystem.Application\\Ecosystem.Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Application\\Ecosystem.Application.csproj",
+        "projectName": "Ecosystem.Application",
+        "projectPath": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Application\\Ecosystem.Application.csproj",
+        "packagesPath": "C:\\Users\\PHI TA\\.nuget\\packages\\",
+        "outputPath": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Application\\obj\\",
+        "projectStyle": "PackageReference",
+        "centralPackageVersionsManagementEnabled": true,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\PHI TA\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet9/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "D:\\Startup\\Ecosystem\\src\\Ecosystem.Domain\\Ecosystem.Domain.csproj": {
+                "projectPath": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Domain\\Ecosystem.Domain.csproj"
+              },
+              "D:\\Startup\\Ecosystem\\src\\Ecosystem.Shared\\Ecosystem.Shared.csproj": {
+                "projectPath": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Shared\\Ecosystem.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "noWarn": [
+            "NU1507"
+          ],
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "FluentValidation.DependencyInjectionExtensions": {
+              "target": "Package",
+              "version": "[12.0.0, )",
+              "versionCentrallyManaged": true
+            },
+            "MediatR": {
+              "target": "Package",
+              "version": "[12.5.0, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.5, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.Extensions.Logging": {
+              "target": "Package",
+              "version": "[9.0.5, )",
+              "versionCentrallyManaged": true
+            },
+            "OpenTelemetry.Api.ProviderBuilderExtensions": {
+              "target": "Package",
+              "version": "[1.12.0, )",
+              "versionCentrallyManaged": true
+            }
+          },
+          "centralPackageVersions": {
+            "Asp.Versioning.Mvc.ApiExplorer": "8.1.0",
+            "Aspire.Hosting.AppHost": "9.3.0",
+            "coverlet.collector": "6.0.4",
+            "Dapper": "2.1.66",
+            "EFCore.NamingConventions": "9.0.0",
+            "FluentValidation.DependencyInjectionExtensions": "12.0.0",
+            "MediatR": "12.5.0",
+            "Microsoft.AspNetCore.Authentication.JwtBearer": "9.0.5",
+            "Microsoft.AspNetCore.OpenApi": "9.0.5",
+            "Microsoft.EntityFrameworkCore": "9.0.5",
+            "Microsoft.EntityFrameworkCore.Design": "9.0.5",
+            "Microsoft.EntityFrameworkCore.Relational": "9.0.5",
+            "Microsoft.EntityFrameworkCore.Tools": "9.0.5",
+            "Microsoft.Extensions.Caching.Abstractions": "9.0.5",
+            "Microsoft.Extensions.Caching.StackExchangeRedis": "9.0.5",
+            "Microsoft.Extensions.Configuration.Abstractions": "9.0.5",
+            "Microsoft.Extensions.Http": "9.0.5",
+            "Microsoft.Extensions.Http.Resilience": "9.5.0",
+            "Microsoft.Extensions.Logging": "9.0.5",
+            "Microsoft.Extensions.Options": "9.0.5",
+            "Microsoft.Extensions.ServiceDiscovery": "9.3.0",
+            "Microsoft.NET.Test.Sdk": "17.14.1",
+            "Npgsql": "9.0.3",
+            "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4",
+            "NSwag.AspNetCore": "14.4.0",
+            "OpenTelemetry.Api.ProviderBuilderExtensions": "1.12.0",
+            "OpenTelemetry.Exporter.OpenTelemetryProtocol": "1.12.0",
+            "OpenTelemetry.Extensions.Hosting": "1.12.0",
+            "OpenTelemetry.Instrumentation.AspNetCore": "1.12.0",
+            "OpenTelemetry.Instrumentation.Http": "1.12.0",
+            "OpenTelemetry.Instrumentation.Runtime": "1.12.0",
+            "Scalar.AspNetCore": "2.4.13",
+            "System.IdentityModel.Tokens.Jwt": "8.12.0",
+            "xunit": "2.9.3",
+            "xunit.runner.visualstudio": "3.1.1"
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Startup\\Ecosystem\\src\\Ecosystem.Domain\\Ecosystem.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Domain\\Ecosystem.Domain.csproj",
+        "projectName": "Ecosystem.Domain",
+        "projectPath": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Domain\\Ecosystem.Domain.csproj",
+        "packagesPath": "C:\\Users\\PHI TA\\.nuget\\packages\\",
+        "outputPath": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "centralPackageVersionsManagementEnabled": true,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\PHI TA\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet9/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "D:\\Startup\\Ecosystem\\src\\Ecosystem.Shared\\Ecosystem.Shared.csproj": {
+                "projectPath": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Shared\\Ecosystem.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "noWarn": [
+            "NU1507"
+          ],
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "centralPackageVersions": {
+            "Asp.Versioning.Mvc.ApiExplorer": "8.1.0",
+            "Aspire.Hosting.AppHost": "9.3.0",
+            "coverlet.collector": "6.0.4",
+            "Dapper": "2.1.66",
+            "EFCore.NamingConventions": "9.0.0",
+            "FluentValidation.DependencyInjectionExtensions": "12.0.0",
+            "MediatR": "12.5.0",
+            "Microsoft.AspNetCore.Authentication.JwtBearer": "9.0.5",
+            "Microsoft.AspNetCore.OpenApi": "9.0.5",
+            "Microsoft.EntityFrameworkCore": "9.0.5",
+            "Microsoft.EntityFrameworkCore.Design": "9.0.5",
+            "Microsoft.EntityFrameworkCore.Relational": "9.0.5",
+            "Microsoft.EntityFrameworkCore.Tools": "9.0.5",
+            "Microsoft.Extensions.Caching.Abstractions": "9.0.5",
+            "Microsoft.Extensions.Caching.StackExchangeRedis": "9.0.5",
+            "Microsoft.Extensions.Configuration.Abstractions": "9.0.5",
+            "Microsoft.Extensions.Http": "9.0.5",
+            "Microsoft.Extensions.Http.Resilience": "9.5.0",
+            "Microsoft.Extensions.Logging": "9.0.5",
+            "Microsoft.Extensions.Options": "9.0.5",
+            "Microsoft.Extensions.ServiceDiscovery": "9.3.0",
+            "Microsoft.NET.Test.Sdk": "17.14.1",
+            "Npgsql": "9.0.3",
+            "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4",
+            "NSwag.AspNetCore": "14.4.0",
+            "OpenTelemetry.Api.ProviderBuilderExtensions": "1.12.0",
+            "OpenTelemetry.Exporter.OpenTelemetryProtocol": "1.12.0",
+            "OpenTelemetry.Extensions.Hosting": "1.12.0",
+            "OpenTelemetry.Instrumentation.AspNetCore": "1.12.0",
+            "OpenTelemetry.Instrumentation.Http": "1.12.0",
+            "OpenTelemetry.Instrumentation.Runtime": "1.12.0",
+            "Scalar.AspNetCore": "2.4.13",
+            "System.IdentityModel.Tokens.Jwt": "8.12.0",
+            "xunit": "2.9.3",
+            "xunit.runner.visualstudio": "3.1.1"
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Startup\\Ecosystem\\src\\Ecosystem.Infrastructure\\Ecosystem.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Infrastructure\\Ecosystem.Infrastructure.csproj",
+        "projectName": "Ecosystem.Infrastructure",
+        "projectPath": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Infrastructure\\Ecosystem.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\PHI TA\\.nuget\\packages\\",
+        "outputPath": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Infrastructure\\obj\\",
+        "projectStyle": "PackageReference",
+        "centralPackageVersionsManagementEnabled": true,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\PHI TA\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet9/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "D:\\Startup\\Ecosystem\\src\\Ecosystem.Application\\Ecosystem.Application.csproj": {
+                "projectPath": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Application\\Ecosystem.Application.csproj"
+              },
+              "D:\\Startup\\Ecosystem\\src\\Ecosystem.Domain\\Ecosystem.Domain.csproj": {
+                "projectPath": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Domain\\Ecosystem.Domain.csproj"
+              },
+              "D:\\Startup\\Ecosystem\\src\\Ecosystem.Shared\\Ecosystem.Shared.csproj": {
+                "projectPath": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Shared\\Ecosystem.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "noWarn": [
+            "NU1507"
+          ],
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "Microsoft.Extensions.Caching.Abstractions": {
+              "target": "Package",
+              "version": "[9.0.5, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.Extensions.Caching.StackExchangeRedis": {
+              "target": "Package",
+              "version": "[9.0.5, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.Extensions.Http": {
+              "target": "Package",
+              "version": "[9.0.5, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.Extensions.Options": {
+              "target": "Package",
+              "version": "[9.0.5, )",
+              "versionCentrallyManaged": true
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[8.12.0, )",
+              "versionCentrallyManaged": true
+            }
+          },
+          "centralPackageVersions": {
+            "Asp.Versioning.Mvc.ApiExplorer": "8.1.0",
+            "Aspire.Hosting.AppHost": "9.3.0",
+            "coverlet.collector": "6.0.4",
+            "Dapper": "2.1.66",
+            "EFCore.NamingConventions": "9.0.0",
+            "FluentValidation.DependencyInjectionExtensions": "12.0.0",
+            "MediatR": "12.5.0",
+            "Microsoft.AspNetCore.Authentication.JwtBearer": "9.0.5",
+            "Microsoft.AspNetCore.OpenApi": "9.0.5",
+            "Microsoft.EntityFrameworkCore": "9.0.5",
+            "Microsoft.EntityFrameworkCore.Design": "9.0.5",
+            "Microsoft.EntityFrameworkCore.Relational": "9.0.5",
+            "Microsoft.EntityFrameworkCore.Tools": "9.0.5",
+            "Microsoft.Extensions.Caching.Abstractions": "9.0.5",
+            "Microsoft.Extensions.Caching.StackExchangeRedis": "9.0.5",
+            "Microsoft.Extensions.Configuration.Abstractions": "9.0.5",
+            "Microsoft.Extensions.Http": "9.0.5",
+            "Microsoft.Extensions.Http.Resilience": "9.5.0",
+            "Microsoft.Extensions.Logging": "9.0.5",
+            "Microsoft.Extensions.Options": "9.0.5",
+            "Microsoft.Extensions.ServiceDiscovery": "9.3.0",
+            "Microsoft.NET.Test.Sdk": "17.14.1",
+            "Npgsql": "9.0.3",
+            "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4",
+            "NSwag.AspNetCore": "14.4.0",
+            "OpenTelemetry.Api.ProviderBuilderExtensions": "1.12.0",
+            "OpenTelemetry.Exporter.OpenTelemetryProtocol": "1.12.0",
+            "OpenTelemetry.Extensions.Hosting": "1.12.0",
+            "OpenTelemetry.Instrumentation.AspNetCore": "1.12.0",
+            "OpenTelemetry.Instrumentation.Http": "1.12.0",
+            "OpenTelemetry.Instrumentation.Runtime": "1.12.0",
+            "Scalar.AspNetCore": "2.4.13",
+            "System.IdentityModel.Tokens.Jwt": "8.12.0",
+            "xunit": "2.9.3",
+            "xunit.runner.visualstudio": "3.1.1"
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Startup\\Ecosystem\\src\\Ecosystem.Persistence.ReadDb\\Ecosystem.Persistence.ReadDb.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Persistence.ReadDb\\Ecosystem.Persistence.ReadDb.csproj",
+        "projectName": "Ecosystem.Persistence.ReadDb",
+        "projectPath": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Persistence.ReadDb\\Ecosystem.Persistence.ReadDb.csproj",
+        "packagesPath": "C:\\Users\\PHI TA\\.nuget\\packages\\",
+        "outputPath": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Persistence.ReadDb\\obj\\",
+        "projectStyle": "PackageReference",
+        "centralPackageVersionsManagementEnabled": true,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\PHI TA\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet9/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "D:\\Startup\\Ecosystem\\src\\Ecosystem.Application\\Ecosystem.Application.csproj": {
+                "projectPath": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Application\\Ecosystem.Application.csproj"
+              },
+              "D:\\Startup\\Ecosystem\\src\\Ecosystem.Domain\\Ecosystem.Domain.csproj": {
+                "projectPath": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Domain\\Ecosystem.Domain.csproj"
+              },
+              "D:\\Startup\\Ecosystem\\src\\Ecosystem.Shared\\Ecosystem.Shared.csproj": {
+                "projectPath": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Shared\\Ecosystem.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "noWarn": [
+            "NU1507"
+          ],
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.1.66, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.Extensions.Configuration.Abstractions": {
+              "target": "Package",
+              "version": "[9.0.5, )",
+              "versionCentrallyManaged": true
+            },
+            "Npgsql": {
+              "target": "Package",
+              "version": "[9.0.3, )",
+              "versionCentrallyManaged": true
+            }
+          },
+          "centralPackageVersions": {
+            "Asp.Versioning.Mvc.ApiExplorer": "8.1.0",
+            "Aspire.Hosting.AppHost": "9.3.0",
+            "coverlet.collector": "6.0.4",
+            "Dapper": "2.1.66",
+            "EFCore.NamingConventions": "9.0.0",
+            "FluentValidation.DependencyInjectionExtensions": "12.0.0",
+            "MediatR": "12.5.0",
+            "Microsoft.AspNetCore.Authentication.JwtBearer": "9.0.5",
+            "Microsoft.AspNetCore.OpenApi": "9.0.5",
+            "Microsoft.EntityFrameworkCore": "9.0.5",
+            "Microsoft.EntityFrameworkCore.Design": "9.0.5",
+            "Microsoft.EntityFrameworkCore.Relational": "9.0.5",
+            "Microsoft.EntityFrameworkCore.Tools": "9.0.5",
+            "Microsoft.Extensions.Caching.Abstractions": "9.0.5",
+            "Microsoft.Extensions.Caching.StackExchangeRedis": "9.0.5",
+            "Microsoft.Extensions.Configuration.Abstractions": "9.0.5",
+            "Microsoft.Extensions.Http": "9.0.5",
+            "Microsoft.Extensions.Http.Resilience": "9.5.0",
+            "Microsoft.Extensions.Logging": "9.0.5",
+            "Microsoft.Extensions.Options": "9.0.5",
+            "Microsoft.Extensions.ServiceDiscovery": "9.3.0",
+            "Microsoft.NET.Test.Sdk": "17.14.1",
+            "Npgsql": "9.0.3",
+            "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4",
+            "NSwag.AspNetCore": "14.4.0",
+            "OpenTelemetry.Api.ProviderBuilderExtensions": "1.12.0",
+            "OpenTelemetry.Exporter.OpenTelemetryProtocol": "1.12.0",
+            "OpenTelemetry.Extensions.Hosting": "1.12.0",
+            "OpenTelemetry.Instrumentation.AspNetCore": "1.12.0",
+            "OpenTelemetry.Instrumentation.Http": "1.12.0",
+            "OpenTelemetry.Instrumentation.Runtime": "1.12.0",
+            "Scalar.AspNetCore": "2.4.13",
+            "System.IdentityModel.Tokens.Jwt": "8.12.0",
+            "xunit": "2.9.3",
+            "xunit.runner.visualstudio": "3.1.1"
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Startup\\Ecosystem\\src\\Ecosystem.Persistence.WriteDb\\Ecosystem.Persistence.WriteDb.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Persistence.WriteDb\\Ecosystem.Persistence.WriteDb.csproj",
+        "projectName": "Ecosystem.Persistence.WriteDb",
+        "projectPath": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Persistence.WriteDb\\Ecosystem.Persistence.WriteDb.csproj",
+        "packagesPath": "C:\\Users\\PHI TA\\.nuget\\packages\\",
+        "outputPath": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Persistence.WriteDb\\obj\\",
+        "projectStyle": "PackageReference",
+        "centralPackageVersionsManagementEnabled": true,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\PHI TA\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet9/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "D:\\Startup\\Ecosystem\\src\\Ecosystem.Application\\Ecosystem.Application.csproj": {
+                "projectPath": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Application\\Ecosystem.Application.csproj"
+              },
+              "D:\\Startup\\Ecosystem\\src\\Ecosystem.Domain\\Ecosystem.Domain.csproj": {
+                "projectPath": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Domain\\Ecosystem.Domain.csproj"
+              },
+              "D:\\Startup\\Ecosystem\\src\\Ecosystem.Shared\\Ecosystem.Shared.csproj": {
+                "projectPath": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Shared\\Ecosystem.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "noWarn": [
+            "NU1507"
+          ],
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "EFCore.NamingConventions": {
+              "target": "Package",
+              "version": "[9.0.0, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.5, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[9.0.5, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.5, )",
+              "versionCentrallyManaged": true
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[9.0.4, )",
+              "versionCentrallyManaged": true
+            }
+          },
+          "centralPackageVersions": {
+            "Asp.Versioning.Mvc.ApiExplorer": "8.1.0",
+            "Aspire.Hosting.AppHost": "9.3.0",
+            "coverlet.collector": "6.0.4",
+            "Dapper": "2.1.66",
+            "EFCore.NamingConventions": "9.0.0",
+            "FluentValidation.DependencyInjectionExtensions": "12.0.0",
+            "MediatR": "12.5.0",
+            "Microsoft.AspNetCore.Authentication.JwtBearer": "9.0.5",
+            "Microsoft.AspNetCore.OpenApi": "9.0.5",
+            "Microsoft.EntityFrameworkCore": "9.0.5",
+            "Microsoft.EntityFrameworkCore.Design": "9.0.5",
+            "Microsoft.EntityFrameworkCore.Relational": "9.0.5",
+            "Microsoft.EntityFrameworkCore.Tools": "9.0.5",
+            "Microsoft.Extensions.Caching.Abstractions": "9.0.5",
+            "Microsoft.Extensions.Caching.StackExchangeRedis": "9.0.5",
+            "Microsoft.Extensions.Configuration.Abstractions": "9.0.5",
+            "Microsoft.Extensions.Http": "9.0.5",
+            "Microsoft.Extensions.Http.Resilience": "9.5.0",
+            "Microsoft.Extensions.Logging": "9.0.5",
+            "Microsoft.Extensions.Options": "9.0.5",
+            "Microsoft.Extensions.ServiceDiscovery": "9.3.0",
+            "Microsoft.NET.Test.Sdk": "17.14.1",
+            "Npgsql": "9.0.3",
+            "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4",
+            "NSwag.AspNetCore": "14.4.0",
+            "OpenTelemetry.Api.ProviderBuilderExtensions": "1.12.0",
+            "OpenTelemetry.Exporter.OpenTelemetryProtocol": "1.12.0",
+            "OpenTelemetry.Extensions.Hosting": "1.12.0",
+            "OpenTelemetry.Instrumentation.AspNetCore": "1.12.0",
+            "OpenTelemetry.Instrumentation.Http": "1.12.0",
+            "OpenTelemetry.Instrumentation.Runtime": "1.12.0",
+            "Scalar.AspNetCore": "2.4.13",
+            "System.IdentityModel.Tokens.Jwt": "8.12.0",
+            "xunit": "2.9.3",
+            "xunit.runner.visualstudio": "3.1.1"
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Startup\\Ecosystem\\src\\Ecosystem.Shared\\Ecosystem.Shared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Shared\\Ecosystem.Shared.csproj",
+        "projectName": "Ecosystem.Shared",
+        "projectPath": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Shared\\Ecosystem.Shared.csproj",
+        "packagesPath": "C:\\Users\\PHI TA\\.nuget\\packages\\",
+        "outputPath": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Shared\\obj\\",
+        "projectStyle": "PackageReference",
+        "centralPackageVersionsManagementEnabled": true,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\PHI TA\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet9/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "noWarn": [
+            "NU1507"
+          ],
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "centralPackageVersions": {
+            "Asp.Versioning.Mvc.ApiExplorer": "8.1.0",
+            "Aspire.Hosting.AppHost": "9.3.0",
+            "coverlet.collector": "6.0.4",
+            "Dapper": "2.1.66",
+            "EFCore.NamingConventions": "9.0.0",
+            "FluentValidation.DependencyInjectionExtensions": "12.0.0",
+            "MediatR": "12.5.0",
+            "Microsoft.AspNetCore.Authentication.JwtBearer": "9.0.5",
+            "Microsoft.AspNetCore.OpenApi": "9.0.5",
+            "Microsoft.EntityFrameworkCore": "9.0.5",
+            "Microsoft.EntityFrameworkCore.Design": "9.0.5",
+            "Microsoft.EntityFrameworkCore.Relational": "9.0.5",
+            "Microsoft.EntityFrameworkCore.Tools": "9.0.5",
+            "Microsoft.Extensions.Caching.Abstractions": "9.0.5",
+            "Microsoft.Extensions.Caching.StackExchangeRedis": "9.0.5",
+            "Microsoft.Extensions.Configuration.Abstractions": "9.0.5",
+            "Microsoft.Extensions.Http": "9.0.5",
+            "Microsoft.Extensions.Http.Resilience": "9.5.0",
+            "Microsoft.Extensions.Logging": "9.0.5",
+            "Microsoft.Extensions.Options": "9.0.5",
+            "Microsoft.Extensions.ServiceDiscovery": "9.3.0",
+            "Microsoft.NET.Test.Sdk": "17.14.1",
+            "Npgsql": "9.0.3",
+            "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4",
+            "NSwag.AspNetCore": "14.4.0",
+            "OpenTelemetry.Api.ProviderBuilderExtensions": "1.12.0",
+            "OpenTelemetry.Exporter.OpenTelemetryProtocol": "1.12.0",
+            "OpenTelemetry.Extensions.Hosting": "1.12.0",
+            "OpenTelemetry.Instrumentation.AspNetCore": "1.12.0",
+            "OpenTelemetry.Instrumentation.Http": "1.12.0",
+            "OpenTelemetry.Instrumentation.Runtime": "1.12.0",
+            "Scalar.AspNetCore": "2.4.13",
+            "System.IdentityModel.Tokens.Jwt": "8.12.0",
+            "xunit": "2.9.3",
+            "xunit.runner.visualstudio": "3.1.1"
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Startup\\Ecosystem\\src\\Ecosystem.WebApi\\Ecosystem.WebApi.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Startup\\Ecosystem\\src\\Ecosystem.WebApi\\Ecosystem.WebApi.csproj",
+        "projectName": "Ecosystem.WebApi",
+        "projectPath": "D:\\Startup\\Ecosystem\\src\\Ecosystem.WebApi\\Ecosystem.WebApi.csproj",
+        "packagesPath": "C:\\Users\\PHI TA\\.nuget\\packages\\",
+        "outputPath": "D:\\Startup\\Ecosystem\\src\\Ecosystem.WebApi\\obj\\",
+        "projectStyle": "PackageReference",
+        "centralPackageVersionsManagementEnabled": true,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\PHI TA\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet9/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "D:\\Startup\\Ecosystem\\src\\Ecosystem.Application\\Ecosystem.Application.csproj": {
+                "projectPath": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Application\\Ecosystem.Application.csproj"
+              },
+              "D:\\Startup\\Ecosystem\\src\\Ecosystem.Infrastructure\\Ecosystem.Infrastructure.csproj": {
+                "projectPath": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Infrastructure\\Ecosystem.Infrastructure.csproj"
+              },
+              "D:\\Startup\\Ecosystem\\src\\Ecosystem.Persistence.ReadDb\\Ecosystem.Persistence.ReadDb.csproj": {
+                "projectPath": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Persistence.ReadDb\\Ecosystem.Persistence.ReadDb.csproj"
+              },
+              "D:\\Startup\\Ecosystem\\src\\Ecosystem.Persistence.WriteDb\\Ecosystem.Persistence.WriteDb.csproj": {
+                "projectPath": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Persistence.WriteDb\\Ecosystem.Persistence.WriteDb.csproj"
+              },
+              "D:\\Startup\\Ecosystem\\src\\Ecosystem.Shared\\Ecosystem.Shared.csproj": {
+                "projectPath": "D:\\Startup\\Ecosystem\\src\\Ecosystem.Shared\\Ecosystem.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "noWarn": [
+            "NU1507"
+          ],
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "Asp.Versioning.Mvc.ApiExplorer": {
+              "target": "Package",
+              "version": "[8.1.0, )",
+              "versionCentrallyManaged": true
+            },
+            "MediatR": {
+              "target": "Package",
+              "version": "[12.5.0, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[9.0.5, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[9.0.5, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.5, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[9.0.5, )",
+              "versionCentrallyManaged": true
+            },
+            "NSwag.AspNetCore": {
+              "target": "Package",
+              "version": "[14.4.0, )",
+              "versionCentrallyManaged": true
+            },
+            "Scalar.AspNetCore": {
+              "target": "Package",
+              "version": "[2.4.13, )",
+              "versionCentrallyManaged": true
+            }
+          },
+          "centralPackageVersions": {
+            "Asp.Versioning.Mvc.ApiExplorer": "8.1.0",
+            "Aspire.Hosting.AppHost": "9.3.0",
+            "coverlet.collector": "6.0.4",
+            "Dapper": "2.1.66",
+            "EFCore.NamingConventions": "9.0.0",
+            "FluentValidation.DependencyInjectionExtensions": "12.0.0",
+            "MediatR": "12.5.0",
+            "Microsoft.AspNetCore.Authentication.JwtBearer": "9.0.5",
+            "Microsoft.AspNetCore.OpenApi": "9.0.5",
+            "Microsoft.EntityFrameworkCore": "9.0.5",
+            "Microsoft.EntityFrameworkCore.Design": "9.0.5",
+            "Microsoft.EntityFrameworkCore.Relational": "9.0.5",
+            "Microsoft.EntityFrameworkCore.Tools": "9.0.5",
+            "Microsoft.Extensions.Caching.Abstractions": "9.0.5",
+            "Microsoft.Extensions.Caching.StackExchangeRedis": "9.0.5",
+            "Microsoft.Extensions.Configuration.Abstractions": "9.0.5",
+            "Microsoft.Extensions.Http": "9.0.5",
+            "Microsoft.Extensions.Http.Resilience": "9.5.0",
+            "Microsoft.Extensions.Logging": "9.0.5",
+            "Microsoft.Extensions.Options": "9.0.5",
+            "Microsoft.Extensions.ServiceDiscovery": "9.3.0",
+            "Microsoft.NET.Test.Sdk": "17.14.1",
+            "Npgsql": "9.0.3",
+            "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4",
+            "NSwag.AspNetCore": "14.4.0",
+            "OpenTelemetry.Api.ProviderBuilderExtensions": "1.12.0",
+            "OpenTelemetry.Exporter.OpenTelemetryProtocol": "1.12.0",
+            "OpenTelemetry.Extensions.Hosting": "1.12.0",
+            "OpenTelemetry.Instrumentation.AspNetCore": "1.12.0",
+            "OpenTelemetry.Instrumentation.Http": "1.12.0",
+            "OpenTelemetry.Instrumentation.Runtime": "1.12.0",
+            "Scalar.AspNetCore": "2.4.13",
+            "System.IdentityModel.Tokens.Jwt": "8.12.0",
+            "xunit": "2.9.3",
+            "xunit.runner.visualstudio": "3.1.1"
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Startup\\Ecosystem\\tests\\Ecosystem.Application.IntegrationTests\\Ecosystem.Application.IntegrationTests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Startup\\Ecosystem\\tests\\Ecosystem.Application.IntegrationTests\\Ecosystem.Application.IntegrationTests.csproj",
+        "projectName": "Ecosystem.Application.IntegrationTests",
+        "projectPath": "D:\\Startup\\Ecosystem\\tests\\Ecosystem.Application.IntegrationTests\\Ecosystem.Application.IntegrationTests.csproj",
+        "packagesPath": "C:\\Users\\PHI TA\\.nuget\\packages\\",
+        "outputPath": "D:\\Startup\\Ecosystem\\tests\\Ecosystem.Application.IntegrationTests\\obj\\",
+        "projectStyle": "PackageReference",
+        "centralPackageVersionsManagementEnabled": true,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\PHI TA\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet9/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "D:\\Startup\\Ecosystem\\src\\Ecosystem.WebApi\\Ecosystem.WebApi.csproj": {
+                "projectPath": "D:\\Startup\\Ecosystem\\src\\Ecosystem.WebApi\\Ecosystem.WebApi.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "noWarn": [
+            "NU1507"
+          ],
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[9.0.5, )",
+              "versionCentrallyManaged": true
+            },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.14.1, )",
+              "versionCentrallyManaged": true
+            },
+            "coverlet.collector": {
+              "target": "Package",
+              "version": "[6.0.4, )",
+              "versionCentrallyManaged": true
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.9.3, )",
+              "versionCentrallyManaged": true
+            },
+            "xunit.runner.visualstudio": {
+              "target": "Package",
+              "version": "[3.1.1, )",
+              "versionCentrallyManaged": true
+            }
+          },
+          "centralPackageVersions": {
+            "Asp.Versioning.Mvc.ApiExplorer": "8.1.0",
+            "Aspire.Hosting.AppHost": "9.3.0",
+            "coverlet.collector": "6.0.4",
+            "Dapper": "2.1.66",
+            "EFCore.NamingConventions": "9.0.0",
+            "FluentValidation.DependencyInjectionExtensions": "12.0.0",
+            "MediatR": "12.5.0",
+            "Microsoft.AspNetCore.Authentication.JwtBearer": "9.0.5",
+            "Microsoft.AspNetCore.OpenApi": "9.0.5",
+            "Microsoft.EntityFrameworkCore": "9.0.5",
+            "Microsoft.EntityFrameworkCore.Design": "9.0.5",
+            "Microsoft.EntityFrameworkCore.Relational": "9.0.5",
+            "Microsoft.EntityFrameworkCore.Tools": "9.0.5",
+            "Microsoft.Extensions.Caching.Abstractions": "9.0.5",
+            "Microsoft.Extensions.Caching.StackExchangeRedis": "9.0.5",
+            "Microsoft.Extensions.Configuration.Abstractions": "9.0.5",
+            "Microsoft.Extensions.Http": "9.0.5",
+            "Microsoft.Extensions.Http.Resilience": "9.5.0",
+            "Microsoft.Extensions.Logging": "9.0.5",
+            "Microsoft.Extensions.Options": "9.0.5",
+            "Microsoft.Extensions.ServiceDiscovery": "9.3.0",
+            "Microsoft.NET.Test.Sdk": "17.14.1",
+            "Npgsql": "9.0.3",
+            "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4",
+            "NSwag.AspNetCore": "14.4.0",
+            "OpenTelemetry.Api.ProviderBuilderExtensions": "1.12.0",
+            "OpenTelemetry.Exporter.OpenTelemetryProtocol": "1.12.0",
+            "OpenTelemetry.Extensions.Hosting": "1.12.0",
+            "OpenTelemetry.Instrumentation.AspNetCore": "1.12.0",
+            "OpenTelemetry.Instrumentation.Http": "1.12.0",
+            "OpenTelemetry.Instrumentation.Runtime": "1.12.0",
+            "Scalar.AspNetCore": "2.4.13",
+            "System.IdentityModel.Tokens.Jwt": "8.12.0",
+            "xunit": "2.9.3",
+            "xunit.runner.visualstudio": "3.1.1"
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
