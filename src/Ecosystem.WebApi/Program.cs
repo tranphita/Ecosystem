@@ -46,6 +46,18 @@ builder.Services.AddReadPersistence(builder.Configuration);
 // Thêm dịch vụ cho Controllers để hệ thống nhận diện và sử dụng các API Controller
 builder.Services.AddControllers();
 
+// Cấu hình CORS cho phép Angular frontend truy cập
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngularApp", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200", "https://localhost:4200")
+              .AllowAnyMethod()
+              .AllowAnyHeader()
+              .AllowCredentials();
+    });
+});
+
 // Cấu hình dịch vụ xác thực JWT Bearer
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -85,7 +97,13 @@ app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.UseHttpsRedirection();
 
+// Kích hoạt CORS (phải đặt trước Authentication/Authorization)
+app.UseCors("AllowAngularApp");
+
 app.UseAuthentication();
 app.UseAuthorization();
+
+// Map controllers to enable API endpoints
+app.MapControllers();
 
 app.Run();

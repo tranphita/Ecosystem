@@ -16,13 +16,14 @@ public static class DependencyInjection
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        // Cấu hình cho JWT
+        // Cấu hình JWT
         services.Configure<JwtSettings>(configuration.GetSection(JwtSettings.SectionName));
         services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 
-        // Cấu hình cho Identity Service
+        // Cấu hình dịch vụ xác thực với IDP
         services.Configure<IdpSettings>(configuration.GetSection(IdpSettings.SectionName));
         services.AddHttpClient<IIdentityService, IdentityService>();
+        services.AddHttpClient<IAuthenticationService, AuthenticationService>();
 
         // Cấu hình Redis Cache
         services.AddStackExchangeRedisCache(options =>

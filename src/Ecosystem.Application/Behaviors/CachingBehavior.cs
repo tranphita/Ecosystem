@@ -25,7 +25,15 @@ public sealed class CachingBehavior<TRequest, TResponse> : IPipelineBehavior<TRe
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
         // Thử lấy kết quả từ cache
-        var cachedResponse = await _cacheService.GetAsync<TResponse>(request.CacheKey, cancellationToken);
+        TResponse? cachedResponse = default;
+        try
+        {
+            cachedResponse = await _cacheService.GetAsync<TResponse>(request.CacheKey, cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogWarning(ex, "Cache lookup failed for {CacheKey}", request.CacheKey);
+        }
         if (cachedResponse is not null)
         {
             _logger.LogInformation("Cache hit for {CacheKey}", request.CacheKey);
