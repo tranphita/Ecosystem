@@ -15,6 +15,7 @@ public static class DependencyInjection
 
             // Đăng ký các pipeline behaviors theo đúng thứ tự
             cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
+            cfg.AddOpenBehavior(typeof(CachingBehavior<,>));
             cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
             cfg.AddOpenBehavior(typeof(TransactionBehavior<,>));
         });

@@ -1,4 +1,5 @@
 ﻿using Ecosystem.Application.Abstractions.Data;
+using Ecosystem.Application.Common.Exceptions;
 using Ecosystem.Application.Features.Users.DTOs;
 using Ecosystem.Shared;
 using MediatR;
@@ -20,7 +21,7 @@ internal sealed class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery
 
         if (user is null)
         {
-            return Result<UserDto>.Failure(new Error("User.NotFound", "The user with the specified ID was not found."));
+            throw new NotFoundException("User", request.UserId);
         }
 
         return user;

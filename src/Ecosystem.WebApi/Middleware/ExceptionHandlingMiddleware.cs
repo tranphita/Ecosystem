@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Ecosystem.Application.Common.Exceptions;
+using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
 namespace Ecosystem.WebApi.Middleware;
@@ -29,15 +31,33 @@ public class ExceptionHandlingMiddleware
 
     private static async Task HandleExceptionAsync(HttpContext context, Exception exception)
     {
-        context.Response.ContentType = "application/json";
-        context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+        context.Response.ContentType = "application/problem+json";
 
-        var problemDetails = new ProblemDetails
+        var problemDetails = exception switch
         {
-            Status = StatusCodes.Status500InternalServerError,
-            Title = "An internal server error occurred.",
-            Detail = "An unexpected error occurred. Please try again later."
+            ValidationException validationException => new ProblemDetails
+            {
+                Status = StatusCodes.Status400BadRequest,
+                Title = "Bad Request",
+                Detail = "One or more validation errors occurred."
+                // Thêm chi tiết lỗi validation nếu cần
+                // Extensions = { ["errors"] = validationException.Errors.Select(e => new { e.PropertyName, e.ErrorMessage }) }
+            },
+            NotFoundException notFoundException => new ProblemDetails
+            {
+                Status = StatusCodes.Status404NotFound,
+                Title = "Not Found",
+                Detail = notFoundException.Message
+            },
+            _ => new ProblemDetails
+            {
+                Status = StatusCodes.Status500InternalServerError,
+                Title = "Internal Server Error",
+                Detail = "An unexpected error occurred. Please try again later."
+            }
         };
+        
+        context.Response.StatusCode = problemDetails.Status ?? StatusCodes.Status500InternalServerError;
 
         var json = JsonSerializer.Serialize(problemDetails);
         await context.Response.WriteAsync(json);
