@@ -27,8 +27,4 @@ public static class EcosystemNames
 
     public const string SaaSApi = "EcosystemSaaS";
     public const string SaaSDb = "EcosystemSaaSDb";
-
-    public const string WebAppApi = "EcosystemWebApp";
-    public const string WebAppClient = "EcosystemWebAppClient";
-    public const string WebAppDb = "EcosystemWebAppDb";
 }

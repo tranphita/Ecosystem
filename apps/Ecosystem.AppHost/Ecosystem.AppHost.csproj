@@ -13,12 +13,6 @@
 
     <ItemGroup>
         <PackageReference Include="Aspire.Hosting.AppHost" Version="9.3.1" />
-        <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="9.3.1" />
-        <PackageReference Include="Aspire.Hosting.Redis" Version="9.3.1" />
-        <PackageReference Include="Aspire.Hosting.Seq" Version="9.3.1" />
-        <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.3.1" />
-        <PackageReference Include="Aspire.RabbitMQ.Client" Version="9.3.1" />
-        <PackageReference Include="Aspire.Seq" Version="9.3.1" />
         <PackageReference Include="System.Linq.Dynamic.Core" Version="1.6.6" />
     </ItemGroup>
 

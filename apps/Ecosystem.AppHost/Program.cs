@@ -10,15 +10,14 @@ internal class Program
         const string LaunchProfileName = "Aspire";
         var builder = DistributedApplication.CreateBuilder(args);
 
-        var postgres = builder.AddPostgres(EcosystemNames.Postgres).WithPgWeb().WithVolume("pgdata", "/var/lib/postgresql/data");
-        var rabbitMq = builder.AddRabbitMQ(EcosystemNames.RabbitMq).WithManagementPlugin().WithVolume("rabbitmqdata", "/var/lib/rabbitmq");
-        var redis = builder.AddRedis(EcosystemNames.Redis).WithRedisCommander().WithVolume("redisdata", "/data");
-        var seq = builder.AddSeq(EcosystemNames.Seq);
-
-        var adminDb = postgres.AddDatabase(EcosystemNames.AdministrationDb);
-        var identityDb = postgres.AddDatabase(EcosystemNames.IdentityServiceDb);
-        var projectsDb = postgres.AddDatabase(EcosystemNames.ProjectsDb);
-        var saasDb = postgres.AddDatabase(EcosystemNames.SaaSDb);
+        // Sử dụng connection strings cho tất cả infrastructure services
+        var adminDb = builder.AddConnectionString(EcosystemNames.AdministrationDb);
+        var identityDb = builder.AddConnectionString(EcosystemNames.IdentityServiceDb);
+        var projectsDb = builder.AddConnectionString(EcosystemNames.ProjectsDb);
+        var saasDb = builder.AddConnectionString(EcosystemNames.SaaSDb);
+        var rabbitMq = builder.AddConnectionString(EcosystemNames.RabbitMq);
+        var redis = builder.AddConnectionString(EcosystemNames.Redis);
+        var seq = builder.AddConnectionString(EcosystemNames.Seq);
 
         var migrator = builder
             .AddProject<Ecosystem_DbMigrator>(
@@ -29,8 +28,7 @@ internal class Program
             .WithReference(identityDb)
             .WithReference(projectsDb)
             .WithReference(saasDb)
-            .WithReference(seq)
-            .WaitFor(postgres);
+            .WithReference(seq);
 
         var admin = builder
             .AddProject<Ecosystem_Administration_HttpApi_Host>(

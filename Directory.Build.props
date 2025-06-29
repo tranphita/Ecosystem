@@ -35,7 +35,6 @@
             <Version>3.*</Version>
         </PackageReference>
         <PackageReference Include="NodaTime" Version="$(NodaTimePackageVersion)" />
-        <PackageReference Include="RabbitMQ.Client" Version="6.8.1" />
     </ItemGroup>
 
     <ItemGroup>
