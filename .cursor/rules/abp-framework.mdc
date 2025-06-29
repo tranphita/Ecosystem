@@ -1,0 +1,117 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+You are an expert in .NET 9, ABP Framework, microservices architecture, and Domain-Driven Design.
+
+## Project Structure
+
+* Recognize the root of the solution by the presence of `Ecosystem.sln`.
+* **Apps**
+
+  * `apps/Ecosystem.WebApp`: Blazor Server admin UI.
+  * `apps/Ecosystem.AuthServer`: MVC Razor identity/authentication server.
+  * `gateway/…`: API Gateway project.
+* **Services** (each a separate microservice):
+
+  * `services/identity`, `services/administration`, `services/projects`, `services/saas`
+* **Shared Libraries**:
+
+  * `shared/Ecosystem.Shared`, `Ecosystem.Microservice.Shared`, `Ecosystem.ServiceDefaults`, `Ecosystem.Hosting.Shared`, `Ecosystem.DbMigrator`
+
+## Naming Conventions
+
+* **PascalCase** for all public types, classes, methods, properties, files, and folders.
+* **camelCase** for private fields (`_camelCase`), method parameters, and local variables.
+* Prefix interfaces with `I` (e.g., `IOrderRepository`).
+* Unit-test files: `<Subject>Tests.cs` in a parallel `…Tests` folder (e.g., `services/identity/tests/IdentityServiceTests.cs`).
+
+## Layered DDD Architecture
+
+* **Domain** (entities, value objects, domain events, repository interfaces).
+* **Application** (application services, DTOs, commands/queries, mapping profiles).
+* **Infrastructure** (EF Core DbContexts, repository implementations, Redis caching adapters, Serilog sinks).
+* **Presentation** (Blazor components, MVC controllers, API controllers).
+* Enforce dependencies flowing inward: Presentation → Application → Domain; Infrastructure referenced only by Application.
+
+## ABP Module Configuration
+
+* Enable and configure the following ABP modules in each microservice’s module class:
+
+  * `AbpIdentityDomainModule`
+  * `AbpAuditLoggingModule`
+  * `AbpTenantManagementModule` (common schema multi-tenancy)
+  * `AbpFeatureManagementModule`
+* Register multi-tenant options for shared-schema strategy.
+* Use `AddAbpDbContext<TContext>` with `options.MultiTenancy.IsEnabled = true` and `options.UseSchemaPerTenant = false`.
+
+## EF Core & Database Migrations
+
+* Use EF Core 7+ with global `DbContext` options in `Ecosystem.Hosting.Shared`.
+* Centralize migrations in `Ecosystem.DbMigrator`.
+* Apply migrations per-tenant at startup, using `IUnitOfWork` and `IDbMigrationService`.
+
+## Caching (Redis)
+
+* Register as a distributed cache:
+
+  ```csharp
+  context.Services.AddStackExchangeRedisCache(options => { … });
+  context.Services.AddDistributedCacheRedis();
+  ```
+* Use the `IDistributedCache` abstraction in application services for caching frequently accessed data.
+* Invalidate cache entries on domain events (e.g., after an entity update).
+
+## Logging (Serilog)
+
+* Configure Serilog in `Program.cs`:
+
+  ```csharp
+  Log.Logger = new LoggerConfiguration()
+      .ReadFrom.Configuration(configuration)
+      .Enrich.FromLogContext()
+      .WriteTo.Console()
+      .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day)
+      .CreateLogger();
+  ```
+* Use structured logging (`Log.Information("{@Order}", orderDto)`).
+* Capture request logging and exception details with `UseSerilogRequestLogging()`.
+
+## Security (JWT)
+
+* In `Ecosystem.AuthServer`, configure OpenIddict or JWT bearer:
+
+  ```csharp
+  services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+      .AddJwtBearer(options => {
+          options.Authority = configuration["AuthServer:Authority"];
+          options.Audience = configuration["AuthServer:ApiName"];
+          …
+      });
+  ```
+* Secure API endpoints with `[Authorize]` and ABP permission checks.
+
+## Localization
+
+* Use ABP’s `AbpLocalizationOptions` to register resource assemblies in each module.
+* Store localized texts in JSON/XML under `Localization/Resources`.
+* In Blazor UI, use `@L["Key"]` and in MVC Razor use `L["Key"]` for lookups.
+
+## Testing (xUnit)
+
+* Create test projects under each microservice: `services/identity/tests`, `services/projects/tests`, etc.
+* Use xUnit with FluentAssertions and Moq.
+* Follow Arrange-Act-Assert pattern; write one `Fact` or `Theory` per test case.
+* Mock external dependencies (repositories, caching, DbContext) using `IServiceProvider`–based test fixtures.
+
+## CI/CD & DevOps
+
+* Enforce code style via EditorConfig (tabs vs spaces, max line length = 120).
+* Integrate StyleCop.Analyzers and ABP code analyzers.
+* Build, test, and deploy via GitHub Actions or Azure DevOps pipelines, with stages for build → test → migrate → deploy.
+
+---
+
+
+Ensure strict adherence to these rules when scaffolding or refactoring code to maintain consistency, quality, and compliance across all services and layers.

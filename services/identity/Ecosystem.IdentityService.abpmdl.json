@@ -1,0 +1,79 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {},
+      "host": {}
+    }
+  },
+  "packages": {
+    "Ecosystem.IdentityService.Domain.Shared": {
+      "path": "src/Ecosystem.IdentityService.Domain.Shared/Ecosystem.IdentityService.Domain.Shared.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.IdentityService.Domain": {
+      "path": "src/Ecosystem.IdentityService.Domain/Ecosystem.IdentityService.Domain.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.IdentityService.Application.Contracts": {
+      "path": "src/Ecosystem.IdentityService.Application.Contracts/Ecosystem.IdentityService.Application.Contracts.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.IdentityService.Application": {
+      "path": "src/Ecosystem.IdentityService.Application/Ecosystem.IdentityService.Application.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.IdentityService.EntityFrameworkCore": {
+      "path": "src/Ecosystem.IdentityService.EntityFrameworkCore/Ecosystem.IdentityService.EntityFrameworkCore.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.IdentityService.MongoDB": {
+      "path": "src/Ecosystem.IdentityService.MongoDB/Ecosystem.IdentityService.MongoDB.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.IdentityService.HttpApi": {
+      "path": "src/Ecosystem.IdentityService.HttpApi/Ecosystem.IdentityService.HttpApi.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.IdentityService.HttpApi.Client": {
+      "path": "src/Ecosystem.IdentityService.HttpApi.Client/Ecosystem.IdentityService.HttpApi.Client.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.IdentityService.TestBase": {
+      "path": "test/Ecosystem.IdentityService.TestBase/Ecosystem.IdentityService.TestBase.abppkg.json",
+      "folder": "test"
+    },
+    "Ecosystem.IdentityService.EntityFrameworkCore.Tests": {
+      "path": "test/Ecosystem.IdentityService.EntityFrameworkCore.Tests/Ecosystem.IdentityService.EntityFrameworkCore.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Ecosystem.IdentityService.MongoDB.Tests": {
+      "path": "test/Ecosystem.IdentityService.MongoDB.Tests/Ecosystem.IdentityService.MongoDB.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Ecosystem.IdentityService.Domain.Tests": {
+      "path": "test/Ecosystem.IdentityService.Domain.Tests/Ecosystem.IdentityService.Domain.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Ecosystem.IdentityService.Application.Tests": {
+      "path": "test/Ecosystem.IdentityService.Application.Tests/Ecosystem.IdentityService.Application.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Ecosystem.IdentityService.HttpApi.Host": {
+      "path": "host/Ecosystem.IdentityService.HttpApi.Host/Ecosystem.IdentityService.HttpApi.Host.abppkg.json",
+      "folder": "host"
+    },
+    "Ecosystem.IdentityService.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/Ecosystem.IdentityService.HttpApi.Client.ConsoleTestApp/Ecosystem.IdentityService.HttpApi.Client.ConsoleTestApp.abppkg.json",
+      "folder": "test"
+    },
+    "Ecosystem.IdentityService.IdentityServer": {
+      "path": "host/Ecosystem.IdentityService.IdentityServer/Ecosystem.IdentityService.IdentityServer.abppkg.json",
+      "folder": "host"
+    },
+    "Ecosystem.IdentityService.Host.Shared": {
+      "path": "host/Ecosystem.IdentityService.Host.Shared/Ecosystem.IdentityService.Host.Shared.abppkg.json",
+      "folder": "host"
+    }
+  }
+}

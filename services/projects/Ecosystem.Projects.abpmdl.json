@@ -1,0 +1,79 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {},
+      "host": {}
+    }
+  },
+  "packages": {
+    "Ecosystem.Projects.Domain.Shared": {
+      "path": "src/Ecosystem.Projects.Domain.Shared/Ecosystem.Projects.Domain.Shared.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.Projects.Domain": {
+      "path": "src/Ecosystem.Projects.Domain/Ecosystem.Projects.Domain.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.Projects.Application.Contracts": {
+      "path": "src/Ecosystem.Projects.Application.Contracts/Ecosystem.Projects.Application.Contracts.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.Projects.Application": {
+      "path": "src/Ecosystem.Projects.Application/Ecosystem.Projects.Application.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.Projects.EntityFrameworkCore": {
+      "path": "src/Ecosystem.Projects.EntityFrameworkCore/Ecosystem.Projects.EntityFrameworkCore.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.Projects.MongoDB": {
+      "path": "src/Ecosystem.Projects.MongoDB/Ecosystem.Projects.MongoDB.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.Projects.HttpApi": {
+      "path": "src/Ecosystem.Projects.HttpApi/Ecosystem.Projects.HttpApi.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.Projects.HttpApi.Client": {
+      "path": "src/Ecosystem.Projects.HttpApi.Client/Ecosystem.Projects.HttpApi.Client.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.Projects.TestBase": {
+      "path": "test/Ecosystem.Projects.TestBase/Ecosystem.Projects.TestBase.abppkg.json",
+      "folder": "test"
+    },
+    "Ecosystem.Projects.EntityFrameworkCore.Tests": {
+      "path": "test/Ecosystem.Projects.EntityFrameworkCore.Tests/Ecosystem.Projects.EntityFrameworkCore.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Ecosystem.Projects.MongoDB.Tests": {
+      "path": "test/Ecosystem.Projects.MongoDB.Tests/Ecosystem.Projects.MongoDB.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Ecosystem.Projects.Domain.Tests": {
+      "path": "test/Ecosystem.Projects.Domain.Tests/Ecosystem.Projects.Domain.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Ecosystem.Projects.Application.Tests": {
+      "path": "test/Ecosystem.Projects.Application.Tests/Ecosystem.Projects.Application.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Ecosystem.Projects.HttpApi.Host": {
+      "path": "host/Ecosystem.Projects.HttpApi.Host/Ecosystem.Projects.HttpApi.Host.abppkg.json",
+      "folder": "host"
+    },
+    "Ecosystem.Projects.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/Ecosystem.Projects.HttpApi.Client.ConsoleTestApp/Ecosystem.Projects.HttpApi.Client.ConsoleTestApp.abppkg.json",
+      "folder": "test"
+    },
+    "Ecosystem.Projects.IdentityServer": {
+      "path": "host/Ecosystem.Projects.IdentityServer/Ecosystem.Projects.IdentityServer.abppkg.json",
+      "folder": "host"
+    },
+    "Ecosystem.Projects.Host.Shared": {
+      "path": "host/Ecosystem.Projects.Host.Shared/Ecosystem.Projects.Host.Shared.abppkg.json",
+      "folder": "host"
+    }
+  }
+}

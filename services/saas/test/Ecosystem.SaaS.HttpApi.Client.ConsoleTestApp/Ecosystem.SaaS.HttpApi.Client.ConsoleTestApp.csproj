@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net9.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Remove="appsettings.json" />
+        <Content Include="appsettings.json">
+            <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <None Remove="appsettings.secrets.json" />
+        <Content Include="appsettings.secrets.json">
+            <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.0" />
+        <PackageReference Include="System.Linq.Dynamic.Core" Version="1.6.6" />
+        <PackageReference Include="Volo.Abp.Autofac" Version="9.0.0" />
+        <PackageReference Include="Volo.Abp.Http.Client.IdentityModel" Version="9.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\Ecosystem.SaaS.HttpApi.Client\Ecosystem.SaaS.HttpApi.Client.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Update="Fody" Version="6.9.2">
+        <PrivateAssets>all</PrivateAssets>
+      </PackageReference>
+      <PackageReference Update="Microsoft.CodeAnalysis.NetAnalyzers" Version="9.0.0" />
+      <PackageReference Update="Microsoft.VisualStudio.Threading.Analyzers" Version="17.14.15" />
+      <PackageReference Update="NodaTime" Version="3.2.2" />
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,7 @@
+{
+  "modules": {
+    "Ecosystem.IdentityService": {
+      "path": "Ecosystem.IdentityService.abpmdl.json"
+    }
+  }
+}

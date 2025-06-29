@@ -1,0 +1,79 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {},
+      "host": {}
+    }
+  },
+  "packages": {
+    "Ecosystem.Administration.Domain.Shared": {
+      "path": "src/Ecosystem.Administration.Domain.Shared/Ecosystem.Administration.Domain.Shared.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.Administration.Domain": {
+      "path": "src/Ecosystem.Administration.Domain/Ecosystem.Administration.Domain.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.Administration.Application.Contracts": {
+      "path": "src/Ecosystem.Administration.Application.Contracts/Ecosystem.Administration.Application.Contracts.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.Administration.Application": {
+      "path": "src/Ecosystem.Administration.Application/Ecosystem.Administration.Application.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.Administration.EntityFrameworkCore": {
+      "path": "src/Ecosystem.Administration.EntityFrameworkCore/Ecosystem.Administration.EntityFrameworkCore.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.Administration.MongoDB": {
+      "path": "src/Ecosystem.Administration.MongoDB/Ecosystem.Administration.MongoDB.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.Administration.HttpApi": {
+      "path": "src/Ecosystem.Administration.HttpApi/Ecosystem.Administration.HttpApi.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.Administration.HttpApi.Client": {
+      "path": "src/Ecosystem.Administration.HttpApi.Client/Ecosystem.Administration.HttpApi.Client.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.Administration.TestBase": {
+      "path": "test/Ecosystem.Administration.TestBase/Ecosystem.Administration.TestBase.abppkg.json",
+      "folder": "test"
+    },
+    "Ecosystem.Administration.EntityFrameworkCore.Tests": {
+      "path": "test/Ecosystem.Administration.EntityFrameworkCore.Tests/Ecosystem.Administration.EntityFrameworkCore.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Ecosystem.Administration.MongoDB.Tests": {
+      "path": "test/Ecosystem.Administration.MongoDB.Tests/Ecosystem.Administration.MongoDB.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Ecosystem.Administration.Domain.Tests": {
+      "path": "test/Ecosystem.Administration.Domain.Tests/Ecosystem.Administration.Domain.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Ecosystem.Administration.Application.Tests": {
+      "path": "test/Ecosystem.Administration.Application.Tests/Ecosystem.Administration.Application.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Ecosystem.Administration.HttpApi.Host": {
+      "path": "host/Ecosystem.Administration.HttpApi.Host/Ecosystem.Administration.HttpApi.Host.abppkg.json",
+      "folder": "host"
+    },
+    "Ecosystem.Administration.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/Ecosystem.Administration.HttpApi.Client.ConsoleTestApp/Ecosystem.Administration.HttpApi.Client.ConsoleTestApp.abppkg.json",
+      "folder": "test"
+    },
+    "Ecosystem.Administration.IdentityServer": {
+      "path": "host/Ecosystem.Administration.IdentityServer/Ecosystem.Administration.IdentityServer.abppkg.json",
+      "folder": "host"
+    },
+    "Ecosystem.Administration.Host.Shared": {
+      "path": "host/Ecosystem.Administration.Host.Shared/Ecosystem.Administration.Host.Shared.abppkg.json",
+      "folder": "host"
+    }
+  }
+}

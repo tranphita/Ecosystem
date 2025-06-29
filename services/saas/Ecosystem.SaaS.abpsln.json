@@ -1,0 +1,7 @@
+{
+  "modules": {
+    "Ecosystem.SaaS": {
+      "path": "Ecosystem.SaaS.abpmdl.json"
+    }
+  }
+}

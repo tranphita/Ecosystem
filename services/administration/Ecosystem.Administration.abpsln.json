@@ -1,0 +1,7 @@
+{
+  "modules": {
+    "Ecosystem.Administration": {
+      "path": "Ecosystem.Administration.abpmdl.json"
+    }
+  }
+}

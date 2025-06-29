@@ -1,0 +1,79 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {},
+      "host": {}
+    }
+  },
+  "packages": {
+    "Ecosystem.SaaS.Domain.Shared": {
+      "path": "src/Ecosystem.SaaS.Domain.Shared/Ecosystem.SaaS.Domain.Shared.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.SaaS.Domain": {
+      "path": "src/Ecosystem.SaaS.Domain/Ecosystem.SaaS.Domain.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.SaaS.Application.Contracts": {
+      "path": "src/Ecosystem.SaaS.Application.Contracts/Ecosystem.SaaS.Application.Contracts.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.SaaS.Application": {
+      "path": "src/Ecosystem.SaaS.Application/Ecosystem.SaaS.Application.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.SaaS.EntityFrameworkCore": {
+      "path": "src/Ecosystem.SaaS.EntityFrameworkCore/Ecosystem.SaaS.EntityFrameworkCore.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.SaaS.MongoDB": {
+      "path": "src/Ecosystem.SaaS.MongoDB/Ecosystem.SaaS.MongoDB.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.SaaS.HttpApi": {
+      "path": "src/Ecosystem.SaaS.HttpApi/Ecosystem.SaaS.HttpApi.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.SaaS.HttpApi.Client": {
+      "path": "src/Ecosystem.SaaS.HttpApi.Client/Ecosystem.SaaS.HttpApi.Client.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.SaaS.TestBase": {
+      "path": "test/Ecosystem.SaaS.TestBase/Ecosystem.SaaS.TestBase.abppkg.json",
+      "folder": "test"
+    },
+    "Ecosystem.SaaS.EntityFrameworkCore.Tests": {
+      "path": "test/Ecosystem.SaaS.EntityFrameworkCore.Tests/Ecosystem.SaaS.EntityFrameworkCore.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Ecosystem.SaaS.MongoDB.Tests": {
+      "path": "test/Ecosystem.SaaS.MongoDB.Tests/Ecosystem.SaaS.MongoDB.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Ecosystem.SaaS.Domain.Tests": {
+      "path": "test/Ecosystem.SaaS.Domain.Tests/Ecosystem.SaaS.Domain.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Ecosystem.SaaS.Application.Tests": {
+      "path": "test/Ecosystem.SaaS.Application.Tests/Ecosystem.SaaS.Application.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Ecosystem.SaaS.HttpApi.Host": {
+      "path": "host/Ecosystem.SaaS.HttpApi.Host/Ecosystem.SaaS.HttpApi.Host.abppkg.json",
+      "folder": "host"
+    },
+    "Ecosystem.SaaS.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/Ecosystem.SaaS.HttpApi.Client.ConsoleTestApp/Ecosystem.SaaS.HttpApi.Client.ConsoleTestApp.abppkg.json",
+      "folder": "test"
+    },
+    "Ecosystem.SaaS.IdentityServer": {
+      "path": "host/Ecosystem.SaaS.IdentityServer/Ecosystem.SaaS.IdentityServer.abppkg.json",
+      "folder": "host"
+    },
+    "Ecosystem.SaaS.Host.Shared": {
+      "path": "host/Ecosystem.SaaS.Host.Shared/Ecosystem.SaaS.Host.Shared.abppkg.json",
+      "folder": "host"
+    }
+  }
+}
