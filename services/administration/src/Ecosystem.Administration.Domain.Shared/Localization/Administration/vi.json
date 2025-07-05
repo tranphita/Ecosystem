@@ -2,6 +2,41 @@
   "culture": "vi",
   "texts": {
     "MyAccount": "Tài khoản của tôi",
-    "SamplePageMessage": "Trang mẫu cho mô-đun Administration"
+    "SamplePageMessage": "Trang mẫu cho mô-đun Administration",
+    
+    "Permission:Administration:OpenIddict": "Quản lý OpenIddict",
+    "Permission:Administration:OpenIddict:Applications": "Ứng dụng",
+    "Permission:Administration:OpenIddict:Applications.Create": "Tạo ứng dụng",
+    "Permission:Administration:OpenIddict:Applications.Update": "Cập nhật ứng dụng",
+    "Permission:Administration:OpenIddict:Applications.Delete": "Xóa ứng dụng",
+    "Permission:Administration:OpenIddict:Applications.ManagePermissions": "Quản lý quyền ứng dụng",
+    "Permission:Administration:OpenIddict:Scopes": "Phạm vi",
+    "Permission:Administration:OpenIddict:Scopes.Create": "Tạo phạm vi",
+    "Permission:Administration:OpenIddict:Scopes.Update": "Cập nhật phạm vi",
+    "Permission:Administration:OpenIddict:Scopes.Delete": "Xóa phạm vi",
+    
+    "OpenIddict:Applications": "Ứng dụng",
+    "OpenIddict:Application": "Ứng dụng",
+    "OpenIddict:Scopes": "Phạm vi",
+    "OpenIddict:Scope": "Phạm vi",
+    "OpenIddict:ClientId": "Client ID",
+    "OpenIddict:ClientSecret": "Client Secret",
+    "OpenIddict:DisplayName": "Tên hiển thị",
+    "OpenIddict:ConsentType": "Loại đồng ý",
+    "OpenIddict:Type": "Loại",
+    "OpenIddict:Permissions": "Quyền",
+    "OpenIddict:RedirectUris": "URL chuyển hướng",
+    "OpenIddict:PostLogoutRedirectUris": "URL chuyển hướng sau đăng xuất",
+    "OpenIddict:Requirements": "Yêu cầu",
+    "OpenIddict:GrantTypes": "Loại Grant",
+    "OpenIddict:ResponseTypes": "Loại Response",
+    "OpenIddict:ScopeName": "Tên phạm vi",
+    "OpenIddict:Description": "Mô tả",
+    "OpenIddict:Resources": "Tài nguyên",
+    
+    "OpenIddict:ApplicationNotFound": "Không tìm thấy ứng dụng",
+    "OpenIddict:ScopeNotFound": "Không tìm thấy phạm vi",
+    "OpenIddict:ClientIdAlreadyExists": "Client ID đã tồn tại",
+    "OpenIddict:ScopeNameAlreadyExists": "Tên phạm vi đã tồn tại"
   }
 }

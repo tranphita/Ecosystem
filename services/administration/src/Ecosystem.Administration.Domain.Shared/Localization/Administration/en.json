@@ -2,6 +2,41 @@
   "culture": "en",
   "texts": {
     "MyAccount": "My account",
-    "SamplePageMessage": "A sample page for the Administration module"
+    "SamplePageMessage": "A sample page for the Administration module",
+    
+    "Permission:Administration:OpenIddict": "OpenIddict Management",
+    "Permission:Administration:OpenIddict:Applications": "Applications",
+    "Permission:Administration:OpenIddict:Applications.Create": "Create Applications",
+    "Permission:Administration:OpenIddict:Applications.Update": "Update Applications",
+    "Permission:Administration:OpenIddict:Applications.Delete": "Delete Applications",
+    "Permission:Administration:OpenIddict:Applications.ManagePermissions": "Manage Application Permissions",
+    "Permission:Administration:OpenIddict:Scopes": "Scopes",
+    "Permission:Administration:OpenIddict:Scopes.Create": "Create Scopes",
+    "Permission:Administration:OpenIddict:Scopes.Update": "Update Scopes",
+    "Permission:Administration:OpenIddict:Scopes.Delete": "Delete Scopes",
+    
+    "OpenIddict:Applications": "Applications",
+    "OpenIddict:Application": "Application",
+    "OpenIddict:Scopes": "Scopes",
+    "OpenIddict:Scope": "Scope",
+    "OpenIddict:ClientId": "Client ID",
+    "OpenIddict:ClientSecret": "Client Secret",
+    "OpenIddict:DisplayName": "Display Name",
+    "OpenIddict:ConsentType": "Consent Type",
+    "OpenIddict:Type": "Type",
+    "OpenIddict:Permissions": "Permissions",
+    "OpenIddict:RedirectUris": "Redirect URIs",
+    "OpenIddict:PostLogoutRedirectUris": "Post Logout Redirect URIs",
+    "OpenIddict:Requirements": "Requirements",
+    "OpenIddict:GrantTypes": "Grant Types",
+    "OpenIddict:ResponseTypes": "Response Types",
+    "OpenIddict:ScopeName": "Scope Name",
+    "OpenIddict:Description": "Description",
+    "OpenIddict:Resources": "Resources",
+    
+    "OpenIddict:ApplicationNotFound": "Application not found",
+    "OpenIddict:ScopeNotFound": "Scope not found",
+    "OpenIddict:ClientIdAlreadyExists": "Client ID already exists",
+    "OpenIddict:ScopeNameAlreadyExists": "Scope name already exists"
   }
 }

@@ -18,8 +18,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <EmbeddedResource Include="Localization\Projects\*.json" />
-        <Content Remove="Localization\Projects\*.json" />
+        <EmbeddedResource Include="Localization\SmartBox\*.json" />
+        <Content Remove="Localization\SmartBox\*.json" />
     </ItemGroup>
 
     <ItemGroup>
