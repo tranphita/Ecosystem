@@ -7,6 +7,7 @@ import { ScopesListComponent } from './scopes-list.component';
 import { ApplicationFormComponent } from './application-form.component';
 import { ScopeFormComponent } from './scope-form.component';
 import { VALIDATION_BLUEPRINTS } from '@ngx-validate/core';
+import { provideOpenIddictConfig } from './config/providers/openiddict-config.provider';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { VALIDATION_BLUEPRINTS } from '@ngx-validate/core';
     {
       provide: VALIDATION_BLUEPRINTS,
       useValue: {}
-    }
+    },
+    ...provideOpenIddictConfig()
   ]
 })
 export class ApplicationManagementModule { } 

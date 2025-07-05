@@ -3,19 +3,19 @@
   <!-- Tabs for form sections -->
   <ul class="nav nav-tabs mb-3" role="tablist">
     <li class="nav-item">
-      <a class="nav-link active" data-bs-toggle="tab" href="#basic-tab" role="tab">
+      <a class="nav-link active" data-bs-toggle="tab" href="#basic-tab" role="tab" (click)="$event.preventDefault()">
         <i class="fas fa-info-circle me-1"></i>
         Basic Information
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="tab" href="#auth-tab" role="tab">
+      <a class="nav-link" data-bs-toggle="tab" href="#auth-tab" role="tab" (click)="$event.preventDefault()">
         <i class="fas fa-key me-1"></i>
         Authentication
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="tab" href="#urls-tab" role="tab">
+      <a class="nav-link" data-bs-toggle="tab" href="#urls-tab" role="tab" (click)="$event.preventDefault()">
         <i class="fas fa-link me-1"></i>
         URLs
       </a>

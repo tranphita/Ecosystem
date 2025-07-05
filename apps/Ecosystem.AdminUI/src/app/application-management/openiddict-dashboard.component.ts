@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { Location } from '@angular/common';
 import { Subject } from 'rxjs';
 import { takeUntil, filter } from 'rxjs/operators';
 
@@ -32,7 +33,8 @@ export class OpenIddictDashboardComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -87,26 +89,10 @@ export class OpenIddictDashboardComponent implements OnInit, OnDestroy {
     console.log('🔥 switchTab called with:', tabKey);
     
     try {
-      // Navigate to specific route for each tab
-      if (tabKey === 'applications') {
-        console.log('🔥 Navigating to applications...');
-        this.router.navigate(['/application-management/applications']).then(success => {
-          console.log('🔥 Navigation success:', success);
-        }).catch(error => {
-          console.error('🔥 Navigation error:', error);
-        });
-      } else if (tabKey === 'scopes') {
-        console.log('🔥 Navigating to scopes...');
-        this.router.navigate(['/application-management/scopes']).then(success => {
-          console.log('🔥 Navigation success:', success);
-        }).catch(error => {
-          console.error('🔥 Navigation error:', error);
-        });
-      } else {
-        // Fallback to setting tab directly
-        console.log('🔥 Setting tab directly:', tabKey);
-        this.currentTab = tabKey;
-      }
+
+      this.currentTab = tabKey;
+      const newUrl = `/application-management/${tabKey}`;
+      this.location.replaceState(newUrl);
     } catch (error) {
       console.error('🔥 Error in switchTab:', error);
     }
@@ -118,8 +104,4 @@ export class OpenIddictDashboardComponent implements OnInit, OnDestroy {
   isTabActive(tabKey: string): boolean {
     return this.currentTab === tabKey;
   }
-
-
-
- 
 }  

@@ -2,35 +2,35 @@
 
 export const OPENIDDICT_PERMISSIONS = {
   // OpenIddict group permission
-  OpenIddict: 'OpenIddict',
+  OpenIddict: 'Administration.OpenIddict',
   
   // Applications permissions
   Applications: {
-    Default: 'OpenIddict.Applications',
-    Create: 'OpenIddict.Applications.Create',
-    Edit: 'OpenIddict.Applications.Edit',
-    Delete: 'OpenIddict.Applications.Delete',
-    ManagePermissions: 'OpenIddict.Applications.ManagePermissions',
+    Default: 'Administration.OpenIddict.Applications',
+    Create: 'Administration.OpenIddict.Applications.Create',
+    Edit: 'Administration.OpenIddict.Applications.Update',
+    Delete: 'Administration.OpenIddict.Applications.Delete',
+    ManagePermissions: 'Administration.OpenIddict.Applications.ManagePermissions',
   },
   
   // Scopes permissions
   Scopes: {
-    Default: 'OpenIddict.Scopes',
-    Create: 'OpenIddict.Scopes.Create',
-    Edit: 'OpenIddict.Scopes.Edit',
-    Delete: 'OpenIddict.Scopes.Delete',
+    Default: 'Administration.OpenIddict.Scopes',
+    Create: 'Administration.OpenIddict.Scopes.Create',
+    Edit: 'Administration.OpenIddict.Scopes.Update',
+    Delete: 'Administration.OpenIddict.Scopes.Delete',
   },
   
   // Authorization permissions
   Authorizations: {
-    Default: 'OpenIddict.Authorizations',
-    Delete: 'OpenIddict.Authorizations.Delete',
+    Default: 'Administration.OpenIddict.Authorizations',
+    Delete: 'Administration.OpenIddict.Authorizations.Delete',
   },
   
   // Token permissions
   Tokens: {
-    Default: 'OpenIddict.Tokens',
-    Delete: 'OpenIddict.Tokens.Delete',
+    Default: 'Administration.OpenIddict.Tokens',
+    Delete: 'Administration.OpenIddict.Tokens.Delete',
   },
 } as const;
 

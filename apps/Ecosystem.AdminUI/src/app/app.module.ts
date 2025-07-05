@@ -17,6 +17,7 @@ import { AppComponent } from './app.component';
 import { APP_ROUTE_PROVIDER } from './route.provider';
 import { OPENIDDICT_CONFIG_PROVIDERS } from './application-management/config/providers/openiddict-config.provider';
 
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -31,11 +32,11 @@ import { OPENIDDICT_CONFIG_PROVIDERS } from './application-management/config/pro
   providers: [
     APP_ROUTE_PROVIDER,
     ...OPENIDDICT_CONFIG_PROVIDERS,
-
     provideAbpCore(
       withOptions({
         environment,
         registerLocaleFn: registerLocale(),
+        skipGetAppConfiguration: false,
       })
     ),
     provideAbpOAuth(),

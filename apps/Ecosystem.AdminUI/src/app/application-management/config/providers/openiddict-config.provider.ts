@@ -1,5 +1,6 @@
 import { APP_INITIALIZER } from '@angular/core';
 import { RoutesService, eLayoutType } from '@abp/ng.core';
+import { OPENIDDICT_PERMISSIONS } from '../permissions/openiddict-permissions';
 
 // OpenIddict Configuration Provider
 export function provideOpenIddictConfig() {
@@ -22,6 +23,7 @@ function configureOpenIddictRoutes(routesService: RoutesService) {
         iconClass: 'fas fa-wrench',
         order: 2,
         layout: eLayoutType.application,
+        // Không đặt requiredPolicy ở mức gốc để menu Administration vẫn hiển thị
       },
       {
         path: '/application-management',
@@ -30,6 +32,7 @@ function configureOpenIddictRoutes(routesService: RoutesService) {
         order: 100,
         layout: eLayoutType.application,
         parentName: 'AbpUiNavigation::Menu:Administration',
+        requiredPolicy: OPENIDDICT_PERMISSIONS.Applications.Default,
       },
       {
         path: '/application-management/applications',
@@ -38,6 +41,7 @@ function configureOpenIddictRoutes(routesService: RoutesService) {
         order: 1,
         layout: eLayoutType.application,
         parentName: 'OpenIddict Management',
+        requiredPolicy: OPENIDDICT_PERMISSIONS.Applications.Default,
       },
       {
         path: '/application-management/scopes',
@@ -46,6 +50,7 @@ function configureOpenIddictRoutes(routesService: RoutesService) {
         order: 2,
         layout: eLayoutType.application,
         parentName: 'OpenIddict Management',
+        requiredPolicy: OPENIDDICT_PERMISSIONS.Scopes.Default,
       },
     ]);
   };
