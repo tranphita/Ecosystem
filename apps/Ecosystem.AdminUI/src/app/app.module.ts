@@ -15,6 +15,7 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { APP_ROUTE_PROVIDER } from './route.provider';
+import { OPENIDDICT_CONFIG_PROVIDERS } from './application-management/config/providers/openiddict-config.provider';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,6 +30,7 @@ import { APP_ROUTE_PROVIDER } from './route.provider';
   ],
   providers: [
     APP_ROUTE_PROVIDER,
+    ...OPENIDDICT_CONFIG_PROVIDERS,
 
     provideAbpCore(
       withOptions({

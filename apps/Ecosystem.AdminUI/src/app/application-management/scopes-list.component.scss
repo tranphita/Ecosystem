@@ -1,0 +1,178 @@
+// Custom styles cho Scopes List Component - tương tự Application List
+
+.card {
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+  .card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    padding: 1rem 1.5rem;
+    
+    .card-title {
+      margin-bottom: 0;
+      font-weight: 600;
+      color: #495057;
+    }
+  }
+  
+  .card-body {
+    padding: 1.5rem;
+  }
+}
+
+// Table styling
+.table-responsive {
+  .table {
+    margin-bottom: 0;
+    
+    th {
+      background-color: #f8f9fa;
+      border-top: none;
+      font-weight: 600;
+      color: #495057;
+      padding: 12px;
+      vertical-align: middle;
+    }
+    
+    td {
+      padding: 12px;
+      vertical-align: middle;
+      border-top: 1px solid #dee2e6;
+    }
+    
+    tbody tr {
+      transition: background-color 0.15s ease-in-out;
+      
+      &:hover {
+        background-color: #f8f9fa;
+      }
+    }
+  }
+}
+
+// Badge styling
+.badge {
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  
+  &.bg-light {
+    border: 1px solid #dee2e6;
+  }
+}
+
+// Button group styling
+.btn-group {
+  .btn {
+    border-radius: 4px;
+    margin-right: 2px;
+    
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+// Search form styling
+form {
+  .input-group {
+    .form-control {
+      border-radius: 4px 0 0 4px;
+    }
+    
+    .btn {
+      border-radius: 0 4px 4px 0;
+    }
+  }
+}
+
+// Loading spinner
+.text-center {
+  .fa-spinner {
+    color: #007bff;
+  }
+}
+
+// Modal styling
+.modal {
+  &.show {
+    display: block !important;
+  }
+  
+  .modal-dialog {
+    margin: 1.75rem auto;
+    
+    .modal-content {
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19);
+    }
+    
+    .modal-header {
+      background-color: #f8f9fa;
+      border-bottom: 1px solid #dee2e6;
+      border-radius: 8px 8px 0 0;
+      
+      .modal-title {
+        font-weight: 600;
+        color: #495057;
+      }
+    }
+    
+    .modal-body {
+      padding: 1.5rem;
+    }
+    
+    .modal-footer {
+      background-color: #f8f9fa;
+      border-top: 1px solid #dee2e6;
+      border-radius: 0 0 8px 8px;
+    }
+  }
+}
+
+// Modal backdrop
+.modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .card {
+    .card-header {
+      .row {
+        .col-md-6 {
+          margin-bottom: 1rem;
+          
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+  
+  .table-responsive {
+    .table {
+      th, td {
+        padding: 8px;
+        font-size: 0.875rem;
+      }
+    }
+  }
+  
+  .btn-group {
+    .btn {
+      padding: 0.25rem 0.5rem;
+      font-size: 0.875rem;
+    }
+  }
+}
+
+// Specific styles for scope resources
+.badge.bg-light {
+  color: #495057;
+  background-color: #f8f9fa !important;
+  border: 1px solid #dee2e6;
+} 

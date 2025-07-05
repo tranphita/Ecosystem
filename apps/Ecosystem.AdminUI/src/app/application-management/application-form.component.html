@@ -1,0 +1,255 @@
+<!-- Application Form -->
+<form [formGroup]="form" (ngSubmit)="onSave()">
+  <!-- Tabs for form sections -->
+  <ul class="nav nav-tabs mb-3" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" data-bs-toggle="tab" href="#basic-tab" role="tab">
+        <i class="fas fa-info-circle me-1"></i>
+        Basic Information
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="tab" href="#auth-tab" role="tab">
+        <i class="fas fa-key me-1"></i>
+        Authentication
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="tab" href="#urls-tab" role="tab">
+        <i class="fas fa-link me-1"></i>
+        URLs
+      </a>
+    </li>
+  </ul>
+
+  <!-- Tab Content -->
+  <div class="tab-content">
+    <!-- Basic Information Tab -->
+    <div class="tab-pane fade show active" id="basic-tab" role="tabpanel">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="clientId" class="form-label">Client ID *</label>
+            <input 
+              type="text" 
+              id="clientId"
+              class="form-control" 
+              formControlName="clientId"
+              [class.is-invalid]="form.get('clientId')?.invalid && form.get('clientId')?.touched">
+            <div class="invalid-feedback" *ngIf="form.get('clientId')?.invalid && form.get('clientId')?.touched">
+              Client ID is required
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="displayName" class="form-label">Display Name</label>
+            <input 
+              type="text" 
+              id="displayName"
+              class="form-control" 
+              formControlName="displayName">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="type" class="form-label">Application Type</label>
+            <select id="type" class="form-select" formControlName="type">
+              <option *ngFor="let type of applicationTypes" [value]="type.value">
+                {{ type.label }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="consentType" class="form-label">Consent Type</label>
+            <select id="consentType" class="form-select" formControlName="consentType">
+              <option *ngFor="let consent of consentTypes" [value]="consent.value">
+                {{ consent.label }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="clientUri" class="form-label">Client URI</label>
+            <input 
+              type="url" 
+              id="clientUri"
+              class="form-control" 
+              formControlName="clientUri">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="logoUri" class="form-label">Logo URI</label>
+            <input 
+              type="url" 
+              id="logoUri"
+              class="form-control" 
+              formControlName="logoUri">
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="clientSecret" class="form-label">Client Secret</label>
+        <input 
+          type="password" 
+          id="clientSecret"
+          class="form-control" 
+          formControlName="clientSecret">
+        <div class="form-text">Leave empty for public clients</div>
+      </div>
+    </div>
+
+    <!-- Authentication Tab -->
+    <div class="tab-pane fade" id="auth-tab" role="tabpanel">
+      <!-- Grant Types -->
+      <div class="mb-4">
+        <label class="form-label">Grant Types</label>
+        <div class="row">
+          <div class="col-md-6" *ngFor="let grantType of grantTypes">
+            <div class="form-check">
+              <input 
+                class="form-check-input" 
+                type="checkbox" 
+                [id]="'grant-' + grantType.value"
+                [checked]="isGrantTypeSelected(grantType.value)"
+                (change)="onGrantTypeChange(grantType.value, $event.target?.checked)">
+              <label class="form-check-label" [for]="'grant-' + grantType.value">
+                {{ grantType.label }}
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Response Types -->
+      <div class="mb-4">
+        <label class="form-label">Response Types</label>
+        <div class="row">
+          <div class="col-md-4" *ngFor="let responseType of responseTypes">
+            <div class="form-check">
+              <input 
+                class="form-check-input" 
+                type="checkbox" 
+                [id]="'response-' + responseType.value"
+                [checked]="isResponseTypeSelected(responseType.value)"
+                (change)="onResponseTypeChange(responseType.value, $event.target?.checked)">
+              <label class="form-check-label" [for]="'response-' + responseType.value">
+                {{ responseType.label }}
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scopes -->
+      <div class="mb-4">
+        <label class="form-label">Scopes</label>
+        <div class="row">
+          <div class="col-md-4" *ngFor="let scope of scopes">
+            <div class="form-check">
+              <input 
+                class="form-check-input" 
+                type="checkbox" 
+                [id]="'scope-' + scope.value"
+                [checked]="isScopeSelected(scope.value)"
+                (change)="onScopeChange(scope.value, $event.target?.checked)">
+              <label class="form-check-label" [for]="'scope-' + scope.value">
+                {{ scope.label }}
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- URLs Tab -->
+    <div class="tab-pane fade" id="urls-tab" role="tabpanel">
+      <!-- Redirect URIs -->
+      <div class="mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <label class="form-label mb-0">Redirect URIs</label>
+          <button type="button" class="btn btn-sm btn-outline-primary" (click)="addRedirectUri()">
+            <i class="fa fa-plus me-1"></i>
+            Add URI
+          </button>
+        </div>
+        <div formArrayName="redirectUris">
+          <div 
+            *ngFor="let uri of redirectUrisArray.controls; let i = index" 
+            class="input-group mb-2">
+            <input 
+              type="url" 
+              class="form-control" 
+              [formControlName]="i"
+              placeholder="https://example.com/callback">
+            <button 
+              type="button" 
+              class="btn btn-outline-danger" 
+              (click)="removeRedirectUri(i)">
+              <i class="fa fa-trash"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Post Logout Redirect URIs -->
+      <div class="mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <label class="form-label mb-0">Post Logout Redirect URIs</label>
+          <button type="button" class="btn btn-sm btn-outline-primary" (click)="addPostLogoutUri()">
+            <i class="fa fa-plus me-1"></i>
+            Add URI
+          </button>
+        </div>
+        <div formArrayName="postLogoutRedirectUris">
+          <div 
+            *ngFor="let uri of postLogoutRedirectUrisArray.controls; let i = index" 
+            class="input-group mb-2">
+            <input 
+              type="url" 
+              class="form-control" 
+              [formControlName]="i"
+              placeholder="https://example.com/logout">
+            <button 
+              type="button" 
+              class="btn btn-outline-danger" 
+              (click)="removePostLogoutUri(i)">
+              <i class="fa fa-trash"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form Actions -->
+  <div class="d-flex justify-content-end gap-2 mt-4">
+    <button 
+      type="button" 
+      class="btn btn-secondary" 
+      (click)="onCancel()"
+      [disabled]="isLoading">
+      <i class="fa fa-times me-1"></i>
+      Cancel
+    </button>
+    <button 
+      type="submit" 
+      class="btn btn-primary"
+      [disabled]="form.invalid || isLoading">
+      <i class="fa fa-spinner fa-spin me-1" *ngIf="isLoading"></i>
+      <i class="fa fa-save me-1" *ngIf="!isLoading"></i>
+      {{ application ? 'Update' : 'Create' }}
+    </button>
+  </div>
+</form> 

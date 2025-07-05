@@ -1,0 +1,85 @@
+<!-- Scope Form -->
+<form [formGroup]="form" (ngSubmit)="onSave()">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label for="name" class="form-label">Scope Name *</label>
+        <input 
+          type="text" 
+          id="name"
+          class="form-control" 
+          formControlName="name"
+          [class.is-invalid]="form.get('name')?.invalid && form.get('name')?.touched"
+          [readonly]="!!scope"
+          placeholder="e.g., api1, user_profile">
+        <div class="invalid-feedback" *ngIf="form.get('name')?.invalid && form.get('name')?.touched">
+          <div *ngIf="form.get('name')?.errors?.['required']">Scope name is required</div>
+          <div *ngIf="form.get('name')?.errors?.['minlength']">Scope name must be at least 2 characters</div>
+        </div>
+        <div class="form-text" *ngIf="!scope">
+          Scope name cannot be changed after creation
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label for="displayName" class="form-label">Display Name</label>
+        <input 
+          type="text" 
+          id="displayName"
+          class="form-control" 
+          formControlName="displayName"
+          placeholder="e.g., API Access, User Profile">
+        <div class="form-text">
+          Human-readable name for the scope
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <textarea 
+      id="description"
+      class="form-control" 
+      formControlName="description"
+      rows="3"
+      placeholder="Describe what this scope allows access to..."></textarea>
+    <div class="form-text">
+      Optional description of the scope's purpose
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="resources" class="form-label">Resources</label>
+    <input 
+      type="text" 
+      id="resources"
+      class="form-control" 
+      formControlName="resources"
+      placeholder="e.g., api1, api2, user-service">
+    <div class="form-text">
+      Comma-separated list of resources this scope can access
+    </div>
+  </div>
+
+  <!-- Form Actions -->
+  <div class="d-flex justify-content-end gap-2 mt-4">
+    <button 
+      type="button" 
+      class="btn btn-secondary" 
+      (click)="onCancel()"
+      [disabled]="isLoading">
+      <i class="fa fa-times me-1"></i>
+      Cancel
+    </button>
+    <button 
+      type="submit" 
+      class="btn btn-primary"
+      [disabled]="form.invalid || isLoading">
+      <i class="fa fa-spinner fa-spin me-1" *ngIf="isLoading"></i>
+      <i class="fa fa-save me-1" *ngIf="!isLoading"></i>
+      {{ scope ? 'Update' : 'Create' }}
+    </button>
+  </div>
+</form> 

@@ -1,7 +1,7 @@
 import { CoreTestingModule } from "@abp/ng.core/testing";
 import { ThemeSharedTestingModule } from "@abp/ng.theme.shared/testing";
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
-import { NgxValidateCoreModule } from "@ngx-validate/core";
+// import { NgxValidateCoreModule } from "@ngx-validate/core";
 import { HomeComponent } from "./home.component";
 import { OAuthService } from 'angular-oauth2-oidc';
 import { AuthService } from '@abp/ng.core';
@@ -19,7 +19,7 @@ describe("HomeComponent", () => {
         imports: [
           CoreTestingModule.withConfig(),
           ThemeSharedTestingModule.withConfig(),
-          NgxValidateCoreModule,
+          // NgxValidateCoreModule,
         ],
         providers: [
           /* mock providers here */

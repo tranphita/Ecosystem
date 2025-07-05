@@ -1,0 +1,196 @@
+<!-- Header và nút actions -->
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-md-6">
+        <h5 class="card-title">
+          <i class="fas fa-th-large me-2"></i>
+          OpenIddict Applications
+        </h5>
+      </div>
+      <div class="col-md-6">
+        <div class="text-lg-end">
+          <button 
+            type="button" 
+            class="btn btn-primary me-2"
+            (click)="openCreateModal()">
+            <i class="fa fa-plus me-1"></i>
+            Tạo mới
+          </button>
+          <button 
+            type="button" 
+            class="btn btn-secondary"
+            (click)="refresh()">
+            <i class="fa fa-refresh me-1"></i>
+            Làm mới
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <!-- Form tìm kiếm -->
+    <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="mb-3">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="input-group">
+            <input 
+              type="text" 
+              class="form-control" 
+              formControlName="filter"
+              placeholder="Tìm kiếm theo Client ID hoặc Display Name...">
+            <button 
+              type="submit" 
+              class="btn btn-outline-primary">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <!-- Loading indicator -->
+    <div *ngIf="isLoading" class="text-center py-4">
+      <i class="fa fa-spinner fa-spin fa-2x"></i>
+      <p class="mt-2">Đang tải dữ liệu...</p>
+    </div>
+
+    <!-- Bảng danh sách applications -->
+    <div *ngIf="!isLoading" class="table-responsive">
+      <table class="table table-striped">
+        <thead class="table-light">
+          <tr>
+            <th>Display Name</th>
+            <th>Client ID</th>
+            <th>Application Type</th>
+            <th>Consent Type</th>
+            <th>Ngày tạo</th>
+            <th width="200">Thao tác</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Không có dữ liệu -->
+          <tr *ngIf="applications.length === 0">
+            <td colspan="6" class="text-center py-4">
+              <i class="fa fa-info-circle me-2"></i>
+              Không có dữ liệu
+            </td>
+          </tr>
+          
+          <!-- Danh sách applications -->
+          <tr *ngFor="let app of applications; trackBy: trackByFn">
+            <td>
+              <div class="d-flex align-items-center">
+                <div>
+                  <strong>{{ app.displayName || app.clientId }}</strong>
+                  <br>
+                  <small class="text-muted" *ngIf="app.clientUri">
+                    <i class="fa fa-link me-1"></i>
+                    {{ app.clientUri }}
+                  </small>
+                </div>
+              </div>
+            </td>
+            <td>
+              <code class="bg-light p-1 rounded">{{ app.clientId }}</code>
+            </td>
+            <td>
+              <span class="badge bg-info text-white">
+                {{ getApplicationTypeDisplayName(app.type) }}
+              </span>
+            </td>
+            <td>
+              <span class="badge bg-secondary text-white">
+                {{ getConsentTypeDisplayName(app.consentType) }}
+              </span>
+            </td>
+            <td>
+              <small>{{ app.creationTime | date:'dd/MM/yyyy HH:mm' }}</small>
+            </td>
+            <td>
+              <div class="btn-group" role="group">
+                <button 
+                  type="button" 
+                  class="btn btn-sm btn-outline-primary"
+                  (click)="openEditModal(app)"
+                  title="Chỉnh sửa">
+                  <i class="fa fa-edit"></i>
+                </button>
+                <button 
+                  type="button" 
+                  class="btn btn-sm btn-outline-info"
+                  title="Permissions">
+                  <i class="fa fa-shield-alt"></i>
+                </button>
+                <button 
+                  type="button" 
+                  class="btn btn-sm btn-outline-danger"
+                  (click)="deleteApplication(app)"
+                  title="Xóa">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Phân trang -->
+    <div *ngIf="!isLoading && applications.length > 0" class="d-flex justify-content-between align-items-center">
+      <div class="text-muted">
+        Hiển thị {{ (page * pageSize) + 1 }} - {{ Math.min((page + 1) * pageSize, totalCount) }} 
+        trong tổng số {{ totalCount }} kết quả
+      </div>
+      
+      <ngb-pagination 
+        [(page)]="page" 
+        [pageSize]="pageSize" 
+        [collectionSize]="totalCount"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="onPageChange(page)">
+      </ngb-pagination>
+    </div>
+  </div>
+</div>
+
+<!-- Modal tạo/chỉnh sửa application -->
+<div 
+  class="modal fade" 
+  [class.show]="isModalOpen"
+  [style.display]="isModalOpen ? 'block' : 'none'"
+  tabindex="-1"
+  role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          {{ selectedApplication ? 'Chỉnh sửa Application' : 'Tạo mới Application' }}
+        </h5>
+        <button 
+          type="button" 
+          class="btn-close" 
+          (click)="closeModal()">
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-application-form
+          [application]="selectedApplication"
+          [isVisible]="isModalOpen"
+          (saved)="onModalSave()"
+          (cancelled)="closeModal()">
+        </app-application-form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal backdrop -->
+<div 
+  *ngIf="isModalOpen"
+  class="modal-backdrop fade show"
+  (click)="closeModal()">
+</div> 

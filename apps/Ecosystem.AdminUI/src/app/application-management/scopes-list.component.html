@@ -1,0 +1,202 @@
+<!-- Header và nút actions -->
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-md-6">
+        <h5 class="card-title">
+          <i class="fas fa-key me-2"></i>
+          OpenIddict Scopes
+        </h5>
+      </div>
+      <div class="col-md-6">
+        <div class="text-lg-end">
+          <button 
+            type="button" 
+            class="btn btn-primary me-2"
+            (click)="openCreateModal()">
+            <i class="fa fa-plus me-1"></i>
+            New Scope
+          </button>
+          <button 
+            type="button" 
+            class="btn btn-secondary"
+            (click)="refresh()">
+            <i class="fa fa-refresh me-1"></i>
+            Refresh
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <!-- Form tìm kiếm -->
+    <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="mb-3">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="input-group">
+            <input 
+              type="text" 
+              class="form-control" 
+              formControlName="filter"
+              placeholder="Tìm kiếm theo tên scope...">
+            <button 
+              type="submit" 
+              class="btn btn-outline-primary">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <!-- Loading indicator -->
+    <div *ngIf="isLoading" class="text-center py-4">
+      <i class="fa fa-spinner fa-spin fa-2x"></i>
+      <p class="mt-2">Đang tải dữ liệu...</p>
+    </div>
+
+    <!-- Bảng danh sách scopes -->
+    <div *ngIf="!isLoading" class="table-responsive">
+      <table class="table table-striped">
+        <thead class="table-light">
+          <tr>
+            <th>Scope Name</th>
+            <th>Display Name</th>
+            <th>Description</th>
+            <th>Resources</th>
+            <th>Ngày tạo</th>
+            <th width="150">Thao tác</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Không có dữ liệu -->
+          <tr *ngIf="scopes.length === 0">
+            <td colspan="6" class="text-center py-4">
+              <i class="fa fa-info-circle me-2"></i>
+              Không có dữ liệu
+            </td>
+          </tr>
+          
+          <!-- Danh sách scopes -->
+          <tr *ngFor="let scope of scopes; trackBy: trackByFn">
+            <td>
+              <div class="d-flex align-items-center">
+                <div>
+                  <strong>{{ scope.name }}</strong>
+                  <br>
+                  <small class="text-muted">{{ scope.id }}</small>
+                </div>
+              </div>
+            </td>
+            <td>
+              <span *ngIf="scope.displayName; else noDisplayName">
+                {{ scope.displayName }}
+              </span>
+              <ng-template #noDisplayName>
+                <em class="text-muted">No display name</em>
+              </ng-template>
+            </td>
+            <td>
+              <span *ngIf="scope.description; else noDescription">
+                {{ scope.description | slice:0:50 }}{{ scope.description.length > 50 ? '...' : '' }}
+              </span>
+              <ng-template #noDescription>
+                <em class="text-muted">No description</em>
+              </ng-template>
+            </td>
+            <td>
+              <div *ngIf="scope.resources && scope.resources.length > 0; else noResources">
+                <span 
+                  *ngFor="let resource of scope.resources; let last = last"
+                  class="badge bg-light text-dark me-1">
+                  {{ resource }}
+                </span>
+              </div>
+              <ng-template #noResources>
+                <em class="text-muted">No resources</em>
+              </ng-template>
+            </td>
+            <td>
+              <small>{{ scope.creationTime | date:'dd/MM/yyyy HH:mm' }}</small>
+            </td>
+            <td>
+              <div class="btn-group" role="group">
+                <button 
+                  type="button" 
+                  class="btn btn-sm btn-outline-primary"
+                  (click)="openEditModal(scope)"
+                  title="Chỉnh sửa">
+                  <i class="fa fa-edit"></i>
+                </button>
+                <button 
+                  type="button" 
+                  class="btn btn-sm btn-outline-danger"
+                  (click)="deleteScope(scope)"
+                  title="Xóa">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Phân trang -->
+    <div *ngIf="!isLoading && scopes.length > 0" class="d-flex justify-content-between align-items-center">
+      <div class="text-muted">
+        Hiển thị {{ (page * pageSize) + 1 }} - {{ Math.min((page + 1) * pageSize, totalCount) }} 
+        trong tổng số {{ totalCount }} kết quả
+      </div>
+      
+      <ngb-pagination 
+        [(page)]="page" 
+        [pageSize]="pageSize" 
+        [collectionSize]="totalCount"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="onPageChange(page)">
+      </ngb-pagination>
+    </div>
+  </div>
+</div>
+
+<!-- Modal tạo/chỉnh sửa scope -->
+<div 
+  class="modal fade" 
+  [class.show]="isModalOpen"
+  [style.display]="isModalOpen ? 'block' : 'none'"
+  tabindex="-1"
+  role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          {{ selectedScope ? 'Edit Scope' : 'New Scope' }}
+        </h5>
+        <button 
+          type="button" 
+          class="btn-close" 
+          (click)="closeModal()">
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-scope-form
+          [scope]="selectedScope"
+          [isVisible]="isModalOpen"
+          (saved)="onModalSave()"
+          (cancelled)="closeModal()">
+        </app-scope-form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal backdrop -->
+<div 
+  *ngIf="isModalOpen"
+  class="modal-backdrop fade show"
+  (click)="closeModal()">
+</div> 
