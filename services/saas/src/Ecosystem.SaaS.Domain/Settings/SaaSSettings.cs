@@ -1,4 +1,4 @@
-﻿namespace Ecosystem.SaaS.Settings;
+namespace Ecosystem.SaaS.Settings;
 
 public static class SaaSSettings
 {

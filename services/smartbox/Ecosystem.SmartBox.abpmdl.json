@@ -1,0 +1,79 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {},
+      "host": {}
+    }
+  },
+  "packages": {
+    "Ecosystem.SmartBox.Domain.Shared": {
+      "path": "src/Ecosystem.SmartBox.Domain.Shared/Ecosystem.SmartBox.Domain.Shared.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.SmartBox.Domain": {
+      "path": "src/Ecosystem.SmartBox.Domain/Ecosystem.SmartBox.Domain.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.SmartBox.Application.Contracts": {
+      "path": "src/Ecosystem.SmartBox.Application.Contracts/Ecosystem.SmartBox.Application.Contracts.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.SmartBox.Application": {
+      "path": "src/Ecosystem.SmartBox.Application/Ecosystem.SmartBox.Application.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.SmartBox.EntityFrameworkCore": {
+      "path": "src/Ecosystem.SmartBox.EntityFrameworkCore/Ecosystem.SmartBox.EntityFrameworkCore.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.SmartBox.MongoDB": {
+      "path": "src/Ecosystem.SmartBox.MongoDB/Ecosystem.SmartBox.MongoDB.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.SmartBox.HttpApi": {
+      "path": "src/Ecosystem.SmartBox.HttpApi/Ecosystem.SmartBox.HttpApi.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.SmartBox.HttpApi.Client": {
+      "path": "src/Ecosystem.SmartBox.HttpApi.Client/Ecosystem.SmartBox.HttpApi.Client.abppkg.json",
+      "folder": "src"
+    },
+    "Ecosystem.SmartBox.TestBase": {
+      "path": "test/Ecosystem.SmartBox.TestBase/Ecosystem.SmartBox.TestBase.abppkg.json",
+      "folder": "test"
+    },
+    "Ecosystem.SmartBox.EntityFrameworkCore.Tests": {
+      "path": "test/Ecosystem.SmartBox.EntityFrameworkCore.Tests/Ecosystem.SmartBox.EntityFrameworkCore.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Ecosystem.SmartBox.MongoDB.Tests": {
+      "path": "test/Ecosystem.SmartBox.MongoDB.Tests/Ecosystem.SmartBox.MongoDB.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Ecosystem.SmartBox.Domain.Tests": {
+      "path": "test/Ecosystem.SmartBox.Domain.Tests/Ecosystem.SmartBox.Domain.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Ecosystem.SmartBox.Application.Tests": {
+      "path": "test/Ecosystem.SmartBox.Application.Tests/Ecosystem.SmartBox.Application.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "Ecosystem.SmartBox.HttpApi.Host": {
+      "path": "host/Ecosystem.SmartBox.HttpApi.Host/Ecosystem.SmartBox.HttpApi.Host.abppkg.json",
+      "folder": "host"
+    },
+    "Ecosystem.SmartBox.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/Ecosystem.SmartBox.HttpApi.Client.ConsoleTestApp/Ecosystem.SmartBox.HttpApi.Client.ConsoleTestApp.abppkg.json",
+      "folder": "test"
+    },
+    "Ecosystem.SmartBox.IdentityServer": {
+      "path": "host/Ecosystem.SmartBox.IdentityServer/Ecosystem.SmartBox.IdentityServer.abppkg.json",
+      "folder": "host"
+    },
+    "Ecosystem.SmartBox.Host.Shared": {
+      "path": "host/Ecosystem.SmartBox.Host.Shared/Ecosystem.SmartBox.Host.Shared.abppkg.json",
+      "folder": "host"
+    }
+  }
+}

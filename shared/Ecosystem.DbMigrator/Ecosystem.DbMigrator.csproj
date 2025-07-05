@@ -27,8 +27,8 @@
         <ProjectReference Include="..\..\services\administration\src\Ecosystem.Administration.EntityFrameworkCore\Ecosystem.Administration.EntityFrameworkCore.csproj" />
         <ProjectReference Include="..\..\services\identity\src\Ecosystem.IdentityService.Application.Contracts\Ecosystem.IdentityService.Application.Contracts.csproj" />
         <ProjectReference Include="..\..\services\identity\src\Ecosystem.IdentityService.EntityFrameworkCore\Ecosystem.IdentityService.EntityFrameworkCore.csproj" />
-        <ProjectReference Include="..\..\services\projects\src\Ecosystem.Projects.Application.Contracts\Ecosystem.Projects.Application.Contracts.csproj" />
-        <ProjectReference Include="..\..\services\projects\src\Ecosystem.Projects.EntityFrameworkCore\Ecosystem.Projects.EntityFrameworkCore.csproj" />
+        <ProjectReference Include="..\..\services\smartbox\src\Ecosystem.SmartBox.Application.Contracts\Ecosystem.SmartBox.Application.Contracts.csproj" />
+        <ProjectReference Include="..\..\services\smartbox\src\Ecosystem.SmartBox.EntityFrameworkCore\Ecosystem.SmartBox.EntityFrameworkCore.csproj" />
         <ProjectReference Include="..\..\services\saas\src\Ecosystem.SaaS.Application.Contracts\Ecosystem.SaaS.Application.Contracts.csproj" />
         <ProjectReference Include="..\..\services\saas\src\Ecosystem.SaaS.EntityFrameworkCore\Ecosystem.SaaS.EntityFrameworkCore.csproj" />
         <ProjectReference Include="..\Ecosystem.Microservice.Shared\Ecosystem.Microservice.Shared.csproj" />

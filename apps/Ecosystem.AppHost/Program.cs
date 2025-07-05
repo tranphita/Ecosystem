@@ -10,15 +10,16 @@ internal class Program
         const string LaunchProfileName = "Aspire";
         var builder = DistributedApplication.CreateBuilder(args);
 
-        // Sử dụng connection strings cho tất cả infrastructure services
+        // Sử dụng connection strings cho tất cả infrastructure services  
         var adminDb = builder.AddConnectionString(EcosystemNames.AdministrationDb);
         var identityDb = builder.AddConnectionString(EcosystemNames.IdentityServiceDb);
-        var projectsDb = builder.AddConnectionString(EcosystemNames.ProjectsDb);
+        var smartBoxDb = builder.AddConnectionString(EcosystemNames.SmartBoxDb);
         var saasDb = builder.AddConnectionString(EcosystemNames.SaaSDb);
         var rabbitMq = builder.AddConnectionString(EcosystemNames.RabbitMq);
         var redis = builder.AddConnectionString(EcosystemNames.Redis);
         var seq = builder.AddConnectionString(EcosystemNames.Seq);
 
+        // Thêm các dịch vụ cơ sở hạ tầng
         var migrator = builder
             .AddProject<Ecosystem_DbMigrator>(
                 EcosystemNames.DbMigrator,
@@ -26,10 +27,11 @@ internal class Program
             )
             .WithReference(adminDb)
             .WithReference(identityDb)
-            .WithReference(projectsDb)
+            .WithReference(smartBoxDb)
             .WithReference(saasDb)
             .WithReference(seq);
 
+        // Thêm Administration API
         var admin = builder
             .AddProject<Ecosystem_Administration_HttpApi_Host>(
                 EcosystemNames.AdministrationApi,
@@ -43,6 +45,7 @@ internal class Program
             .WithReference(seq)
             .WaitForCompletion(migrator);
 
+        // Thêm Identity Service API
         var identity = builder
             .AddProject<Ecosystem_IdentityService_HttpApi_Host>(
                 EcosystemNames.IdentityServiceApi,
@@ -57,6 +60,7 @@ internal class Program
             .WithReference(seq)
             .WaitForCompletion(migrator);
 
+        // Thêm SaaS API
         var saas = builder
             .AddProject<Ecosystem_SaaS_HttpApi_Host>(
                 EcosystemNames.SaaSApi,
@@ -70,20 +74,22 @@ internal class Program
             .WithReference(seq)
             .WaitForCompletion(migrator);
 
+        // Thêm SmartBox API
         builder
-            .AddProject<Ecosystem_Projects_HttpApi_Host>(
-                EcosystemNames.ProjectsApi,
+            .AddProject<Ecosystem_SmartBox_HttpApi_Host>(
+                EcosystemNames.SmartBoxApi,
                 launchProfileName: LaunchProfileName
             )
             .WithExternalHttpEndpoints()
             .WithReference(adminDb)
-            .WithReference(projectsDb)
+            .WithReference(smartBoxDb)
             .WithReference(rabbitMq)
             .WithReference(redis)
             .WithReference(seq)
             .WaitForCompletion(migrator);
 
-        var gateway = builder
+        // Thêm Gateway
+        builder
             .AddProject<Ecosystem_Gateway>(EcosystemNames.Gateway, launchProfileName: LaunchProfileName)
             .WithExternalHttpEndpoints()
             .WithReference(seq)
@@ -91,7 +97,8 @@ internal class Program
             .WaitFor(identity)
             .WaitFor(saas);
 
-        var authserver = builder
+        // Thêm AuthServer 
+        builder
             .AddProject<Ecosystem_AuthServer>(
                 EcosystemNames.AuthServer,
                 launchProfileName: LaunchProfileName

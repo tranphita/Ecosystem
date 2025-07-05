@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Volo.Abp;
@@ -15,16 +15,16 @@ public class SampleController(ISampleAppService sampleAppService)
     private readonly ISampleAppService _sampleAppService = sampleAppService;
 
     [HttpGet]
-    public async Task<SampleDto> GetAsync()
+    public Task<SampleDto> GetAsync()
     {
-        return await _sampleAppService.GetAsync();
+        return _sampleAppService.GetAsync();
     }
 
     [HttpGet]
     [Route("authorized")]
     [Authorize]
-    public async Task<SampleDto> GetAuthorizedAsync()
+    public Task<SampleDto> GetAuthorizedAsync()
     {
-        return await _sampleAppService.GetAsync();
+        return _sampleAppService.GetAsync();
     }
 }

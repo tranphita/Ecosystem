@@ -1,4 +1,4 @@
-﻿namespace Ecosystem.Administration.Settings;
+namespace Ecosystem.Administration.Settings;
 
 public static class AdministrationSettings
 {

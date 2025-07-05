@@ -1,4 +1,4 @@
-﻿using Ecosystem.Administration.Localization;
+using Ecosystem.Administration.Localization;
 using Volo.Abp.AspNetCore.Mvc;
 
 namespace Ecosystem.Administration;

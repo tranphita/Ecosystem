@@ -1,4 +1,4 @@
-﻿using Ecosystem.Administration.Samples;
+using Ecosystem.Administration.Samples;
 
 namespace Ecosystem.Administration.EntityFrameworkCore.Samples;
 

@@ -2,8 +2,8 @@ using Ecosystem.Administration;
 using Ecosystem.Administration.EntityFrameworkCore;
 using Ecosystem.IdentityService;
 using Ecosystem.IdentityService.EntityFrameworkCore;
-using Ecosystem.Projects;
-using Ecosystem.Projects.EntityFrameworkCore;
+using Ecosystem.SmartBox;
+using Ecosystem.SmartBox.EntityFrameworkCore;
 using Ecosystem.SaaS;
 using Ecosystem.SaaS.EntityFrameworkCore;
 using Volo.Abp.Autofac;
@@ -19,8 +19,8 @@ namespace Ecosystem.DbMigrator;
 [DependsOn(typeof(AdministrationApplicationContractsModule))]
 [DependsOn(typeof(IdentityServiceEntityFrameworkCoreModule))]
 [DependsOn(typeof(IdentityServiceApplicationContractsModule))]
-[DependsOn(typeof(ProjectsEntityFrameworkCoreModule))]
-[DependsOn(typeof(ProjectsApplicationContractsModule))]
+[DependsOn(typeof(SmartBoxEntityFrameworkCoreModule))]
+[DependsOn(typeof(SmartBoxApplicationContractsModule))]
 [DependsOn(typeof(SaaSEntityFrameworkCoreModule))]
 [DependsOn(typeof(SaaSApplicationContractsModule))]
 //[DependsOn(typeof(WebAppEntityFrameworkCoreModule))]

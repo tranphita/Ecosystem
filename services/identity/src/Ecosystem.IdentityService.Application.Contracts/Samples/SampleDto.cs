@@ -1,4 +1,4 @@
-﻿namespace Ecosystem.IdentityService.Samples;
+namespace Ecosystem.IdentityService.Samples;
 
 public class SampleDto
 {

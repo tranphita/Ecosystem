@@ -1,4 +1,4 @@
-﻿namespace Microsoft.Extensions.Hosting;
+namespace Microsoft.Extensions.Hosting;
 
 public static class EcosystemNames
 {
@@ -22,8 +22,8 @@ public static class EcosystemNames
     public const string IdentityServiceApi = "EcosystemIdentityService";
     public const string IdentityServiceDb = "EcosystemIdentityServiceDb";
 
-    public const string ProjectsApi = "EcosystemProjects";
-    public const string ProjectsDb = "EcosystemProjectsDb";
+    public const string SmartBoxApi = "EcosystemSmartBox";
+    public const string SmartBoxDb = "EcosystemSmartBoxDb";
 
     public const string SaaSApi = "EcosystemSaaS";
     public const string SaaSDb = "EcosystemSaaSDb";

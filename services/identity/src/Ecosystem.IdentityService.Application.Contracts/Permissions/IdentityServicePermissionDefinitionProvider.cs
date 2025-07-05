@@ -1,4 +1,4 @@
-﻿using Ecosystem.IdentityService.Localization;
+using Ecosystem.IdentityService.Localization;
 using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.Localization;
 

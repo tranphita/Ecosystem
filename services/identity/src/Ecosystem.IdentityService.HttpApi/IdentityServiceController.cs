@@ -1,4 +1,4 @@
-﻿using Ecosystem.IdentityService.Localization;
+using Ecosystem.IdentityService.Localization;
 using Volo.Abp.AspNetCore.Mvc;
 
 namespace Ecosystem.IdentityService;

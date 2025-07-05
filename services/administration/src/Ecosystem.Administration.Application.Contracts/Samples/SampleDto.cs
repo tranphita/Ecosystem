@@ -1,4 +1,4 @@
-﻿namespace Ecosystem.Administration.Samples;
+namespace Ecosystem.Administration.Samples;
 
 public class SampleDto
 {

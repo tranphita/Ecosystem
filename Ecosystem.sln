@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
@@ -79,39 +79,39 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecosystem.IdentityService.H
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecosystem.IdentityService.TestBase", "services\identity\test\Ecosystem.IdentityService.TestBase\Ecosystem.IdentityService.TestBase.csproj", "{7225FFE9-696E-41D6-A221-7F253216E839}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "projects", "projects", "{0A7F8AAD-959C-482E-A73F-93AA5E3EA336}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "smartbox", "smartbox", "{0A7F8AAD-959C-482E-A73F-93AA5E3EA336}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "host", "host", "{91727E91-C421-48B7-9886-73F53551B79E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecosystem.Projects.HttpApi.Host", "services\projects\host\Ecosystem.Projects.HttpApi.Host\Ecosystem.Projects.HttpApi.Host.csproj", "{47BB13B5-AA29-41BB-AC7F-50A048A9E0C7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecosystem.SmartBox.HttpApi.Host", "services\\smartbox\host\Ecosystem.SmartBox.HttpApi.Host\Ecosystem.SmartBox.HttpApi.Host.csproj", "{47BB13B5-AA29-41BB-AC7F-50A048A9E0C7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3D6775B5-A021-4B7F-9490-56E4E5791FD6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecosystem.Projects.Application", "services\projects\src\Ecosystem.Projects.Application\Ecosystem.Projects.Application.csproj", "{A54016B8-B5C4-4BA4-BE16-EF8B15A8A2CD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecosystem.SmartBox.Application", "services\\smartbox\src\Ecosystem.SmartBox.Application\Ecosystem.SmartBox.Application.csproj", "{A54016B8-B5C4-4BA4-BE16-EF8B15A8A2CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecosystem.Projects.Application.Contracts", "services\projects\src\Ecosystem.Projects.Application.Contracts\Ecosystem.Projects.Application.Contracts.csproj", "{703D7AA7-4227-456C-8299-9856ADE63A35}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecosystem.SmartBox.Application.Contracts", "services\\smartbox\src\Ecosystem.SmartBox.Application.Contracts\Ecosystem.SmartBox.Application.Contracts.csproj", "{703D7AA7-4227-456C-8299-9856ADE63A35}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecosystem.Projects.Domain", "services\projects\src\Ecosystem.Projects.Domain\Ecosystem.Projects.Domain.csproj", "{9E13CD78-C104-4DF2-B479-D0CA0CCCD7B5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecosystem.SmartBox.Domain", "services\\smartbox\src\Ecosystem.SmartBox.Domain\Ecosystem.SmartBox.Domain.csproj", "{9E13CD78-C104-4DF2-B479-D0CA0CCCD7B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecosystem.Projects.Domain.Shared", "services\projects\src\Ecosystem.Projects.Domain.Shared\Ecosystem.Projects.Domain.Shared.csproj", "{D4E86606-A366-4223-A3C1-4825DFC24D90}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecosystem.SmartBox.Domain.Shared", "services\\smartbox\src\Ecosystem.SmartBox.Domain.Shared\Ecosystem.SmartBox.Domain.Shared.csproj", "{D4E86606-A366-4223-A3C1-4825DFC24D90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecosystem.Projects.EntityFrameworkCore", "services\projects\src\Ecosystem.Projects.EntityFrameworkCore\Ecosystem.Projects.EntityFrameworkCore.csproj", "{410F0B5D-7A4F-41DA-A3DF-C07B4794248A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecosystem.SmartBox.EntityFrameworkCore", "services\\smartbox\src\Ecosystem.SmartBox.EntityFrameworkCore\Ecosystem.SmartBox.EntityFrameworkCore.csproj", "{410F0B5D-7A4F-41DA-A3DF-C07B4794248A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecosystem.Projects.HttpApi", "services\projects\src\Ecosystem.Projects.HttpApi\Ecosystem.Projects.HttpApi.csproj", "{9B52831E-909D-4C25-944A-2D7E3055A805}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecosystem.SmartBox.HttpApi", "services\\smartbox\src\Ecosystem.SmartBox.HttpApi\Ecosystem.SmartBox.HttpApi.csproj", "{9B52831E-909D-4C25-944A-2D7E3055A805}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecosystem.Projects.HttpApi.Client", "services\projects\src\Ecosystem.Projects.HttpApi.Client\Ecosystem.Projects.HttpApi.Client.csproj", "{4501460B-F7FA-4223-851D-3F08358EB7EF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecosystem.SmartBox.HttpApi.Client", "services\\smartbox\src\Ecosystem.SmartBox.HttpApi.Client\Ecosystem.SmartBox.HttpApi.Client.csproj", "{4501460B-F7FA-4223-851D-3F08358EB7EF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{343B3A62-D822-4F9F-BC92-A6ED0A76BE7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecosystem.Projects.Application.Tests", "services\projects\test\Ecosystem.Projects.Application.Tests\Ecosystem.Projects.Application.Tests.csproj", "{4E108EE4-7138-4D4F-8EB6-40F68A468273}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecosystem.SmartBox.Application.Tests", "services\\smartbox\test\Ecosystem.SmartBox.Application.Tests\Ecosystem.SmartBox.Application.Tests.csproj", "{4E108EE4-7138-4D4F-8EB6-40F68A468273}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecosystem.Projects.Domain.Tests", "services\projects\test\Ecosystem.Projects.Domain.Tests\Ecosystem.Projects.Domain.Tests.csproj", "{BC64053D-CC88-4DA0-AD9E-1E48CF2249D9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecosystem.SmartBox.Domain.Tests", "services\\smartbox\test\Ecosystem.SmartBox.Domain.Tests\Ecosystem.SmartBox.Domain.Tests.csproj", "{BC64053D-CC88-4DA0-AD9E-1E48CF2249D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecosystem.Projects.EntityFrameworkCore.Tests", "services\projects\test\Ecosystem.Projects.EntityFrameworkCore.Tests\Ecosystem.Projects.EntityFrameworkCore.Tests.csproj", "{65924C1E-5F65-41E0-B11B-47BA856026B6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecosystem.SmartBox.EntityFrameworkCore.Tests", "services\\smartbox\test\Ecosystem.SmartBox.EntityFrameworkCore.Tests\Ecosystem.SmartBox.EntityFrameworkCore.Tests.csproj", "{65924C1E-5F65-41E0-B11B-47BA856026B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecosystem.Projects.HttpApi.Client.ConsoleTestApp", "services\projects\test\Ecosystem.Projects.HttpApi.Client.ConsoleTestApp\Ecosystem.Projects.HttpApi.Client.ConsoleTestApp.csproj", "{66260BF7-24F3-4FFA-AC4A-2D55C90F5DAD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecosystem.SmartBox.HttpApi.Client.ConsoleTestApp", "services\\smartbox\test\Ecosystem.SmartBox.HttpApi.Client.ConsoleTestApp\Ecosystem.SmartBox.HttpApi.Client.ConsoleTestApp.csproj", "{66260BF7-24F3-4FFA-AC4A-2D55C90F5DAD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecosystem.Projects.TestBase", "services\projects\test\Ecosystem.Projects.TestBase\Ecosystem.Projects.TestBase.csproj", "{16CC6D8C-47ED-4B2C-A157-8DD13636B14B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecosystem.SmartBox.TestBase", "services\\smartbox\test\Ecosystem.SmartBox.TestBase\Ecosystem.SmartBox.TestBase.csproj", "{16CC6D8C-47ED-4B2C-A157-8DD13636B14B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "saas", "saas", "{DE7668EA-5EAF-4144-BE6F-07C51A4A625F}"
 EndProject

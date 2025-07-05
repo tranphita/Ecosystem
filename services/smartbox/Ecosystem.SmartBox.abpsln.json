@@ -1,0 +1,7 @@
+{
+  "modules": {
+    "Ecosystem.SmartBox": {
+      "path": "Ecosystem.SmartBox.abpmdl.json"
+    }
+  }
+}

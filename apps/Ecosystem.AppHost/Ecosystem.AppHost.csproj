@@ -21,7 +21,7 @@
         <ProjectReference Include="..\..\gateway\Ecosystem.Gateway\Ecosystem.Gateway.csproj" />
         <ProjectReference Include="..\..\services\administration\host\Ecosystem.Administration.HttpApi.Host\Ecosystem.Administration.HttpApi.Host.csproj" />
         <ProjectReference Include="..\..\services\identity\host\Ecosystem.IdentityService.HttpApi.Host\Ecosystem.IdentityService.HttpApi.Host.csproj" />
-        <ProjectReference Include="..\..\services\projects\host\Ecosystem.Projects.HttpApi.Host\Ecosystem.Projects.HttpApi.Host.csproj" />
+        <ProjectReference Include="..\..\services\smartbox\host\Ecosystem.SmartBox.HttpApi.Host\Ecosystem.SmartBox.HttpApi.Host.csproj" />
         <ProjectReference Include="..\..\services\saas\host\Ecosystem.SaaS.HttpApi.Host\Ecosystem.SaaS.HttpApi.Host.csproj" />
         <ProjectReference Include="..\..\shared\Ecosystem.DbMigrator\Ecosystem.DbMigrator.csproj" />
         <ProjectReference Include="..\..\shared\Ecosystem.Shared\Ecosystem.Shared.csproj" IsAspireProjectResource="false" />

@@ -1,4 +1,4 @@
-﻿namespace Ecosystem.IdentityService.Settings;
+namespace Ecosystem.IdentityService.Settings;
 
 public static class IdentityServiceSettings
 {

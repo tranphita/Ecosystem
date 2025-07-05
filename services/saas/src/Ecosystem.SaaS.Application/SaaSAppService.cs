@@ -1,4 +1,4 @@
-﻿using Ecosystem.SaaS.Localization;
+using Ecosystem.SaaS.Localization;
 using Volo.Abp.Application.Services;
 
 namespace Ecosystem.SaaS;

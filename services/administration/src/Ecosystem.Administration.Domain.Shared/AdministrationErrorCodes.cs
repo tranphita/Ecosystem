@@ -1,4 +1,4 @@
-﻿namespace Ecosystem.Administration;
+namespace Ecosystem.Administration;
 
 public static class AdministrationErrorCodes
 {

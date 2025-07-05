@@ -1,4 +1,4 @@
-﻿namespace Ecosystem.MultiTenancy;
+namespace Ecosystem.MultiTenancy;
 
 public static class MultiTenancyConsts
 {

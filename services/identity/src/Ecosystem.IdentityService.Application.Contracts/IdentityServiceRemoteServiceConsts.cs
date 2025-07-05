@@ -1,4 +1,4 @@
-﻿namespace Ecosystem.IdentityService;
+namespace Ecosystem.IdentityService;
 
 public class IdentityServiceRemoteServiceConsts
 {

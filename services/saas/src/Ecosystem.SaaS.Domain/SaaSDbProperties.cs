@@ -1,4 +1,4 @@
-﻿namespace Ecosystem.SaaS;
+namespace Ecosystem.SaaS;
 
 public static class SaaSDbProperties
 {

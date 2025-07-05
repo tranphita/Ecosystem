@@ -1,4 +1,4 @@
-﻿using Ecosystem.SaaS.Samples;
+using Ecosystem.SaaS.Samples;
 
 namespace Ecosystem.SaaS.EntityFrameworkCore.Samples;
 

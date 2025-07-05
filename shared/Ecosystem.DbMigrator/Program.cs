@@ -1,6 +1,6 @@
 using Serilog;
 using Ecosystem.Administration.EntityFrameworkCore;
-using Ecosystem.Projects.EntityFrameworkCore;
+using Ecosystem.SmartBox.EntityFrameworkCore;
 using Ecosystem.SaaS.EntityFrameworkCore;
 using Volo.Abp.Identity.EntityFrameworkCore;
 
@@ -8,7 +8,7 @@ namespace Ecosystem.DbMigrator;
 
 internal class Program
 {
-    private static async Task Main(string[] args)
+    private static Task Main(string[] args)
     {
         EcosystemLogging.Initialize();
 
@@ -21,7 +21,7 @@ internal class Program
         );
         builder.AddNpgsqlDbContext<IdentityDbContext>(connectionName: EcosystemNames.IdentityServiceDb);
         builder.AddNpgsqlDbContext<SaaSDbContext>(connectionName: EcosystemNames.SaaSDb);
-        builder.AddNpgsqlDbContext<ProjectsDbContext>(connectionName: EcosystemNames.ProjectsDb);
+        builder.AddNpgsqlDbContext<SmartBoxDbContext>(connectionName: EcosystemNames.SmartBoxDb);
 
         builder.Configuration.AddAppSettingsSecretsJson();
 
@@ -31,6 +31,6 @@ internal class Program
 
         var host = builder.Build();
 
-        await host.RunAsync();
+        return host.RunAsync();
     }
 }

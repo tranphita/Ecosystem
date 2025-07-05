@@ -1,4 +1,4 @@
-﻿using Ecosystem.IdentityService.Samples;
+using Ecosystem.IdentityService.Samples;
 
 namespace Ecosystem.IdentityService.EntityFrameworkCore.Samples;
 
