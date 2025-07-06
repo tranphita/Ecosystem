@@ -26,9 +26,9 @@ const routes: Routes = [
       import('@abp/ng.setting-management').then(m => m.SettingManagementModule.forLazy()),
   },
   {
-    path: 'application-management',
+    path: 'openiddict-management',
     loadChildren: () =>
-      import('./application-management/application-management.module').then(m => m.ApplicationManagementModule),
+      import('./openiddict-management/openiddict-management.module').then(m => m.OpeniddictManagementModule),
   },
 ];
 

@@ -1,0 +1,37 @@
+// Essential component styles only
+.table-responsive {
+    .table tbody tr:hover {
+        background-color: #f8f9fa;
+    }
+}
+
+// Loading spinner color
+.text-center .fa-spinner {
+    color: #007bff;
+}
+
+// Modal backdrop
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+// Pagination spacing
+::ng-deep ngb-pagination .pagination {
+    margin-bottom: 0;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+    .card-header .row .col-md-6 {
+        margin-bottom: 1rem;
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    
+    .table th,
+    .table td {
+        padding: 8px;
+        font-size: 0.875rem;
+    }
+}

@@ -1,29 +1,25 @@
 import { Injectable } from '@angular/core';
 import { RestService } from '@abp/ng.core';
 import { Observable } from 'rxjs';
-import { 
-  OpenIddictScopeDto, 
-  CreateOpenIddictScopeDto, 
-  UpdateOpenIddictScopeDto, 
-  GetOpenIddictScopeListDto, 
-  OpenIddictScopeListResultDto 
-} from './application.dto';
+import {
+  ScopeModel,
+  CreateScopeModel,
+  UpdateScopeModel,
+  GetScopeListModel,
+  ScopeListResultModel
+} from './models/scope.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OpenIddictScopesService {
-  // API endpoint cho OpenIddict Scopes
   private readonly apiName = 'Default';
   private readonly baseUrl = '/api/openiddict/scopes';
 
   constructor(private restService: RestService) {}
 
-  /**
-   * Lấy danh sách scopes với phân trang và tìm kiếm
-   */
-  getList(input: GetOpenIddictScopeListDto = {}): Observable<OpenIddictScopeListResultDto> {
-    return this.restService.request<void, OpenIddictScopeListResultDto>({
+  getList(input: GetScopeListModel = {}): Observable<ScopeListResultModel> {
+    return this.restService.request<void, ScopeListResultModel>({
       method: 'GET',
       url: this.baseUrl,
       params: {
@@ -36,11 +32,8 @@ export class OpenIddictScopesService {
     });
   }
 
-  /**
-   * Lấy thông tin chi tiết một scope theo ID
-   */
-  get(id: string): Observable<OpenIddictScopeDto> {
-    return this.restService.request<void, OpenIddictScopeDto>({
+  get(id: string): Observable<ScopeModel> {
+    return this.restService.request<void, ScopeModel>({
       method: 'GET',
       url: `${this.baseUrl}/${id}`
     }, {
@@ -48,11 +41,8 @@ export class OpenIddictScopesService {
     });
   }
 
-  /**
-   * Tạo mới một scope
-   */
-  create(input: CreateOpenIddictScopeDto): Observable<OpenIddictScopeDto> {
-    return this.restService.request<CreateOpenIddictScopeDto, OpenIddictScopeDto>({
+  create(input: CreateScopeModel): Observable<ScopeModel> {
+    return this.restService.request<CreateScopeModel, ScopeModel>({
       method: 'POST',
       url: this.baseUrl,
       body: input
@@ -61,11 +51,8 @@ export class OpenIddictScopesService {
     });
   }
 
-  /**
-   * Cập nhật thông tin scope
-   */
-  update(id: string, input: UpdateOpenIddictScopeDto): Observable<OpenIddictScopeDto> {
-    return this.restService.request<UpdateOpenIddictScopeDto, OpenIddictScopeDto>({
+  update(id: string, input: UpdateScopeModel): Observable<ScopeModel> {
+    return this.restService.request<UpdateScopeModel, ScopeModel>({
       method: 'PUT',
       url: `${this.baseUrl}/${id}`,
       body: input
@@ -74,9 +61,6 @@ export class OpenIddictScopesService {
     });
   }
 
-  /**
-   * Xóa scope theo ID
-   */
   delete(id: string): Observable<void> {
     return this.restService.request<void, void>({
       method: 'DELETE',
@@ -85,4 +69,4 @@ export class OpenIddictScopesService {
       apiName: this.apiName
     });
   }
-} 
+}

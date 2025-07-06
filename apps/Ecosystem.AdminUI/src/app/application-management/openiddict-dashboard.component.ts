@@ -3,6 +3,7 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Location } from '@angular/common';
 import { Subject } from 'rxjs';
 import { takeUntil, filter } from 'rxjs/operators';
+// Đã chuyển sang openiddict-management, cập nhật import khi sử dụng component con
 
 @Component({
   selector: 'app-openiddict-dashboard',
@@ -30,6 +31,7 @@ export class OpenIddictDashboardComponent implements OnInit, OnDestroy {
       icon: 'fas fa-key'
     }
   ];
+  // Khi sử dụng <app-application-list> hoặc <app-scopes-list>, hãy import từ openiddict-management/applications hoặc openiddict-management/scopes
 
   constructor(
     private route: ActivatedRoute,
@@ -86,10 +88,7 @@ export class OpenIddictDashboardComponent implements OnInit, OnDestroy {
    * Chuyển tab
    */
   switchTab(tabKey: string): void {
-    console.log('🔥 switchTab called with:', tabKey);
-    
     try {
-
       this.currentTab = tabKey;
       const newUrl = `/application-management/${tabKey}`;
       this.location.replaceState(newUrl);

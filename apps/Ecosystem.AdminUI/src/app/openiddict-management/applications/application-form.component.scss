@@ -1,0 +1,40 @@
+
+// Essential form styles
+.nav-tabs {
+  border-bottom: 2px solid #dee2e6;
+  .nav-link {
+    border: none;
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
+    &.active {
+      color: #007bff;
+      background-color: transparent;
+      border-bottom-color: #007bff;
+      font-weight: 600;
+    }
+  }
+}
+
+.tab-content {
+  padding: 1.5rem 0;
+}
+
+// Loading animation
+.fa-spin {
+  animation: fa-spin 2s infinite linear;
+}
+
+@keyframes fa-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+// Mobile responsive
+@media (max-width: 768px) {
+  .tab-content {
+    padding: 1rem 0;
+  }
+  .col-md-6, .col-md-4 {
+    margin-bottom: 1rem;
+  }
+}

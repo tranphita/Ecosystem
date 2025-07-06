@@ -1,0 +1,404 @@
+<!-- Application Form -->
+<form [formGroup]="form" (ngSubmit)="onSave()">
+  <!-- Quick Help Section -->
+  <div class="card mb-3">
+    <div class="card-header">
+      <button 
+        class="btn btn-link btn-sm p-0 text-decoration-none" 
+        type="button" 
+        data-bs-toggle="collapse" 
+        data-bs-target="#quickHelp"
+        aria-expanded="false" 
+        aria-controls="quickHelp">
+        <i class="fas fa-question-circle me-1"></i>
+        Quick Setup Examples
+        <i class="fas fa-chevron-down ms-1"></i>
+      </button>
+    </div>
+    <div class="collapse" id="quickHelp">
+      <div class="card-body small">
+        <div class="row">
+          <div class="col-md-6">
+            <h6 class="text-primary">SPA/Mobile App (Public)</h6>
+            <ul class="list-unstyled mb-0">
+              <li><strong>Type:</strong> Public</li>
+              <li><strong>Grant Types:</strong> Authorization Code, Refresh Token</li>
+              <li><strong>Response Types:</strong> Code</li>
+              <li><strong>Scopes:</strong> OpenID, Profile, Email</li>
+              <li><strong>Redirect URIs:</strong> Required</li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <h6 class="text-primary">Web App (Confidential)</h6>
+            <ul class="list-unstyled mb-0">
+              <li><strong>Type:</strong> Confidential</li>
+              <li><strong>Grant Types:</strong> Authorization Code, Refresh Token</li>
+              <li><strong>Response Types:</strong> Code</li>
+              <li><strong>Scopes:</strong> OpenID, Profile, Email</li>
+              <li><strong>Client Secret:</strong> Required</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabs for form sections -->
+  <ul class="nav nav-tabs mb-3" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" data-bs-toggle="tab" href="#basic-tab" role="tab" aria-controls="basic-tab" aria-selected="true">
+        <i class="fas fa-info-circle me-1"></i>
+        Basic Information
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="tab" href="#auth-tab" role="tab" aria-controls="auth-tab" aria-selected="false">
+        <i class="fas fa-key me-1"></i>
+        Authentication
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="tab" href="#urls-tab" role="tab" aria-controls="urls-tab" aria-selected="false">
+        <i class="fas fa-link me-1"></i>
+        URLs
+      </a>
+    </li>
+  </ul>
+
+  <!-- Tab Content -->
+  <div class="tab-content">
+    <!-- Basic Information Tab -->
+    <div class="tab-pane fade show active" id="basic-tab" role="tabpanel">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="clientId" class="form-label">Client ID *</label>
+            <input 
+              type="text" 
+              id="clientId"
+              class="form-control" 
+              formControlName="clientId"
+              [class.is-invalid]="form.get('clientId')?.invalid && form.get('clientId')?.touched">
+            <div class="invalid-feedback" *ngIf="form.get('clientId')?.invalid && form.get('clientId')?.touched">
+              Client ID is required
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="displayName" class="form-label">Display Name</label>
+            <input 
+              type="text" 
+              id="displayName"
+              class="form-control" 
+              formControlName="displayName">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="type" class="form-label">Application Type *</label>
+            <select id="type" class="form-select" formControlName="type"
+              [class.is-invalid]="form.get('type')?.invalid && form.get('type')?.touched">
+              <option *ngFor="let type of applicationTypes" [value]="type.value">
+                {{ type.label }}
+              </option>
+            </select>
+            <div class="form-text">
+              <i class="fas fa-info-circle text-primary me-1"></i>
+              <strong>Confidential:</strong> Can securely store credentials (requires client secret).
+              <br>
+              <strong>Public:</strong> Cannot securely store credentials (mobile/SPA apps).
+            </div>
+            <div class="invalid-feedback" *ngIf="form.get('type')?.invalid && form.get('type')?.touched">
+              Application Type is required
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="consentType" class="form-label">Consent Type *</label>
+            <select id="consentType" class="form-select" formControlName="consentType"
+              [class.is-invalid]="form.get('consentType')?.invalid && form.get('consentType')?.touched">
+              <option *ngFor="let consent of consentTypes" [value]="consent.value">
+                {{ consent.label }}
+              </option>
+            </select>
+            <div class="form-text">
+              <i class="fas fa-info-circle text-primary me-1"></i>
+              Determines how user consent is obtained for authorization requests.
+            </div>
+            <div class="invalid-feedback" *ngIf="form.get('consentType')?.invalid && form.get('consentType')?.touched">
+              Consent Type is required
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="clientUri" class="form-label">Client URI</label>
+            <input 
+              type="url" 
+              id="clientUri"
+              class="form-control" 
+              formControlName="clientUri">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="logoUri" class="form-label">Logo URI</label>
+            <input 
+              type="url" 
+              id="logoUri"
+              class="form-control" 
+              formControlName="logoUri">
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="clientSecret" class="form-label">
+          Client Secret 
+          <span *ngIf="form.get('type')?.value === 'confidential'" class="text-danger">*</span>
+        </label>
+        <input 
+          type="password" 
+          id="clientSecret"
+          class="form-control" 
+          formControlName="clientSecret"
+          [disabled]="form.get('type')?.value === 'public'"
+          [class.is-invalid]="form.get('clientSecret')?.invalid && form.get('clientSecret')?.touched">
+        <div class="form-text">
+          <span *ngIf="form.get('type')?.value === 'confidential'">Required for confidential applications</span>
+          <span *ngIf="form.get('type')?.value === 'public'">Not allowed for public applications (disabled)</span>
+        </div>
+        <div class="invalid-feedback" *ngIf="form.get('clientSecret')?.invalid && form.get('clientSecret')?.touched">
+          Client Secret is required for confidential applications
+        </div>
+      </div>
+    </div>
+
+    <!-- Authentication Tab -->
+    <div class="tab-pane fade" id="auth-tab" role="tabpanel">
+      <!-- Grant Types -->
+      <div class="mb-4">
+        <label class="form-label">Grant Types <span class="text-danger">*</span></label>
+        <div class="form-text mb-2">
+          <strong>Select at least one grant type for your application.</strong>
+          <br>
+          <small>
+            <i class="fas fa-info-circle text-primary me-1"></i>
+            <strong>Authorization Code:</strong> Most secure, requires redirect URIs. Recommended for web applications.
+            <br>
+            <i class="fas fa-info-circle text-primary me-1"></i>
+            <strong>Client Credentials:</strong> For machine-to-machine authentication.
+            <br>
+            <i class="fas fa-info-circle text-primary me-1"></i>
+            <strong>Refresh Token:</strong> Allows long-lived access without re-authentication.
+          </small>
+        </div>
+        <div class="row">
+          <div class="col-md-6" *ngFor="let grantType of grantTypes">
+            <div class="form-check">
+              <input 
+                class="form-check-input" 
+                type="checkbox" 
+                [id]="'grant-' + grantType.value"
+                [checked]="isGrantTypeSelected(grantType.value)"
+                (change)="onGrantTypeChange(grantType.value, $event.target?.checked)">
+              <label class="form-check-label" [for]="'grant-' + grantType.value">
+                {{ grantType.label }}
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="text-danger small" *ngIf="grantTypesArray.length === 0">
+          <i class="fas fa-exclamation-triangle me-1"></i>
+          At least one grant type must be selected
+        </div>
+      </div>
+
+      <!-- Response Types -->
+      <div class="mb-4">
+        <label class="form-label">Response Types</label>
+        <div class="form-text mb-2">
+          <i class="fas fa-info-circle text-primary me-1"></i>
+          Response types determine how the authorization server responds to authorization requests. 
+          <strong>Code</strong> is most secure and recommended for server-side applications.
+        </div>
+        <div class="row">
+          <div class="col-md-4" *ngFor="let responseType of responseTypes">
+            <div class="form-check">
+              <input 
+                class="form-check-input" 
+                type="checkbox" 
+                [id]="'response-' + responseType.value"
+                [checked]="isResponseTypeSelected(responseType.value)"
+                (change)="onResponseTypeChange(responseType.value, $event.target?.checked)">
+              <label class="form-check-label" [for]="'response-' + responseType.value">
+                {{ responseType.label }}
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scopes -->
+      <div class="mb-4">
+        <label class="form-label">Scopes</label>
+        <div class="form-text mb-2">
+          <i class="fas fa-info-circle text-primary me-1"></i>
+          Scopes define what information and actions the application can access. 
+          <strong>OpenID</strong> is required for OpenID Connect authentication.
+        </div>
+        <div class="row">
+          <div class="col-md-4" *ngFor="let scope of scopes">
+            <div class="form-check">
+              <input 
+                class="form-check-input" 
+                type="checkbox" 
+                [id]="'scope-' + scope.value"
+                [checked]="isScopeSelected(scope.value)"
+                (change)="onScopeChange(scope.value, $event.target?.checked)">
+              <label class="form-check-label" [for]="'scope-' + scope.value">
+                {{ scope.label }}
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- URLs Tab -->
+    <div class="tab-pane fade" id="urls-tab" role="tabpanel">
+      <!-- Redirect URIs -->
+      <div class="mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <label class="form-label mb-0">
+            Redirect URIs 
+            <span class="text-danger" *ngIf="isGrantTypeSelected('authorization_code')">*</span>
+          </label>
+          <button type="button" class="btn btn-sm btn-outline-primary" (click)="addRedirectUri()">
+            <i class="fa fa-plus me-1"></i>
+            Add URI
+          </button>
+        </div>
+        <div class="form-text mb-2">
+          <i class="fas fa-info-circle text-primary me-1"></i>
+          <span *ngIf="isGrantTypeSelected('authorization_code')">
+            <strong>Required for Authorization Code flow.</strong> URLs where users will be redirected after authorization.
+          </span>
+          <span *ngIf="!isGrantTypeSelected('authorization_code')">
+            URLs where users will be redirected after authorization (if applicable).
+          </span>
+          <br>
+          <small>Example: https://yourdomain.com/callback</small>
+        </div>
+        <div formArrayName="redirectUris">
+          <div 
+            *ngFor="let uri of redirectUrisArray.controls; let i = index" 
+            class="input-group mb-2">
+            <input 
+              type="url" 
+              class="form-control" 
+              [formControlName]="i"
+              placeholder="https://example.com/callback">
+            <button 
+              type="button" 
+              class="btn btn-outline-danger" 
+              (click)="removeRedirectUri(i)">
+              <i class="fa fa-trash"></i>
+            </button>
+          </div>
+        </div>
+        <div class="text-danger small" *ngIf="isGrantTypeSelected('authorization_code') && redirectUrisArray.length === 0">
+          <i class="fas fa-exclamation-triangle me-1"></i>
+          At least one redirect URI is required for Authorization Code grant type
+        </div>
+      </div>
+
+      <!-- Post Logout Redirect URIs -->
+      <div class="mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <label class="form-label mb-0">
+            Post Logout Redirect URIs
+            <span class="text-warning" *ngIf="isGrantTypeSelected('authorization_code')">
+              <i class="fas fa-star" title="Recommended for Authorization Code flow"></i>
+            </span>
+          </label>
+          <button type="button" class="btn btn-sm btn-outline-primary" (click)="addPostLogoutUri()">
+            <i class="fa fa-plus me-1"></i>
+            Add URI
+          </button>
+        </div>
+        <div class="form-text mb-2">
+          <i class="fas fa-info-circle text-primary me-1"></i>
+          <span *ngIf="isGrantTypeSelected('authorization_code')">
+            <strong>Recommended for Authorization Code flow.</strong> URLs where users will be redirected after logout.
+          </span>
+          <span *ngIf="!isGrantTypeSelected('authorization_code')">
+            URLs where users will be redirected after logout (if applicable).
+          </span>
+          <br>
+          <small>Example: https://yourdomain.com/logout</small>
+        </div>
+        <div formArrayName="postLogoutRedirectUris">
+          <div 
+            *ngFor="let uri of postLogoutRedirectUrisArray.controls; let i = index" 
+            class="input-group mb-2">
+            <input 
+              type="url" 
+              class="form-control" 
+              [formControlName]="i"
+              placeholder="https://example.com/logout">
+            <button 
+              type="button" 
+              class="btn btn-outline-danger" 
+              (click)="removePostLogoutUri(i)">
+              <i class="fa fa-trash"></i>
+            </button>
+          </div>
+        </div>
+        <div class="text-warning small" *ngIf="isGrantTypeSelected('authorization_code') && postLogoutRedirectUrisArray.length === 0">
+          <i class="fas fa-exclamation-triangle me-1"></i>
+          Post logout redirect URIs are recommended for Authorization Code grant type
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form Actions -->
+  <div class="d-flex justify-content-end gap-2 mt-4">
+    <!-- Validation Summary -->
+    <div class="alert alert-warning me-auto" *ngIf="!isFormReady() && (form.dirty || form.touched)">
+      <h6 class="mb-2">
+        <i class="fas fa-exclamation-triangle me-1"></i>
+        Form Issues:
+      </h6>
+      <ul class="mb-0 small">
+        <li *ngFor="let issue of getValidationSummary()">{{ issue }}</li>
+      </ul>
+    </div>
+    
+    <button 
+      type="button" 
+      class="btn btn-secondary" 
+      (click)="onCancel()"
+      [disabled]="isLoading">
+      <i class="fa fa-times me-1"></i>
+      Cancel
+    </button>
+    <button 
+      type="submit" 
+      class="btn btn-primary"
+      [disabled]="!isFormReady() || isLoading">
+      <i class="fa fa-spinner fa-spin me-1" *ngIf="isLoading"></i>
+      <i class="fa fa-save me-1" *ngIf="!isLoading"></i>
+      {{ application ? 'Update' : 'Create' }}
+    </button>
+  </div>
+</form>

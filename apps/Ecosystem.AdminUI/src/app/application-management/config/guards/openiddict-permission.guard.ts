@@ -8,23 +8,14 @@ import { OPENIDDICT_PERMISSIONS } from '../permissions/openiddict-permissions';
   providedIn: 'root'
 })
 export class OpenIddictPermissionGuard implements CanActivate {
-  
-  constructor(private permissionService: PermissionService) {}
+
+  constructor(private permissionService: PermissionService) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    
-    console.log('🔐 Permission guard called for:', state.url);
-    console.log('🔐 Required permission:', route.data['requiredPermission']);
-    
-    // Tạm thời return true để bypass permission check
-    console.log('🔐 Bypassing permission check for testing');
-    return true;
-    
-    // TODO: Enable sau khi test
-    // const requiredPermission = route.data['requiredPermission'] || OPENIDDICT_PERMISSIONS.Applications.Default;
-    // return this.permissionService.getGrantedPolicy$(requiredPermission);
+    const requiredPermission = route.data['requiredPermission'] || OPENIDDICT_PERMISSIONS.Applications.Default;
+    return this.permissionService.getGrantedPolicy$(requiredPermission);
   }
 } 

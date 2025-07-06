@@ -23,11 +23,10 @@ function configureOpenIddictRoutes(routesService: RoutesService) {
         iconClass: 'fas fa-wrench',
         order: 2,
         layout: eLayoutType.application,
-        // Không đặt requiredPolicy ở mức gốc để menu Administration vẫn hiển thị
       },
       {
-        path: '/application-management',
-        name: 'OpenIddict Management', 
+        path: '/openiddict-management',
+        name: 'OpenIddict Management',
         iconClass: 'fas fa-shield-alt',
         order: 100,
         layout: eLayoutType.application,
@@ -35,7 +34,7 @@ function configureOpenIddictRoutes(routesService: RoutesService) {
         requiredPolicy: OPENIDDICT_PERMISSIONS.Applications.Default,
       },
       {
-        path: '/application-management/applications',
+        path: '/openiddict-management/applications',
         name: 'Applications',
         iconClass: 'fas fa-th-large',
         order: 1,
@@ -44,7 +43,7 @@ function configureOpenIddictRoutes(routesService: RoutesService) {
         requiredPolicy: OPENIDDICT_PERMISSIONS.Applications.Default,
       },
       {
-        path: '/application-management/scopes',
+        path: '/openiddict-management/scopes',
         name: 'Scopes',
         iconClass: 'fas fa-key',
         order: 2,

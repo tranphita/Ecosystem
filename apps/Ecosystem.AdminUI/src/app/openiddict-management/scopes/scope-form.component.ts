@@ -1,11 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToasterService } from '@abp/ng.theme.shared';
-import { 
-  OpenIddictScopeDto, 
-  CreateOpenIddictScopeDto, 
-  UpdateOpenIddictScopeDto 
-} from './application.dto';
+import { ScopeModel, CreateScopeModel, UpdateScopeModel } from './models/scope.model';
 import { OpenIddictScopesService } from './openiddict-scopes.service';
 
 @Component({
@@ -14,7 +10,7 @@ import { OpenIddictScopesService } from './openiddict-scopes.service';
   styleUrls: ['./scope-form.component.scss']
 })
 export class ScopeFormComponent implements OnInit {
-  @Input() scope: OpenIddictScopeDto | null = null;
+  @Input() scope: ScopeModel | null = null;
   @Input() isVisible = false;
   @Output() saved = new EventEmitter<void>();
   @Output() cancelled = new EventEmitter<void>();
@@ -54,20 +50,16 @@ export class ScopeFormComponent implements OnInit {
 
     this.isLoading = true;
     const formValue = this.form.value;
-
-    // Convert resources string to array
     const resources = formValue.resources 
       ? formValue.resources.split(',').map((r: string) => r.trim()).filter((r: string) => r)
       : [];
 
     if (this.scope) {
-      // Update existing scope
-      const updateDto: UpdateOpenIddictScopeDto = {
+      const updateDto: UpdateScopeModel = {
         displayName: formValue.displayName || null,
         description: formValue.description || null,
         resources: resources.length > 0 ? resources : null
       };
-
       this.scopesService.update(this.scope.id, updateDto).subscribe({
         next: () => {
           this.toasterService.success('Cập nhật scope thành công', 'Thành công');
@@ -81,14 +73,12 @@ export class ScopeFormComponent implements OnInit {
         }
       });
     } else {
-      // Create new scope
-      const createDto: CreateOpenIddictScopeDto = {
+      const createDto: CreateScopeModel = {
         name: formValue.name,
         displayName: formValue.displayName || null,
         description: formValue.description || null,
         resources: resources.length > 0 ? resources : null
       };
-
       this.scopesService.create(createDto).subscribe({
         next: () => {
           this.toasterService.success('Tạo scope thành công', 'Thành công');
@@ -107,4 +97,4 @@ export class ScopeFormComponent implements OnInit {
   onCancel(): void {
     this.cancelled.emit();
   }
-} 
+}
