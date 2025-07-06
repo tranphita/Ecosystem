@@ -45,7 +45,6 @@ public class TenantCreatedEventHandler(
 
     private async Task SeedDataAsync(Guid? tenantId)
     {
-        _logger.LogInformation("Seeding ${TenantId}", tenantId);
         using (_currentTenant.Change(tenantId))
         {
             var abpUnitOfWorkOptions = new AbpUnitOfWorkOptions { IsTransactional = true };

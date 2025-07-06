@@ -32,11 +32,8 @@ public class EcosystemDbMigrationService(
     public async Task MigrateAsync(CancellationToken cancellationToken)
     {
         await CreateDatabasesAsync(cancellationToken);
-
-        _logger.LogInformation("Starting Migrations ...");
         await MigrateHostAsync(cancellationToken);
         await MigrateTenantsAsync(cancellationToken);
-        _logger.LogInformation("Completed Migrations.");
     }
 
     private async Task CreateDatabasesAsync(CancellationToken cancellationToken)
@@ -52,16 +49,12 @@ public class EcosystemDbMigrationService(
 
     private async Task MigrateHostAsync(CancellationToken cancellationToken)
     {
-        _logger.LogInformation("Migrating Host side ...");
         await MigrateDatabasesAsync(null, cancellationToken);
         await SeedDataAsync(null);
-        _logger.LogInformation("Host side migration completed.");
     }
 
     private async Task MigrateTenantsAsync(CancellationToken cancellationToken)
     {
-        _logger.LogInformation("Migrating tenants ...");
-
         var tenants = await _tenantRepository.GetListAsync(
             includeDetails: true,
             cancellationToken: cancellationToken
@@ -78,14 +71,8 @@ public class EcosystemDbMigrationService(
                     !connectionString.IsNullOrWhiteSpace()
                     && //tenant has a separate database
                     !migratedDatabaseSchemas.Contains(connectionString)
-                ) //the database was not migrated yet
+                )
                 {
-                    _logger.LogInformation(
-                        "Migrating Tenant: {Name} ({TenantId})",
-                        tenant.Name,
-                        tenant.Id
-                    );
-
                     await MigrateDatabasesAsync(tenant, cancellationToken);
                     migratedDatabaseSchemas.AddIfNotContains(connectionString);
                 }
@@ -94,8 +81,6 @@ public class EcosystemDbMigrationService(
                 await SeedDataAsync(tenant);
             }
         }
-
-        _logger.LogInformation("Tenant migrations are complete.");
     }
 
     private async Task EnsureDatabaseAsync<TDbContext>(CancellationToken cancellationToken)
@@ -133,7 +118,6 @@ public class EcosystemDbMigrationService(
         await MigrateDatabaseAsync<AdministrationDbContext>(cancellationToken);
         await MigrateDatabaseAsync<IdentityServiceDbContext>(cancellationToken);
         await MigrateDatabaseAsync<SmartBoxDbContext>(cancellationToken);
-        //await MigrateDatabaseAsync<WebAppDbContext>(cancellationToken);
 
         await uow.CompleteAsync(cancellationToken);
     }
@@ -142,16 +126,11 @@ public class EcosystemDbMigrationService(
         where TDbContext : DbContext, IEfCoreDbContext
     {
         var name = typeof(TDbContext).Name.RemovePostFix("DbContext");
-
-        _logger.LogInformation("Migrating {Name} database ...", name);
-
         var dbContext = await _unitOfWorkManager
             .Current!.ServiceProvider.GetRequiredService<IDbContextProvider<TDbContext>>()
             .GetDbContextAsync();
 
         await ApplyMigrationAsync(dbContext, cancellationToken);
-
-        _logger.LogInformation("Completed migrating ({Name}).", name);
     }
 
     private static Task ApplyMigrationAsync<TDbContext>(
@@ -170,15 +149,6 @@ public class EcosystemDbMigrationService(
 
     private Task SeedDataAsync(Tenant? tenant)
     {
-        if (tenant is null)
-        {
-            _logger.LogInformation("Seeding host data ...");
-        }
-        else
-        {
-            _logger.LogInformation("Seeding tenant data: {Name} ({Id})", tenant.Name, tenant.Id);
-        }
-
         return _dataSeeder.SeedAsync(
             new DataSeedContext(tenant?.Id)
                 .WithProperty(

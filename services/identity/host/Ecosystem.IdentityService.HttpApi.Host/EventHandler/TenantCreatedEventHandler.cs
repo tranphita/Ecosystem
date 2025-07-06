@@ -25,10 +25,6 @@ public class TenantCreatedEventHandler(
         {
             using (_currentTenant.Change(eventData.Id))
             {
-                _logger.LogInformation(
-                    "Creating admin user for tenant {TenantId}...",
-                    eventData.Id
-                );
                 await _identityDataSeeder.SeedAsync(
                     eventData.Properties.GetOrDefault(
                         IdentityDataSeedContributor.AdminEmailPropertyName

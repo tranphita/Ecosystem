@@ -1,8 +1,7 @@
 using System.Threading.Tasks;
-using Ecosystem.Administration.OpenIddict;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Volo.Abp.Application.Dtos;
-using Volo.Abp.AspNetCore.Mvc;
 
 namespace Ecosystem.Administration.OpenIddict;
 
@@ -15,7 +14,9 @@ public class OpenIddictApplicationController : AdministrationController
 {
     private readonly IOpenIddictApplicationAppService _applicationAppService;
 
-    public OpenIddictApplicationController(IOpenIddictApplicationAppService applicationAppService)
+    public OpenIddictApplicationController(
+        IOpenIddictApplicationAppService applicationAppService,
+        ILogger<OpenIddictApplicationController> logger)
     {
         _applicationAppService = applicationAppService;
     }
@@ -42,8 +43,8 @@ public class OpenIddictApplicationController : AdministrationController
     /// Tạo mới một application
     /// </summary>
     [HttpPost]
-    public Task<OpenIddictApplicationDto> CreateAsync(CreateOpenIddictApplicationDto input)
-    {
+    public Task<OpenIddictApplicationDto> CreateAsync([FromBody] CreateOpenIddictApplicationDto input)
+    {   
         return _applicationAppService.CreateAsync(input);
     }
 
@@ -51,7 +52,7 @@ public class OpenIddictApplicationController : AdministrationController
     /// Cập nhật thông tin application
     /// </summary>
     [HttpPut("{id}")]
-    public Task<OpenIddictApplicationDto> UpdateAsync(string id, UpdateOpenIddictApplicationDto input)
+    public Task<OpenIddictApplicationDto> UpdateAsync(string id, [FromBody] UpdateOpenIddictApplicationDto input)
     {
         return _applicationAppService.UpdateAsync(id, input);
     }

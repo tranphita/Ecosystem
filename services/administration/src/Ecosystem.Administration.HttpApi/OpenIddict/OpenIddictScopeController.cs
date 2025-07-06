@@ -1,8 +1,7 @@
 using System.Threading.Tasks;
-using Ecosystem.Administration.OpenIddict;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Volo.Abp.Application.Dtos;
-using Volo.Abp.AspNetCore.Mvc;
 
 namespace Ecosystem.Administration.OpenIddict;
 
@@ -14,10 +13,14 @@ namespace Ecosystem.Administration.OpenIddict;
 public class OpenIddictScopeController : AdministrationController
 {
     private readonly IOpenIddictScopeAppService _scopeAppService;
+    private readonly ILogger<OpenIddictScopeController> _logger;
 
-    public OpenIddictScopeController(IOpenIddictScopeAppService scopeAppService)
+    public OpenIddictScopeController(
+        IOpenIddictScopeAppService scopeAppService,
+        ILogger<OpenIddictScopeController> logger)
     {
         _scopeAppService = scopeAppService;
+        _logger = logger;
     }
 
     /// <summary>
@@ -42,8 +45,8 @@ public class OpenIddictScopeController : AdministrationController
     /// Tạo mới một scope
     /// </summary>
     [HttpPost]
-    public Task<OpenIddictScopeDto> CreateAsync(CreateOpenIddictScopeDto input)
-    {
+    public Task<OpenIddictScopeDto> CreateAsync([FromBody] CreateOpenIddictScopeDto input)
+    { 
         return _scopeAppService.CreateAsync(input);
     }
 
@@ -51,7 +54,7 @@ public class OpenIddictScopeController : AdministrationController
     /// Cập nhật thông tin scope
     /// </summary>
     [HttpPut("{id}")]
-    public Task<OpenIddictScopeDto> UpdateAsync(string id, UpdateOpenIddictScopeDto input)
+    public Task<OpenIddictScopeDto> UpdateAsync(string id, [FromBody] UpdateOpenIddictScopeDto input)
     {
         return _scopeAppService.UpdateAsync(id, input);
     }

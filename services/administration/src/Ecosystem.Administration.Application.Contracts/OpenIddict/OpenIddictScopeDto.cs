@@ -1,6 +1,8 @@
 #nullable enable
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using Volo.Abp.Application.Dtos;
 
 namespace Ecosystem.Administration.OpenIddict;
@@ -59,31 +61,41 @@ public class CreateOpenIddictScopeDto
     /// <summary>
     /// Tên scope - Định danh duy nhất
     /// </summary>
+    [Required(ErrorMessage = "Tên scope là bắt buộc")]
+    [StringLength(200, ErrorMessage = "Tên scope không được vượt quá 200 ký tự")]
+    [JsonPropertyName("name")]
     public string Name { get; set; } = default!;
 
     /// <summary>
     /// Tên hiển thị của scope
     /// </summary>
+    [StringLength(200, ErrorMessage = "Tên hiển thị không được vượt quá 200 ký tự")]
+    [JsonPropertyName("displayName")]
     public string? DisplayName { get; set; }
 
     /// <summary>
     /// Tên hiển thị đa ngôn ngữ
     /// </summary>
+    [JsonPropertyName("displayNames")]
     public Dictionary<string, string>? DisplayNames { get; set; }
 
     /// <summary>
     /// Mô tả scope
     /// </summary>
+    [StringLength(4000, ErrorMessage = "Mô tả không được vượt quá 4000 ký tự")]
+    [JsonPropertyName("description")]
     public string? Description { get; set; }
 
     /// <summary>
     /// Mô tả đa ngôn ngữ
     /// </summary>
+    [JsonPropertyName("descriptions")]
     public Dictionary<string, string>? Descriptions { get; set; }
 
     /// <summary>
     /// Danh sách tài nguyên mà scope này có thể truy cập
     /// </summary>
+    [JsonPropertyName("resources")]
     public List<string>? Resources { get; set; }
 }
 
@@ -95,26 +107,33 @@ public class UpdateOpenIddictScopeDto
     /// <summary>
     /// Tên hiển thị của scope
     /// </summary>
+    [StringLength(200, ErrorMessage = "Tên hiển thị không được vượt quá 200 ký tự")]
+    [JsonPropertyName("displayName")]
     public string? DisplayName { get; set; }
 
     /// <summary>
     /// Tên hiển thị đa ngôn ngữ
     /// </summary>
+    [JsonPropertyName("displayNames")]
     public Dictionary<string, string>? DisplayNames { get; set; }
 
     /// <summary>
     /// Mô tả scope
     /// </summary>
+    [StringLength(4000, ErrorMessage = "Mô tả không được vượt quá 4000 ký tự")]
+    [JsonPropertyName("description")]
     public string? Description { get; set; }
 
     /// <summary>
     /// Mô tả đa ngôn ngữ
     /// </summary>
+    [JsonPropertyName("descriptions")]
     public Dictionary<string, string>? Descriptions { get; set; }
 
     /// <summary>
     /// Danh sách tài nguyên mà scope này có thể truy cập
     /// </summary>
+    [JsonPropertyName("resources")]
     public List<string>? Resources { get; set; }
 }
 

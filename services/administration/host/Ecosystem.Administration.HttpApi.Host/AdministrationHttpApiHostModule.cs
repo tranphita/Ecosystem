@@ -1,13 +1,14 @@
 using System.IO;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Logging;
+using System.Text.Json;
 using Ecosystem.Administration.EntityFrameworkCore;
 using Ecosystem.IdentityService;
 using Ecosystem.IdentityService.EntityFrameworkCore;
 using Ecosystem.MultiTenancy;
 using Ecosystem.SaaS;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Logging;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy;
 using Volo.Abp.Identity;
@@ -34,6 +35,13 @@ public class AdministrationHttpApiHostModule : AbpModule
         var configuration = context.Services.GetConfiguration();
 
         context.ConfigureMicroservice(EcosystemNames.AdministrationApi);
+
+        // Configure JSON serialization to use camelCase property names
+        context.Services.Configure<Microsoft.AspNetCore.Mvc.JsonOptions>(options =>
+        {
+            options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+            options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+        });
 
         if (hostingEnvironment.IsDevelopment())
         {
