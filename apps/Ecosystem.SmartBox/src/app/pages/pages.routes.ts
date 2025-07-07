@@ -1,0 +1,44 @@
+import { Routes } from '@angular/router';
+import { StarterComponent } from './starter/starter.component';
+import { autoLoginPartialRoutesGuard } from 'angular-auth-oidc-client';
+import { RoleComponent } from './system/role/role.component';
+import { UserComponent } from './system/user/user.component';
+import { FunctionGroupComponent } from './system/function-group/function-group.component';
+import { FunctionComponent } from './system/function/function.component';
+import { SessionComponent } from './system/session/session.component';
+import { SystemComponent } from './system/system.component';
+import { AppEmployeeComponent } from './system/employee/employee.component';
+
+export const PagesRoutes: Routes = [
+  {
+    path: '',
+    redirectTo: 'starter',
+    pathMatch: 'full',
+  },
+  {
+    path: 'starter',
+    component: StarterComponent,
+    canActivate: [autoLoginPartialRoutesGuard],
+    data: {
+      title: 'Starter',
+      urls: [
+        { title: 'Dashboard', url: '/starter' },
+        { title: 'Starter' },
+      ],
+    },
+  },
+  {
+    path: 'system',
+    component: SystemComponent,
+    canActivate: [autoLoginPartialRoutesGuard],
+    children: [
+      { path: 'role', component: RoleComponent },
+      { path: 'user', component: UserComponent },
+      { path: 'function-group', component: FunctionGroupComponent },
+      { path: 'function', component: FunctionComponent },
+      { path: 'session', component: SessionComponent },
+      { path: 'employee', component: AppEmployeeComponent },
+      { path: '', redirectTo: 'role', pathMatch: 'full' },
+    ],
+  },
+];
