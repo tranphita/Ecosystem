@@ -21,6 +21,7 @@ import {
   TableComponent,
   TableColumn,
 } from 'src/app/components/shared/table/table.component';
+import { SortConfig } from 'src/app/core/types/common.types';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { FormDialogComponent } from 'src/app/components/shared/dialog/form-dialog.component';
 import { EmployeeFormComponent } from './employee-form.component';
@@ -160,11 +161,21 @@ export class AppEmployeeComponent {
   filterText = '';
 
   columns: TableColumn<Employee>[] = [
-    { key: 'id', label: '#' },
+    { 
+      key: 'id', 
+      label: '#',
+      sortable: false,
+      filterable: false,
+      visible: true,
+      align: 'center'
+    },
     {
-      key: 'name',
+      key: 'Name', // Fix: use 'Name' instead of 'name'
       label: 'Name',
       sortable: true,
+      filterable: true,
+      visible: true,
+      align: 'left',
       cell: (row: Employee) => {
         // Custom rendering cho cột Name với avatar và thông tin vị trí
         return {
@@ -174,17 +185,48 @@ export class AppEmployeeComponent {
         };
       },
     },
-    { key: 'Email', label: 'Email', sortable: true },
-    { key: 'Mobile', label: 'Mobile', sortable: true },
+    { 
+      key: 'Email', 
+      label: 'Email', 
+      sortable: true,
+      filterable: true,
+      visible: true,
+      align: 'left'
+    },
+    { 
+      key: 'Mobile', 
+      label: 'Mobile', 
+      sortable: true,
+      filterable: true,
+      visible: true,
+      align: 'left'
+    },
     {
       key: 'DateOfJoining',
       label: 'Date of Joining',
       sortable: true,
+      filterable: false,
+      visible: true,
+      align: 'left',
       cell: (row: Employee) =>
         this.datePipe.transform(row.DateOfJoining, 'fullDate'),
     },
-    { key: 'Salary', label: 'Salary', sortable: true },
-    { key: 'Projects', label: 'Projects', sortable: true },
+    { 
+      key: 'Salary', 
+      label: 'Salary', 
+      sortable: true,
+      filterable: true,
+      visible: true,
+      align: 'right'
+    },
+    { 
+      key: 'Projects', 
+      label: 'Projects', 
+      sortable: true,
+      filterable: true,
+      visible: true,
+      align: 'center'
+    },
   ];
 
   constructor(public dialog: MatDialog, public datePipe: DatePipe) { }
@@ -193,7 +235,7 @@ export class AppEmployeeComponent {
     this.filterText = filterValue;
   }
 
-  handleSortChange(event: Sort): void {
+  handleSortChange(event: SortConfig): void {
     console.log('Sort changed:', event);
   }
 

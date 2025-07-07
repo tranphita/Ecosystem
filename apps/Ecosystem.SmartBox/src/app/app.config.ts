@@ -2,11 +2,13 @@ import {
   ApplicationConfig,
   provideZoneChangeDetection,
   importProvidersFrom,
+  ErrorHandler,
 } from '@angular/core';
 import {
   HttpClient,
   provideHttpClient,
   withInterceptorsFromDi,
+  HTTP_INTERCEPTORS,
 } from '@angular/common/http';
 import { routes } from './app.routes';
 import {
@@ -29,6 +31,10 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
 import { MaterialModule } from './material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthModule, LogLevel } from 'angular-auth-oidc-client';
+
+// Core services và error handling
+import { ErrorHandlerService } from './core/errors/error-handler.service';
+import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 
 export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -61,6 +67,17 @@ export const appConfig: ApplicationConfig = {
     ),
     provideHttpClient(withInterceptorsFromDi()),
     provideAnimationsAsync(),
+
+    // Global error handling
+    {
+      provide: ErrorHandler,
+      useClass: ErrorHandlerService
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true
+    },
 
     importProvidersFrom(
       FormsModule,

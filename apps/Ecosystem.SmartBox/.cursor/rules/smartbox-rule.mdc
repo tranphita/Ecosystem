@@ -1,0 +1,80 @@
+---
+alwaysApply: true
+---
+
+You are an expert in Angular, enterprise frontend architecture, and building scalable, maintainable applications.
+
+Project Context
+- This is a customer-facing Angular web application, also used internally for customer support and administration.
+- The application prioritizes intuitive UI/UX, responsiveness, and performance.
+- Internationalization (i18n) is a core requirement.
+
+Key Principles
+- Follow Angular best practices for large teams and scalable projects.
+- Prioritize clean code and DRY principles for high maintainability and reusability.
+- Use modular, domain-driven architecture based on recommended folder structure patterns for enterprise Angular apps.
+
+Architecture and Structure
+- Always use the "standalone component" option when appropriate for new features, unless part of a tightly coupled module.
+- All components must be created with separate `.html`, `.ts`, and `.scss` files. Never use inline templates or styles.
+- Organize code by feature domain:
+  - `src/app/features/` for domain-specific modules and components.
+  - `src/app/shared/` for reusable components, pipes, directives, and utilities.
+  - `src/app/core/` for singleton services, app-wide configuration, interceptors, and guards.
+  - `src/app/routes/` for route definitions and layout shells.
+- Use a dedicated folder for each component: `component-name/component-name.component.ts`.
+
+State Management with NgRx
+- Use `@ngrx/store` for all application state management.
+- Organize NgRx state per domain under `store/` directories within each feature (e.g., `features/user/store`).
+- Each store slice must follow the standard NgRx pattern: `actions.ts`, `reducers.ts`, `effects.ts`, `selectors.ts`, and `models.ts`.
+- Use `@ngrx/effects` for all side effects (e.g., HTTP calls).
+- Use `@ngrx/component-store` for localized component state only when global state is unnecessary.
+- Prefer immutable state updates and pure functions in reducers.
+- Use `createFeatureSelector` and `createSelector` for optimized and reusable state access.
+
+Naming Conventions
+- Use kebab-case for folders and component file names.
+- Use PascalCase for class names and interfaces.
+- Use camelCase for variables and method names.
+- Prefix boolean variables with `is`, `has`, or `can` (e.g., `isLoading`, `hasError`).
+
+Code Style and Patterns
+- Use `ng generate` with schematic options to create all artifacts to ensure consistency.
+- Prefer `OnPush` change detection for performance-critical components.
+- Use `async pipe` and `Observables` for reactive programming; avoid unnecessary `subscribe()` calls.
+- Use centralized `environment.ts` files for configuration.
+- Use translation keys (`{{ 'home.title' | translate }}`) with ngx-translate for all visible text.
+- Avoid using `any` type. Always use explicit types and interfaces.
+
+Testing
+- Write unit tests for every component, service, effect, reducer, and pipe.
+- Place `.spec.ts` files next to the source files.
+- Use Jasmine and Karma for unit testing, with `TestBed` setups for components and effects.
+
+Performance Optimization
+- Lazy-load all feature modules through the router.
+- Implement `trackBy` in `*ngFor` loops.
+- Use `ngOptimizedImage` or similar Angular features for optimized images.
+- Implement guards, resolvers, and interceptors for controlled, performant navigation and API handling.
+
+UI/UX and Accessibility
+- Build UI with Angular Material and custom SCSS following a unified design system.
+- Maintain accessibility: use semantic HTML, ARIA roles, keyboard navigation.
+- Ensure responsive design via Flex Layout or SCSS media queries.
+
+Internationalization
+- Use `@ngx-translate/core` for multilingual support.
+- Organize translation keys in domain-specific JSON files (`en.json`, `vi.json`, etc.).
+- Avoid hardcoded text in templates and TypeScript logic.
+
+Documentation
+- Add JSDoc-style comments for public methods and services.
+- Keep README files updated in each domain module or shared library explaining its purpose and usage.
+
+Process Guidelines
+- Review Angular changelogs and update guides regularly.
+- Use `tslint` or `eslint` with a clean, strict ruleset.
+- Ensure all new features follow the defined architectural and coding standards.
+
+Refer to: Angular Style Guide, NgRx Best Practices
