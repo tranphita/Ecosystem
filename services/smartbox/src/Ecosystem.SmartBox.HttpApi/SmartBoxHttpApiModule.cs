@@ -25,5 +25,10 @@ public class SmartBoxHttpApiModule : AbpModule
         {
             options.Resources.Get<SmartBoxResource>().AddBaseTypes(typeof(AbpUiResource));
         });
+
+        Configure<AbpAspNetCoreMvcOptions>(options =>
+        {
+            options.ConventionalControllers.Create(typeof(SmartBoxHttpApiModule).Assembly);
+        });
     }
 }

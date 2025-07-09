@@ -1,7 +1,34 @@
 {
-  "culture": "vi",
-  "texts": {
-    "MyAccount": "Tài khoản của tôi",
-    "SamplePageMessage": "Trang mẫu cho mô-đun SmartBox"
-  }
+  "Permission:SmartBox": "SmartBox",
+  
+  "Permission:CompanyManagement": "Quản lý công ty",
+  "Permission:CompanyCreate": "Tạo công ty",
+  "Permission:CompanyEdit": "Chỉnh sửa công ty",
+  "Permission:CompanyDelete": "Xóa công ty",
+  
+  "Permission:UserManagement": "Quản lý người dùng",
+  "Permission:UserCreate": "Tạo người dùng",
+  "Permission:UserEdit": "Chỉnh sửa người dùng",
+  "Permission:UserDelete": "Xóa người dùng",
+  "Permission:UserManageRoles": "Quản lý vai trò",
+  "Permission:UserViewAll": "Xem tất cả người dùng",
+  "Permission:UserViewOwnCompany": "Xem người dùng cùng công ty",
+  
+  "Permission:RoleManagement": "Quản lý vai trò",
+  "Permission:RoleCreate": "Tạo vai trò",
+  "Permission:RoleEdit": "Chỉnh sửa vai trò",
+  "Permission:RoleDelete": "Xóa vai trò",
+  
+  "Permission:Dashboard": "Dashboard",
+  "Permission:DashboardViewStatistics": "Xem thống kê",
+  "Permission:DashboardViewReports": "Xem báo cáo",
+  
+  "Permission:Administration": "Quản trị hệ thống",
+  "Permission:AdministrationManageSystem": "Quản lý hệ thống",
+  "Permission:AdministrationViewLogs": "Xem nhật ký",
+  "Permission:AdministrationManageSettings": "Quản lý cài đặt",
+  
+  "CompanyNameAlreadyExists": "Tên công ty '{0}' đã tồn tại",
+  "CompanyTaxCodeAlreadyExists": "Mã số thuế '{0}' đã tồn tại",
+  "CompanyHasUsersCannotDelete": "Không thể xóa công ty đang có người dùng"
 }

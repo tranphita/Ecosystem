@@ -6,6 +6,7 @@
         <TargetFramework>net9.0</TargetFramework>
         <RootNamespace>Ecosystem.SmartBox</RootNamespace>
         <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>

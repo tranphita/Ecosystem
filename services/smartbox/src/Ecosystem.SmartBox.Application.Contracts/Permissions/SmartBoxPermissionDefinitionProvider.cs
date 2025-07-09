@@ -8,10 +8,9 @@ public class SmartBoxPermissionDefinitionProvider : PermissionDefinitionProvider
 {
     public override void Define(IPermissionDefinitionContext context)
     {
-        var smartBoxGroup = context.AddGroup(
-            SmartBoxPermissions.GroupName,
-            L("Permission:SmartBox")
-        );
+        var smartBoxGroup = context.GetGroupOrNull(SmartBoxPermissions.GroupName) 
+            ?? context.AddGroup(SmartBoxPermissions.GroupName, L("Permission:SmartBox"));
+        
         var smartBoxPermissions = smartBoxGroup.AddPermission(
             SmartBoxPermissions.Issues.Default,
             L("Permission:SmartBox:Issues")

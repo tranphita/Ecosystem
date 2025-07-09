@@ -1,7 +1,34 @@
 {
-  "culture": "en",
-  "texts": {
-    "MyAccount": "My account",
-    "SamplePageMessage": "A sample page for the SmartBox module"
-  }
+  "Permission:SmartBox": "SmartBox",
+  
+  "Permission:CompanyManagement": "Company Management",
+  "Permission:CompanyCreate": "Create Company",
+  "Permission:CompanyEdit": "Edit Company", 
+  "Permission:CompanyDelete": "Delete Company",
+  
+  "Permission:UserManagement": "User Management",
+  "Permission:UserCreate": "Create User",
+  "Permission:UserEdit": "Edit User",
+  "Permission:UserDelete": "Delete User",
+  "Permission:UserManageRoles": "Manage User Roles",
+  "Permission:UserViewAll": "View All Users",
+  "Permission:UserViewOwnCompany": "View Own Company Users",
+  
+  "Permission:RoleManagement": "Role Management",
+  "Permission:RoleCreate": "Create Role",
+  "Permission:RoleEdit": "Edit Role",
+  "Permission:RoleDelete": "Delete Role",
+  
+  "Permission:Dashboard": "Dashboard",
+  "Permission:DashboardViewStatistics": "View Statistics",
+  "Permission:DashboardViewReports": "View Reports",
+  
+  "Permission:Administration": "Administration",
+  "Permission:AdministrationManageSystem": "Manage System",
+  "Permission:AdministrationViewLogs": "View Logs",
+  "Permission:AdministrationManageSettings": "Manage Settings",
+  
+  "CompanyNameAlreadyExists": "Company name '{0}' already exists",
+  "CompanyTaxCodeAlreadyExists": "Tax code '{0}' already exists",
+  "CompanyHasUsersCannotDelete": "Cannot delete company that has users assigned"
 }
