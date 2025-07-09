@@ -1,0 +1,270 @@
+<div class="role-list-container">
+  <!-- Header Card -->
+  <mat-card class="header-card">
+    <mat-card-header>
+      <mat-card-title>{{ 'roles.title' | translate }}</mat-card-title>
+      <mat-card-subtitle>{{ 'roles.subtitle' | translate }}</mat-card-subtitle>
+    </mat-card-header>
+    
+    <!-- Stats -->
+    <mat-card-content *ngIf="roleStats$ | async as stats">
+      <div class="stats-row">
+        <div class="stat-item">
+          <span class="stat-value">{{ stats.totalRoles }}</span>
+          <span class="stat-label">{{ 'roles.stats.total' | translate }}</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">{{ stats.activeRoles }}</span>
+          <span class="stat-label">{{ 'roles.stats.active' | translate }}</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">{{ stats.customRoles }}</span>
+          <span class="stat-label">{{ 'roles.stats.custom' | translate }}</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">{{ stats.systemRoles }}</span>
+          <span class="stat-label">{{ 'roles.stats.system' | translate }}</span>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Filter Card -->
+  <mat-card class="filter-card">
+    <mat-card-content>
+      <div class="filter-row">
+        <!-- Search Input -->
+        <mat-form-field appearance="outline" class="search-field">
+          <mat-label>{{ 'common.search' | translate }}</mat-label>
+          <input 
+            matInput 
+            [value]="searchTerm"
+            (input)="onSearchInput($any($event.target).value || '')"
+            [placeholder]="'roles.searchPlaceholder' | translate">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+
+        <!-- Active Filter -->
+        <mat-form-field appearance="outline" class="filter-field">
+          <mat-label>{{ 'roles.filter.status' | translate }}</mat-label>
+          <mat-select 
+            [value]="selectedActiveFilter"
+            (selectionChange)="onActiveFilterChange($event.value)">
+            <mat-option 
+              *ngFor="let option of activeFilterOptions" 
+              [value]="option.value">
+              {{ option.label | translate }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- System Filter -->
+        <mat-form-field appearance="outline" class="filter-field">
+          <mat-label>{{ 'roles.filter.type' | translate }}</mat-label>
+          <mat-select 
+            [value]="selectedSystemFilter"
+            (selectionChange)="onSystemFilterChange($event.value)">
+            <mat-option 
+              *ngFor="let option of systemFilterOptions" 
+              [value]="option.value">
+              {{ option.label | translate }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+          <button 
+            mat-stroked-button 
+            color="primary"
+            (click)="onClearFilters()"
+            class="clear-btn">
+            <mat-icon>clear</mat-icon>
+            {{ 'common.clearFilters' | translate }}
+          </button>
+          
+          <button 
+            mat-raised-button 
+            color="primary"
+            (click)="onCreateRole()"
+            class="create-btn">
+            <mat-icon>add</mat-icon>
+            {{ 'roles.createRole' | translate }}
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Data Table Card -->
+  <mat-card class="table-card">
+    <mat-card-content class="table-content">
+      <!-- Loading Spinner -->
+      <div *ngIf="isLoading$ | async" class="loading-container">
+        <mat-spinner diameter="50"></mat-spinner>
+        <p>{{ 'common.loading' | translate }}</p>
+      </div>
+
+      <!-- Error Message -->
+      <div *ngIf="error$ | async as error" class="error-container">
+        <mat-icon color="warn">error</mat-icon>
+        <p>{{ error }}</p>
+        <button mat-stroked-button color="primary" (click)="onRetry()">
+          {{ 'common.retry' | translate }}
+        </button>
+        <button mat-button (click)="clearError()">
+          {{ 'common.dismiss' | translate }}
+        </button>
+      </div>
+
+      <!-- Data Table -->
+      <div *ngIf="!(isLoading$ | async) && !(error$ | async)" class="table-container">
+        <mat-table 
+          [dataSource]="(roles$ | async) || []" 
+          class="roles-table">
+          
+          <!-- Display Name Column -->
+          <ng-container matColumnDef="displayName">
+            <mat-header-cell *matHeaderCellDef>
+              {{ 'roles.displayName' | translate }}
+            </mat-header-cell>
+            <mat-cell *matCellDef="let role">
+              <div class="role-name">
+                <strong>{{ role.displayName }}</strong>
+                <mat-chip 
+                  *ngIf="role.isSystem" 
+                  [color]="getTypeChipColor(role.isSystem)"
+                  class="type-chip">
+                  {{ 'roles.systemRole' | translate }}
+                </mat-chip>
+              </div>
+            </mat-cell>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef>
+              {{ 'roles.name' | translate }}
+            </mat-header-cell>
+            <mat-cell *matCellDef="let role">
+              <code class="role-code">{{ role.name }}</code>
+            </mat-cell>
+          </ng-container>
+
+          <!-- Description Column -->
+          <ng-container matColumnDef="description">
+            <mat-header-cell *matHeaderCellDef>
+              {{ 'roles.description' | translate }}
+            </mat-header-cell>
+            <mat-cell *matCellDef="let role">
+              <span 
+                class="description-text"
+                [matTooltip]="role.description || ''"
+                [matTooltipDisabled]="!role.description">
+                {{ role.description || ('common.noDescription' | translate) }}
+              </span>
+            </mat-cell>
+          </ng-container>
+
+          <!-- System Role Column -->
+          <ng-container matColumnDef="isSystem">
+            <mat-header-cell *matHeaderCellDef>
+              {{ 'roles.type' | translate }}
+            </mat-header-cell>
+            <mat-cell *matCellDef="let role">
+              <mat-chip [color]="getTypeChipColor(role.isSystem)">
+                {{ (role.isSystem ? 'roles.system' : 'roles.custom') | translate }}
+              </mat-chip>
+            </mat-cell>
+          </ng-container>
+
+          <!-- Active Status Column -->
+          <ng-container matColumnDef="isActive">
+            <mat-header-cell *matHeaderCellDef>
+              {{ 'common.status' | translate }}
+            </mat-header-cell>
+            <mat-cell *matCellDef="let role">
+              <mat-chip [color]="getStatusChipColor(role.isActive)">
+                {{ (role.isActive ? 'common.active' : 'common.inactive') | translate }}
+              </mat-chip>
+            </mat-cell>
+          </ng-container>
+
+          <!-- Display Order Column -->
+          <ng-container matColumnDef="displayOrder">
+            <mat-header-cell *matHeaderCellDef>
+              {{ 'roles.displayOrder' | translate }}
+            </mat-header-cell>
+            <mat-cell *matCellDef="let role">
+              <span class="display-order">{{ role.displayOrder }}</span>
+            </mat-cell>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>
+              {{ 'common.actions' | translate }}
+            </mat-header-cell>
+            <mat-cell *matCellDef="let role">
+              <div class="action-buttons">
+                <button 
+                  mat-icon-button 
+                  color="primary"
+                  (click)="onViewRole(role)"
+                  [matTooltip]="'common.view' | translate">
+                  <mat-icon>visibility</mat-icon>
+                </button>
+                
+                <button 
+                  mat-icon-button 
+                  color="primary"
+                  (click)="onEditRole(role)"
+                  [disabled]="!canEditRole(role)"
+                  [matTooltip]="'common.edit' | translate">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                
+                <button 
+                  mat-icon-button 
+                  color="warn"
+                  (click)="onDeleteRole(role)"
+                  [disabled]="!canDeleteRole(role)"
+                  [matTooltip]="'common.delete' | translate">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </mat-cell>
+          </ng-container>
+
+          <!-- Header and Row Definitions -->
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row 
+            *matRowDef="let row; columns: displayedColumns; trackBy: trackByRoleId">
+          </mat-row>
+        </mat-table>
+
+        <!-- No Data Message -->
+        <div *ngIf="(roles$ | async)?.length === 0" class="no-data">
+          <mat-icon>inbox</mat-icon>
+          <p>{{ 'roles.noRolesFound' | translate }}</p>
+          <button mat-stroked-button color="primary" (click)="onCreateRole()">
+            {{ 'roles.createFirstRole' | translate }}
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
+
+    <!-- Pagination -->
+    <div class="pagination-container" *ngIf="pagination$ | async as pagination">
+      <mat-paginator
+        [length]="pagination.totalCount"
+        [pageSize]="pagination.pageSize"
+        [pageIndex]="pagination.currentPage - 1"
+        [pageSizeOptions]="[5, 10, 25, 50]"
+        [showFirstLastButtons]="true"
+        (page)="onPageChange($event)"
+        class="roles-paginator">
+      </mat-paginator>
+    </div>
+  </mat-card>
+</div> 

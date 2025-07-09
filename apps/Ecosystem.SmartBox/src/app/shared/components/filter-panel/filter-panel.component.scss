@@ -1,0 +1,133 @@
+.filter-panel {
+  margin-bottom: 16px;
+
+  .filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 16px 0 16px;
+
+    .collapse-button {
+      margin-left: auto;
+    }
+  }
+
+  .filter-content {
+    &.collapsed {
+      display: none;
+    }
+
+    .filter-fields {
+      display: flex;
+      gap: 16px;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+
+      @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+      }
+
+      .filter-field {
+        flex-shrink: 0;
+
+        @media (max-width: 768px) {
+          width: 100% !important;
+        }
+
+        .full-width {
+          width: 100%;
+        }
+
+        mat-form-field {
+          .mat-mdc-form-field-subscript-wrapper {
+            display: none; // Hide error space for compact layout
+          }
+        }
+      }
+    }
+
+    .filter-actions {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+      padding-top: 8px;
+      border-top: 1px solid rgba(0, 0, 0, 0.12);
+
+      @media (max-width: 768px) {
+        justify-content: stretch;
+
+        button {
+          flex: 1;
+        }
+      }
+
+      .search-button {
+        min-width: 120px;
+
+        mat-icon {
+          margin-right: 8px;
+        }
+      }
+
+      .clear-button {
+        min-width: 140px;
+
+        mat-icon {
+          margin-right: 8px;
+        }
+      }
+    }
+  }
+}
+
+// Enhanced responsive design
+@media (max-width: 1200px) {
+  .filter-panel .filter-content .filter-fields {
+    .filter-field {
+      min-width: 200px;
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .filter-panel .filter-content .filter-fields {
+    .filter-field {
+      min-width: 180px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .filter-panel {
+    .filter-header {
+      padding: 12px 12px 0 12px;
+    }
+
+    .filter-content {
+      padding: 12px;
+
+      .filter-fields {
+        margin-bottom: 12px;
+      }
+    }
+  }
+}
+
+// Dark theme support
+@media (prefers-color-scheme: dark) {
+  .filter-panel {
+    .filter-content .filter-actions {
+      border-top-color: rgba(255, 255, 255, 0.12);
+    }
+  }
+}
+
+// Print styles
+@media print {
+  .filter-panel {
+    display: none;
+  }
+} 

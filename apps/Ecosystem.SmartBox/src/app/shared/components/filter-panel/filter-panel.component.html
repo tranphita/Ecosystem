@@ -1,0 +1,67 @@
+<mat-card class="filter-panel">
+  <!-- Header -->
+  <mat-card-header *ngIf="title || collapsible" class="filter-header">
+    <mat-card-title *ngIf="title">{{ title | translate }}</mat-card-title>
+    <button *ngIf="collapsible" mat-icon-button (click)="toggleCollapse()" class="collapse-button">
+      <mat-icon>{{ collapsed ? 'expand_more' : 'expand_less' }}</mat-icon>
+    </button>
+  </mat-card-header>
+
+  <!-- Filter Content -->
+  <mat-card-content class="filter-content" [class.collapsed]="collapsed">
+
+    <div class="filter-fields">
+      <!-- Dynamic Filter Fields -->
+      <div *ngFor="let field of fields" class="filter-field" [style.width]="getFieldWidth(field)">
+
+        <!-- Text Input -->
+        <mat-form-field *ngIf="field.type === 'text'" appearance="outline" class="full-width">
+          <mat-label>{{ field.label | translate }}</mat-label>
+          <input matInput [placeholder]="(field.placeholder ?? '') | translate" [value]="getFieldValue(field)"
+            (input)="onFieldChange(field, $any($event.target).value)">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+
+        <!-- Select Dropdown -->
+        <mat-form-field *ngIf="field.type === 'select'" appearance="outline" class="full-width">
+          <mat-label>{{ field.label | translate }}</mat-label>
+          <mat-select [value]="getFieldValue(field)" (selectionChange)="onFieldChange(field, $event.value)">
+            <mat-option *ngFor="let option of field.options" [value]="option.value" [disabled]="option.disabled">
+              {{ option.label | translate }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Date Input -->
+        <mat-form-field *ngIf="field.type === 'date'" appearance="outline" class="full-width">
+          <mat-label>{{ field.label | translate }}</mat-label>
+          <input matInput type="date" [value]="getFieldValue(field)"
+            (change)="onFieldChange(field, $any($event.target).value)">
+        </mat-form-field>
+
+        <!-- Boolean Select -->
+        <mat-form-field *ngIf="field.type === 'boolean'" appearance="outline" class="full-width">
+          <mat-label>{{ field.label | translate }}</mat-label>
+          <mat-select [value]="getFieldValue(field)" (selectionChange)="onFieldChange(field, $event.value)">
+            <mat-option [value]="undefined">{{ 'common.all' | translate }}</mat-option>
+            <mat-option [value]="true">{{ 'common.yes' | translate }}</mat-option>
+            <mat-option [value]="false">{{ 'common.no' | translate }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="filter-actions">
+      <button *ngIf="showSearchButton" mat-raised-button color="primary" (click)="onSearch()" class="search-button">
+        <mat-icon>search</mat-icon>
+        {{ 'common.search' | translate }}
+      </button>
+
+      <button *ngIf="showClearButton" mat-stroked-button color="primary" (click)="onClear()" class="clear-button">
+        <mat-icon>clear</mat-icon>
+        {{ 'common.clearFilters' | translate }}
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>

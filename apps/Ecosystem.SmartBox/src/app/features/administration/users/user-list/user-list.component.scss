@@ -1,0 +1,429 @@
+.user-list-container {
+  padding: 16px;
+  max-width: 1400px;
+  margin: 0 auto;
+
+  .header-card {
+    margin-bottom: 16px;
+
+    .stats-row {
+      display: flex;
+      gap: 24px;
+      margin-top: 16px;
+
+      @media (max-width: 768px) {
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .stat-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-width: 100px;
+
+        .stat-value {
+          font-size: 2rem;
+          font-weight: 600;
+          color: #1976d2;
+          line-height: 1;
+        }
+
+        .stat-label {
+          font-size: 0.875rem;
+          color: rgba(0, 0, 0, 0.6);
+          margin-top: 4px;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  .filter-card {
+    margin-bottom: 16px;
+
+    .filter-row {
+      display: flex;
+      gap: 16px;
+      align-items: flex-end;
+      flex-wrap: wrap;
+
+      @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+      }
+
+      .search-field {
+        flex: 1;
+        min-width: 250px;
+      }
+
+      .filter-field {
+        min-width: 150px;
+      }
+
+      .action-buttons {
+        display: flex;
+        gap: 8px;
+        margin-left: auto;
+
+        @media (max-width: 768px) {
+          margin-left: 0;
+          justify-content: stretch;
+
+          button {
+            flex: 1;
+          }
+        }
+
+        .clear-btn {
+          min-width: 120px;
+        }
+      }
+    }
+  }
+
+  .table-card {
+    .table-content {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .loading-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px;
+      text-align: center;
+
+      mat-spinner {
+        margin-bottom: 16px;
+      }
+
+      p {
+        margin: 0;
+        color: rgba(0, 0, 0, 0.6);
+      }
+    }
+
+    .error-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px;
+      text-align: center;
+      color: #d32f2f;
+
+      mat-icon {
+        font-size: 48px;
+        width: 48px;
+        height: 48px;
+        margin-bottom: 16px;
+      }
+
+      p {
+        margin: 0 0 16px 0;
+        max-width: 400px;
+      }
+
+      button {
+        margin: 0 8px;
+      }
+    }
+
+    .table-container {
+      .users-table {
+        width: 100%;
+
+        .mat-mdc-header-cell {
+          font-weight: 600;
+          color: rgba(0, 0, 0, 0.87);
+        }
+
+        .mat-mdc-cell {
+          padding: 12px 8px;
+        }
+
+        // Column specific styles
+        .mat-column-avatar {
+          width: 60px;
+          text-align: center;
+
+          .user-avatar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .avatar-image {
+              width: 40px;
+              height: 40px;
+              border-radius: 50%;
+              object-fit: cover;
+            }
+
+            .avatar-placeholder {
+              width: 40px;
+              height: 40px;
+              border-radius: 50%;
+              background-color: #1976d2;
+              color: white;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-weight: 600;
+              font-size: 0.875rem;
+            }
+          }
+        }
+
+        .mat-column-fullName {
+          min-width: 200px;
+
+          .user-name {
+            display: flex;
+            flex-direction: column;
+
+            strong {
+              font-weight: 600;
+              color: rgba(0, 0, 0, 0.87);
+            }
+
+            small {
+              color: rgba(0, 0, 0, 0.6);
+              font-size: 0.75rem;
+              margin-top: 2px;
+            }
+          }
+        }
+
+        .mat-column-userName {
+          min-width: 120px;
+
+          .username-code {
+            background-color: rgba(0, 0, 0, 0.05);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.875rem;
+          }
+        }
+
+        .mat-column-email {
+          min-width: 200px;
+
+          .email-link {
+            color: #1976d2;
+            text-decoration: none;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+
+        .mat-column-company {
+          min-width: 150px;
+
+          .company-name {
+            color: rgba(0, 0, 0, 0.7);
+          }
+        }
+
+        .mat-column-position {
+          min-width: 150px;
+
+          .position-info {
+            display: flex;
+            flex-direction: column;
+
+            .position {
+              color: rgba(0, 0, 0, 0.87);
+            }
+
+            .department {
+              color: rgba(0, 0, 0, 0.6);
+              font-size: 0.75rem;
+              margin-top: 2px;
+            }
+          }
+        }
+
+        .mat-column-isActive {
+          width: 100px;
+          text-align: center;
+
+          mat-chip {
+            font-size: 0.75rem;
+            height: 24px;
+            line-height: 24px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+
+            &:hover {
+              opacity: 0.8;
+            }
+          }
+        }
+
+        .mat-column-actions {
+          width: 120px;
+          text-align: center;
+
+          .action-buttons {
+            display: flex;
+            gap: 4px;
+            justify-content: center;
+
+            button {
+              width: 32px;
+              height: 32px;
+              line-height: 32px;
+
+              mat-icon {
+                font-size: 18px;
+                width: 18px;
+                height: 18px;
+              }
+
+              &:disabled {
+                opacity: 0.5;
+              }
+            }
+          }
+        }
+
+        // Row hover effect
+        .mat-mdc-row {
+          transition: background-color 0.2s ease;
+
+          &:hover {
+            background-color: rgba(0, 0, 0, 0.02);
+          }
+        }
+      }
+
+      .no-data {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 48px;
+        text-align: center;
+        color: rgba(0, 0, 0, 0.6);
+
+        mat-icon {
+          font-size: 64px;
+          width: 64px;
+          height: 64px;
+          margin-bottom: 16px;
+          opacity: 0.5;
+        }
+
+        p {
+          margin: 0;
+          font-size: 1.1rem;
+        }
+      }
+    }
+
+    .pagination-container {
+      border-top: 1px solid rgba(0, 0, 0, 0.12);
+      padding: 8px 16px;
+
+      .users-paginator {
+        background: transparent;
+      }
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .user-list-container {
+    padding: 8px;
+
+    .table-card .table-container .users-table {
+      // Hide less important columns on mobile
+      .mat-column-company,
+      .mat-column-position {
+        display: none;
+      }
+
+      .mat-column-fullName {
+        min-width: 150px;
+      }
+
+      .mat-column-email {
+        min-width: 150px;
+      }
+
+      .mat-column-actions {
+        width: 80px;
+
+        .action-buttons {
+          flex-direction: column;
+          gap: 2px;
+
+          button {
+            width: 28px;
+            height: 28px;
+            line-height: 28px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Dark theme support
+@media (prefers-color-scheme: dark) {
+  .user-list-container {
+    .header-card .stats-row .stat-item {
+      .stat-value {
+        color: #90caf9;
+      }
+
+      .stat-label {
+        color: rgba(255, 255, 255, 0.7);
+      }
+    }
+
+    .table-card .table-container .users-table {
+      .mat-column-userName .username-code {
+        background-color: rgba(255, 255, 255, 0.05);
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .mat-column-email .email-link {
+        color: #90caf9;
+      }
+
+      .mat-column-company .company-name,
+      .mat-column-position .position-info .position {
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .mat-column-position .position-info .department {
+        color: rgba(255, 255, 255, 0.5);
+      }
+    }
+  }
+}
+
+// Print styles
+@media print {
+  .user-list-container {
+    .filter-card,
+    .pagination-container {
+      display: none;
+    }
+
+    .table-card .table-container .users-table .mat-column-actions {
+      display: none;
+    }
+  }
+} 
+} 

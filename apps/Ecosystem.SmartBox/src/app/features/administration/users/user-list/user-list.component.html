@@ -1,0 +1,262 @@
+<div class="user-list-container">
+  <!-- Header Card -->
+  <mat-card class="header-card">
+    <mat-card-header>
+      <mat-card-title>{{ 'users.title' | translate }}</mat-card-title>
+      <mat-card-subtitle>{{ 'users.subtitle' | translate }}</mat-card-subtitle>
+    </mat-card-header>
+    
+    <!-- Stats -->
+    <mat-card-content *ngIf="userStats$ | async as stats">
+      <div class="stats-row">
+        <div class="stat-item">
+          <span class="stat-value">{{ stats.totalUsers }}</span>
+          <span class="stat-label">{{ 'users.stats.total' | translate }}</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">{{ stats.activeUsers }}</span>
+          <span class="stat-label">{{ 'users.stats.active' | translate }}</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">{{ stats.inactiveUsers }}</span>
+          <span class="stat-label">{{ 'users.stats.inactive' | translate }}</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">{{ stats.activePercentage }}%</span>
+          <span class="stat-label">{{ 'users.stats.activeRate' | translate }}</span>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Filter Card -->
+  <mat-card class="filter-card">
+    <mat-card-content>
+      <div class="filter-row">
+        <!-- Search Input -->
+        <mat-form-field appearance="outline" class="search-field">
+          <mat-label>{{ 'common.search' | translate }}</mat-label>
+          <input 
+            matInput 
+            [value]="searchTerm"
+            (input)="onSearchInput($any($event.target).value || '')"
+            [placeholder]="'users.searchPlaceholder' | translate">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+
+        <!-- Active Filter -->
+        <mat-form-field appearance="outline" class="filter-field">
+          <mat-label>{{ 'users.filter.status' | translate }}</mat-label>
+          <mat-select 
+            [value]="selectedActiveFilter"
+            (selectionChange)="onActiveFilterChange($event.value)">
+            <mat-option 
+              *ngFor="let option of activeFilterOptions" 
+              [value]="option.value">
+              {{ option.label | translate }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+          <button 
+            mat-stroked-button 
+            color="primary"
+            (click)="onClearFilters()"
+            class="clear-btn">
+            <mat-icon>clear</mat-icon>
+            {{ 'common.clearFilters' | translate }}
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Data Table Card -->
+  <mat-card class="table-card">
+    <mat-card-content class="table-content">
+      <!-- Loading Spinner -->
+      <div *ngIf="isLoading$ | async" class="loading-container">
+        <mat-spinner diameter="50"></mat-spinner>
+        <p>{{ 'common.loading' | translate }}</p>
+      </div>
+
+      <!-- Error Message -->
+      <div *ngIf="error$ | async as error" class="error-container">
+        <mat-icon color="warn">error</mat-icon>
+        <p>{{ error }}</p>
+        <button mat-stroked-button color="primary" (click)="onRetry()">
+          {{ 'common.retry' | translate }}
+        </button>
+        <button mat-button (click)="clearError()">
+          {{ 'common.dismiss' | translate }}
+        </button>
+      </div>
+
+      <!-- Data Table -->
+      <div *ngIf="!(isLoading$ | async) && !(error$ | async)" class="table-container">
+                 <mat-table 
+           [dataSource]="(users$ | async) || []" 
+           class="users-table">
+          
+          <!-- Avatar Column -->
+          <ng-container matColumnDef="avatar">
+            <mat-header-cell *matHeaderCellDef>
+              {{ 'users.avatar' | translate }}
+            </mat-header-cell>
+            <mat-cell *matCellDef="let user">
+              <div class="user-avatar">
+                <img 
+                  *ngIf="user.avatar" 
+                  [src]="user.avatar" 
+                  [alt]="user.fullName"
+                  class="avatar-image">
+                <div 
+                  *ngIf="!user.avatar" 
+                  class="avatar-placeholder">
+                  {{ getInitials(user.fullName || user.userName) }}
+                </div>
+              </div>
+            </mat-cell>
+          </ng-container>
+
+          <!-- Full Name Column -->
+          <ng-container matColumnDef="fullName">
+            <mat-header-cell *matHeaderCellDef>
+              {{ 'users.fullName' | translate }}
+            </mat-header-cell>
+            <mat-cell *matCellDef="let user">
+              <div class="user-name">
+                <strong>{{ user.fullName || user.userName }}</strong>
+                <small *ngIf="user.employeeCode">{{ user.employeeCode }}</small>
+              </div>
+            </mat-cell>
+          </ng-container>
+
+          <!-- Username Column -->
+          <ng-container matColumnDef="userName">
+            <mat-header-cell *matHeaderCellDef>
+              {{ 'users.userName' | translate }}
+            </mat-header-cell>
+            <mat-cell *matCellDef="let user">
+              <code class="username-code">{{ user.userName }}</code>
+            </mat-cell>
+          </ng-container>
+
+          <!-- Email Column -->
+          <ng-container matColumnDef="email">
+            <mat-header-cell *matHeaderCellDef>
+              {{ 'users.email' | translate }}
+            </mat-header-cell>
+            <mat-cell *matCellDef="let user">
+              <a [href]="'mailto:' + user.email" class="email-link">
+                {{ user.email }}
+              </a>
+            </mat-cell>
+          </ng-container>
+
+          <!-- Company Column -->
+          <ng-container matColumnDef="company">
+            <mat-header-cell *matHeaderCellDef>
+              {{ 'users.company' | translate }}
+            </mat-header-cell>
+            <mat-cell *matCellDef="let user">
+              <span class="company-name">
+                {{ user.company?.name || ('common.notSpecified' | translate) }}
+              </span>
+            </mat-cell>
+          </ng-container>
+
+          <!-- Position Column -->
+          <ng-container matColumnDef="position">
+            <mat-header-cell *matHeaderCellDef>
+              {{ 'users.position' | translate }}
+            </mat-header-cell>
+            <mat-cell *matCellDef="let user">
+              <div class="position-info">
+                <span class="position">{{ user.position || ('common.notSpecified' | translate) }}</span>
+                <small *ngIf="user.department" class="department">{{ user.department }}</small>
+              </div>
+            </mat-cell>
+          </ng-container>
+
+          <!-- Active Status Column -->
+          <ng-container matColumnDef="isActive">
+            <mat-header-cell *matHeaderCellDef>
+              {{ 'common.status' | translate }}
+            </mat-header-cell>
+            <mat-cell *matCellDef="let user">
+              <mat-chip 
+                [color]="getStatusChipColor(user.isActive)"
+                (click)="onToggleActive(user)">
+                {{ (user.isActive ? 'common.active' : 'common.inactive') | translate }}
+              </mat-chip>
+            </mat-cell>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>
+              {{ 'common.actions' | translate }}
+            </mat-header-cell>
+            <mat-cell *matCellDef="let user">
+              <div class="action-buttons">
+                <button 
+                  mat-icon-button 
+                  color="primary"
+                  (click)="onViewUser(user)"
+                  [matTooltip]="'common.view' | translate">
+                  <mat-icon>visibility</mat-icon>
+                </button>
+                
+                <button 
+                  mat-icon-button 
+                  color="primary"
+                  (click)="onEditUser(user)"
+                  [disabled]="!hasEditPermission"
+                  [matTooltip]="'common.edit' | translate">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                
+                <button 
+                  mat-icon-button 
+                  color="accent"
+                  (click)="onManageRoles(user)"
+                  [disabled]="!hasManageRolesPermission"
+                  [matTooltip]="'users.manageRoles' | translate">
+                  <mat-icon>security</mat-icon>
+                </button>
+              </div>
+            </mat-cell>
+          </ng-container>
+
+          <!-- Header and Row Definitions -->
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                     <mat-row 
+             *matRowDef="let row; columns: displayedColumns;">
+           </mat-row>
+        </mat-table>
+
+        <!-- No Data Message -->
+        <div *ngIf="(users$ | async)?.length === 0" class="no-data">
+          <mat-icon>people_outline</mat-icon>
+          <p>{{ 'users.noUsersFound' | translate }}</p>
+        </div>
+      </div>
+    </mat-card-content>
+
+    <!-- Pagination -->
+    <div class="pagination-container" *ngIf="pagination$ | async as pagination">
+      <mat-paginator
+        [length]="pagination.totalCount"
+        [pageSize]="pagination.pageSize"
+        [pageIndex]="pagination.currentPage - 1"
+        [pageSizeOptions]="[5, 10, 25, 50]"
+        [showFirstLastButtons]="true"
+        (page)="onPageChange($event)"
+        class="users-paginator">
+      </mat-paginator>
+    </div>
+  </mat-card>
+</div> 

@@ -1,0 +1,136 @@
+<div class="data-table-container">
+  <!-- Loading Spinner -->
+  <div *ngIf="isLoading" class="loading-container">
+    <mat-spinner diameter="50"></mat-spinner>
+    <p>{{ 'common.loading' | translate }}</p>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="error" class="error-container">
+    <mat-icon color="warn">error</mat-icon>
+    <p>{{ error }}</p>
+    <button mat-stroked-button color="primary" (click)="onRetry()">
+      {{ 'common.retry' | translate }}
+    </button>
+  </div>
+
+  <!-- Data Table -->
+  <div *ngIf="!isLoading && !error" class="table-wrapper">
+    <mat-table 
+      [dataSource]="data" 
+      class="data-table"
+      [class.sticky-header]="stickyHeader">
+      
+      <!-- Dynamic Columns -->
+      <ng-container *ngFor="let column of columns" [matColumnDef]="column.key">
+        <mat-header-cell 
+          *matHeaderCellDef
+          [style.width]="column.width"
+          [style.text-align]="column.align || 'left'">
+          {{ column.header | translate }}
+        </mat-header-cell>
+        
+        <mat-cell 
+          *matCellDef="let item"
+          [style.text-align]="column.align || 'left'">
+          
+          <!-- Text Type -->
+          <span *ngIf="!column.type || column.type === 'text'">
+            {{ getColumnValue(item, column) }}
+          </span>
+
+          <!-- Date Type -->
+          <span *ngIf="column.type === 'date'">
+            {{ formatValue(getColumnValue(item, column), column) }}
+          </span>
+
+          <!-- Boolean Type -->
+          <mat-chip 
+            *ngIf="column.type === 'boolean'"
+            [color]="getChipColor(getColumnValue(item, column), column.key)">
+            {{ formatValue(getColumnValue(item, column), column) }}
+          </mat-chip>
+
+          <!-- Chip Type -->
+          <mat-chip 
+            *ngIf="column.type === 'chip'"
+            [color]="getChipColor(getColumnValue(item, column), column.key)">
+            {{ getColumnValue(item, column) }}
+          </mat-chip>
+
+          <!-- Avatar Type -->
+          <div *ngIf="column.type === 'avatar'" class="avatar-cell">
+            <img 
+              *ngIf="getColumnValue(item, column)" 
+              [src]="getColumnValue(item, column)" 
+              [alt]="item.fullName || item.name"
+              class="avatar-image">
+            <div 
+              *ngIf="!getColumnValue(item, column)" 
+              class="avatar-placeholder">
+              {{ getInitials(item.fullName || item.name || item.displayName) }}
+            </div>
+          </div>
+
+          <!-- Email Type -->
+          <a 
+            *ngIf="column.type === 'email'"
+            [href]="'mailto:' + getColumnValue(item, column)" 
+            class="email-link">
+            {{ getColumnValue(item, column) }}
+          </a>
+
+          <!-- Custom Type - Use ng-content projection -->
+          <ng-container *ngIf="column.type === 'custom'">
+            <ng-content [select]="'[slot=' + column.key + ']'"></ng-content>
+          </ng-container>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions" *ngIf="actions.length > 0">
+        <mat-header-cell *matHeaderCellDef>
+          {{ 'common.actions' | translate }}
+        </mat-header-cell>
+        <mat-cell *matCellDef="let item">
+          <div class="action-buttons">
+            <button 
+              *ngFor="let action of actions"
+              mat-icon-button 
+              [color]="action.color || 'primary'"
+              [disabled]="isActionDisabled(action, item)"
+              [style.display]="isActionVisible(action, item) ? 'inline-block' : 'none'"
+              [matTooltip]="action.label | translate"
+              (click)="onActionClick(action.key, item)">
+              <mat-icon>{{ action.icon }}</mat-icon>
+            </button>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Header and Row Definitions -->
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <!-- No Data Message -->
+    <div *ngIf="data.length === 0" class="no-data">
+      <mat-icon>inbox</mat-icon>
+      <p>{{ emptyMessage | translate }}</p>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <div 
+    *ngIf="showPagination && pagination && !isLoading && !error" 
+    class="pagination-container">
+    <mat-paginator
+      [length]="pagination.totalCount"
+      [pageSize]="pagination.pageSize"
+      [pageIndex]="pagination.currentPage - 1"
+      [pageSizeOptions]="[5, 10, 25, 50]"
+      [showFirstLastButtons]="true"
+      (page)="onPageChange($event)">
+    </mat-paginator>
+  </div>
+</div> 

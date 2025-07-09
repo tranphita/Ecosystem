@@ -1,0 +1,173 @@
+{
+  "common": {
+    "loading": "Đang tải...",
+    "search": "Tìm kiếm",
+    "clear": "Xóa",
+    "clearFilters": "Xóa bộ lọc",
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "delete": "Xóa",
+    "edit": "Sửa",
+    "view": "Xem",
+    "create": "Tạo mới",
+    "update": "Cập nhật",
+    "actions": "Thao tác",
+    "status": "Trạng thái",
+    "active": "Hoạt động",
+    "inactive": "Không hoạt động",
+    "yes": "Có",
+    "no": "Không",
+    "all": "Tất cả",
+    "retry": "Thử lại",
+    "dismiss": "Đóng",
+    "noDataFound": "Không có dữ liệu",
+    "notSpecified": "Chưa xác định",
+    "noDescription": "Không có mô tả"
+  },
+  "users": {
+    "title": "Quản lý người dùng",
+    "subtitle": "Quản lý tài khoản người dùng trong hệ thống",
+    "createUser": "Tạo người dùng mới",
+    "editUser": "Sửa người dùng",
+    "viewUser": "Xem người dùng",
+    "manageRoles": "Quản lý vai trò",
+    "noUsersFound": "Không tìm thấy người dùng nào",
+    "searchPlaceholder": "Tìm kiếm theo tên, email, mã nhân viên...",
+    "avatar": "Ảnh đại diện",
+    "fullName": "Họ tên",
+    "userName": "Tên đăng nhập",
+    "email": "Email",
+    "company": "Công ty",
+    "position": "Chức vụ",
+    "department": "Phòng ban",
+    "employeeCode": "Mã nhân viên",
+    "phoneNumber": "Số điện thoại",
+    "dateOfBirth": "Ngày sinh",
+    "gender": "Giới tính",
+    "address": "Địa chỉ",
+    "startDate": "Ngày bắt đầu",
+    "lastLogin": "Đăng nhập cuối",
+    "notes": "Ghi chú",
+    "stats": {
+      "total": "Tổng số",
+      "active": "Hoạt động",
+      "inactive": "Không hoạt động",
+      "activeRate": "Tỷ lệ hoạt động"
+    },
+    "filter": {
+      "status": "Trạng thái",
+      "allStatuses": "Tất cả trạng thái"
+    }
+  },
+  "roles": {
+    "title": "Quản lý vai trò",
+    "subtitle": "Quản lý vai trò và quyền hạn trong hệ thống",
+    "createRole": "Tạo vai trò mới",
+    "editRole": "Sửa vai trò",
+    "viewRole": "Xem vai trò",
+    "deleteRole": "Xóa vai trò",
+    "noRolesFound": "Không tìm thấy vai trò nào",
+    "createFirstRole": "Tạo vai trò đầu tiên",
+    "searchPlaceholder": "Tìm kiếm theo tên vai trò, mô tả...",
+    "name": "Tên vai trò",
+    "displayName": "Tên hiển thị",
+    "description": "Mô tả",
+    "displayOrder": "Thứ tự hiển thị",
+    "type": "Loại",
+    "system": "Hệ thống",
+    "custom": "Tùy chỉnh",
+    "systemRole": "Vai trò hệ thống",
+    "stats": {
+      "total": "Tổng số",
+      "active": "Hoạt động",
+      "custom": "Tùy chỉnh",
+      "system": "Hệ thống"
+    },
+    "filter": {
+      "status": "Trạng thái",
+      "type": "Loại vai trò",
+      "allStatuses": "Tất cả trạng thái",
+      "allTypes": "Tất cả loại",
+      "active": "Hoạt động",
+      "inactive": "Không hoạt động",
+      "systemRoles": "Vai trò hệ thống",
+      "customRoles": "Vai trò tùy chỉnh"
+    }
+  },
+  "companies": {
+    "title": "Quản lý công ty",
+    "subtitle": "Quản lý thông tin công ty trong hệ thống",
+    "createCompany": "Tạo công ty mới",
+    "editCompany": "Sửa công ty",
+    "viewCompany": "Xem công ty",
+    "deleteCompany": "Xóa công ty",
+    "noCompaniesFound": "Không tìm thấy công ty nào",
+    "searchPlaceholder": "Tìm kiếm theo tên công ty, mã thuế...",
+    "name": "Tên công ty",
+    "code": "Mã công ty",
+    "description": "Mô tả",
+    "address": "Địa chỉ",
+    "phoneNumber": "Số điện thoại",
+    "email": "Email",
+    "website": "Website",
+    "taxCode": "Mã số thuế",
+    "logo": "Logo",
+    "displayOrder": "Thứ tự hiển thị"
+  },
+  "permissions": {
+    "title": "Quản lý quyền hạn",
+    "subtitle": "Cấu hình quyền hạn cho vai trò và người dùng",
+    "grantPermission": "Cấp quyền",
+    "revokePermission": "Thu hồi quyền",
+    "permissionGroups": "Nhóm quyền",
+    "noPermissions": "Không có quyền nào",
+    "users": {
+      "view": "Xem danh sách người dùng",
+      "create": "Tạo mới người dùng",
+      "edit": "Chỉnh sửa người dùng",
+      "delete": "Xóa người dùng",
+      "manageRoles": "Quản lý vai trò người dùng"
+    },
+    "roles": {
+      "view": "Xem danh sách vai trò",
+      "create": "Tạo mới vai trò",
+      "edit": "Chỉnh sửa vai trò",
+      "delete": "Xóa vai trò"
+    },
+    "companies": {
+      "view": "Xem danh sách công ty",
+      "create": "Tạo mới công ty",
+      "edit": "Chỉnh sửa công ty",
+      "delete": "Xóa công ty"
+    }
+  },
+  "validation": {
+    "required": "Trường này là bắt buộc",
+    "email": "Email không hợp lệ",
+    "minLength": "Độ dài tối thiểu {min} ký tự",
+    "maxLength": "Độ dài tối đa {max} ký tự",
+    "pattern": "Định dạng không hợp lệ",
+    "unique": "Giá trị này đã tồn tại",
+    "phoneNumber": "Số điện thoại không hợp lệ"
+  },
+  "messages": {
+    "saveSuccess": "Lưu thành công",
+    "deleteSuccess": "Xóa thành công",
+    "deleteConfirm": "Bạn có chắc chắn muốn xóa?",
+    "unsavedChanges": "Có thay đổi chưa được lưu. Bạn có muốn tiếp tục?",
+    "accessDenied": "Bạn không có quyền truy cập chức năng này",
+    "networkError": "Lỗi kết nối mạng. Vui lòng thử lại.",
+    "serverError": "Lỗi máy chủ. Vui lòng liên hệ quản trị viên."
+  },
+  "navigation": {
+    "home": "Trang chủ",
+    "administration": "Quản trị",
+    "users": "Người dùng",
+    "roles": "Vai trò",
+    "companies": "Công ty",
+    "permissions": "Quyền hạn",
+    "settings": "Cài đặt",
+    "profile": "Hồ sơ",
+    "logout": "Đăng xuất"
+  }
+} 
