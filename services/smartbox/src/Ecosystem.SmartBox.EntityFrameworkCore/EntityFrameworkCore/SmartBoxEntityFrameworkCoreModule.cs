@@ -1,4 +1,5 @@
 using System;
+using Ecosystem.SmartBox.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Volo.Abp.Data;
@@ -31,6 +32,10 @@ public class SmartBoxEntityFrameworkCoreModule : AbpModule
         context.Services.AddAbpDbContext<SmartBoxDbContext>(options =>
         {
             options.AddDefaultRepositories(true);
+            
+            // Đăng ký custom repositories
+            options.AddRepository<Entities.SmartBoxRole, SmartBoxRoleRepository>();
+            options.AddRepository<Entities.SmartBoxUser, SmartBoxUserRepository>();
         });
     }
 }

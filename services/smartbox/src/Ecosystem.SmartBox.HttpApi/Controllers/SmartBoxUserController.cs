@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Ecosystem.SmartBox.Users;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
@@ -15,6 +16,7 @@ namespace Ecosystem.SmartBox.Controllers;
 [Area(SmartBoxRemoteServiceConsts.ModuleName)]
 [RemoteService(Name = SmartBoxRemoteServiceConsts.RemoteServiceName)]
 [Route("api/smartbox/users")]
+[AllowAnonymous] // Tạm thời cho phép anonymous access để test
 public class SmartBoxUserController : SmartBoxController, ISmartBoxUserAppService
 {
     private readonly ISmartBoxUserAppService _userAppService;
