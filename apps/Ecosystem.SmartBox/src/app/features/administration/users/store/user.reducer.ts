@@ -300,7 +300,7 @@ export const userReducer = createReducer(
     filter: {
       searchTerm: '',
       sortField: 'fullName',
-      sortDirection: 'asc',
+      sortDirection: 'asc' as const,
       isActive: undefined,
       companyId: undefined,
       roleId: undefined,

@@ -5,6 +5,7 @@
     "clear": "Xóa",
     "clearFilters": "Xóa bộ lọc",
     "save": "Lưu",
+    "saving": "Đang lưu...",
     "cancel": "Hủy",
     "delete": "Xóa",
     "edit": "Sửa",
@@ -66,6 +67,7 @@
     "editRole": "Sửa vai trò",
     "viewRole": "Xem vai trò",
     "deleteRole": "Xóa vai trò",
+    "role": "Vai trò",
     "noRolesFound": "Không tìm thấy vai trò nào",
     "createFirstRole": "Tạo vai trò đầu tiên",
     "searchPlaceholder": "Tìm kiếm theo tên vai trò, mô tả...",
@@ -73,10 +75,19 @@
     "displayName": "Tên hiển thị",
     "description": "Mô tả",
     "displayOrder": "Thứ tự hiển thị",
+    "isActive": "Kích hoạt",
     "type": "Loại",
     "system": "Hệ thống",
     "custom": "Tùy chỉnh",
     "systemRole": "Vai trò hệ thống",
+    "displayNamePlaceholder": "Nhập tên hiển thị của vai trò",
+    "namePlaceholder": "Nhập tên vai trò (chỉ chữ, số, dấu gạch dưới)",
+    "nameHint": "Tên vai trò sẽ được tự động tạo từ tên hiển thị",
+    "descriptionPlaceholder": "Nhập mô tả cho vai trò",
+    "displayOrderPlaceholder": "Nhập thứ tự hiển thị",
+    "displayOrderHint": "Số thứ tự để sắp xếp vai trò (0 = đầu tiên)",
+    "isActiveHint": "Chỉ những vai trò được kích hoạt mới có thể gán cho người dùng",
+    "systemRoleInfo": "Đây là vai trò hệ thống. Một số thông tin không thể chỉnh sửa.",
     "stats": {
       "total": "Tổng số",
       "active": "Hoạt động",
@@ -92,6 +103,23 @@
       "inactive": "Không hoạt động",
       "systemRoles": "Vai trò hệ thống",
       "customRoles": "Vai trò tùy chỉnh"
+    },
+    "validation": {
+      "displayName": {
+        "required": "Tên hiển thị là bắt buộc",
+        "maxlength": "Tên hiển thị không được vượt quá 100 ký tự"
+      },
+      "name": {
+        "required": "Tên vai trò là bắt buộc",
+        "maxlength": "Tên vai trò không được vượt quá 50 ký tự",
+        "pattern": "Tên vai trò chỉ được chứa chữ cái, số, dấu gạch dưới và dấu chấm"
+      },
+      "description": {
+        "maxlength": "Mô tả không được vượt quá 500 ký tự"
+      },
+      "displayOrder": {
+        "min": "Thứ tự hiển thị phải lớn hơn hoặc bằng 0"
+      }
     }
   },
   "companies": {

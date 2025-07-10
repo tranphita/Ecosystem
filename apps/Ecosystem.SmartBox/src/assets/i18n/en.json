@@ -5,6 +5,7 @@
     "clear": "Clear",
     "clearFilters": "Clear Filters",
     "save": "Save",
+    "saving": "Saving...",
     "cancel": "Cancel",
     "delete": "Delete",
     "edit": "Edit",
@@ -66,6 +67,7 @@
     "editRole": "Edit Role",
     "viewRole": "View Role",
     "deleteRole": "Delete Role",
+    "role": "Role",
     "noRolesFound": "No roles found",
     "createFirstRole": "Create First Role",
     "searchPlaceholder": "Search by role name, description...",
@@ -73,10 +75,19 @@
     "displayName": "Display Name",
     "description": "Description",
     "displayOrder": "Display Order",
+    "isActive": "Active",
     "type": "Type",
     "system": "System",
     "custom": "Custom",
     "systemRole": "System Role",
+    "displayNamePlaceholder": "Enter role display name",
+    "namePlaceholder": "Enter role name (letters, numbers, underscore only)",
+    "nameHint": "Role name will be auto-generated from display name",
+    "descriptionPlaceholder": "Enter role description",
+    "displayOrderPlaceholder": "Enter display order",
+    "displayOrderHint": "Order number for sorting roles (0 = first)",
+    "isActiveHint": "Only active roles can be assigned to users",
+    "systemRoleInfo": "This is a system role. Some information cannot be edited.",
     "stats": {
       "total": "Total",
       "active": "Active",
@@ -92,6 +103,23 @@
       "inactive": "Inactive",
       "systemRoles": "System Roles",
       "customRoles": "Custom Roles"
+    },
+    "validation": {
+      "displayName": {
+        "required": "Display name is required",
+        "maxlength": "Display name cannot exceed 100 characters"
+      },
+      "name": {
+        "required": "Role name is required",
+        "maxlength": "Role name cannot exceed 50 characters",
+        "pattern": "Role name can only contain letters, numbers, underscore and dot"
+      },
+      "description": {
+        "maxlength": "Description cannot exceed 500 characters"
+      },
+      "displayOrder": {
+        "min": "Display order must be greater than or equal to 0"
+      }
     }
   },
   "companies": {

@@ -12,6 +12,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { TranslateModule } from '@ngx-translate/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
@@ -20,6 +21,7 @@ import { takeUntil, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { SmartBoxRoleDto } from '../../../../shared/models';
 import * as RoleActions from '../store/role.actions';
 import * as RoleSelectors from '../store/role.selectors';
+import { RoleDialogComponent } from '../role-dialog/role-dialog.component';
 
 /**
  * Component hiển thị danh sách roles với tính năng filter, sort và pagination
@@ -41,6 +43,7 @@ import * as RoleSelectors from '../store/role.selectors';
     MatChipsModule,
     MatTooltipModule,
     MatCardModule,
+    MatDialogModule,
     TranslateModule
   ],
   templateUrl: './role-list.component.html',
@@ -58,6 +61,7 @@ export class RoleListComponent implements OnInit, OnDestroy {
   pagination$ = this.store.select(RoleSelectors.selectRolePaginationInfo);
   filter$ = this.store.select(RoleSelectors.selectRoleFilter);
   roleStats$ = this.store.select(RoleSelectors.selectRoleStats);
+  dialogState$ = this.store.select(RoleSelectors.selectRoleDialogState);
 
   // === UI Properties ===
   displayedColumns: string[] = [
@@ -87,7 +91,10 @@ export class RoleListComponent implements OnInit, OnDestroy {
     { value: false, label: 'roles.filter.customRoles' }
   ];
 
-  constructor(private store: Store) {
+  constructor(
+    private store: Store,
+    private dialog: MatDialog
+  ) {
     // Setup search debouncing
     this.searchSubject.pipe(
       debounceTime(300),
@@ -108,6 +115,15 @@ export class RoleListComponent implements OnInit, OnDestroy {
       this.searchTerm = filter.searchTerm;
       this.selectedActiveFilter = filter.isActive;
       this.selectedSystemFilter = filter.isSystem;
+    });
+
+    // Subscribe to dialog state changes
+    this.dialogState$.pipe(takeUntil(this.destroy$)).subscribe(dialogState => {
+      if (dialogState.isOpen && !this.dialog.openDialogs.length && dialogState.mode) {
+        this.openRoleDialog(dialogState.mode, dialogState.selectedRole || undefined);
+      } else if (!dialogState.isOpen && this.dialog.openDialogs.length > 0) {
+        this.dialog.closeAll();
+      }
     });
   }
 
@@ -207,9 +223,6 @@ export class RoleListComponent implements OnInit, OnDestroy {
   }
 
   // === Utility Methods ===
-  trackByRoleId(index: number, role: SmartBoxRoleDto): string {
-    return role.id;
-  }
 
   getStatusChipColor(isActive: boolean): string {
     return isActive ? 'primary' : 'warn';
@@ -236,5 +249,21 @@ export class RoleListComponent implements OnInit, OnDestroy {
 
   clearError(): void {
     this.store.dispatch(RoleActions.clearRoleError());
+  }
+
+  /**
+   * Mở dialog tạo/chỉnh sửa/xem role
+   */
+  private openRoleDialog(mode: 'create' | 'edit' | 'view', role?: SmartBoxRoleDto): void {
+    const dialogRef = this.dialog.open(RoleDialogComponent, {
+      width: '600px',
+      maxWidth: '90vw',
+      disableClose: true,
+      data: { mode, role }
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.store.dispatch(RoleActions.closeRoleDialog());
+    });
   }
 } 

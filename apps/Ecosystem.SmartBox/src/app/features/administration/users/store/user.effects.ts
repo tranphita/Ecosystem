@@ -45,19 +45,8 @@ export class UserEffects {
   );
 
   // === Create User Effect ===
-  createUser$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(UserActions.createUser),
-      switchMap(({ input }) =>
-        this.userApiService.createUser(input).pipe(
-          map(user => UserActions.createUserSuccess({ user })),
-          catchError(error => of(UserActions.createUserFailure({ 
-            error: error.message || 'Lỗi khi tạo người dùng' 
-          })))
-        )
-      )
-    )
-  );
+  // Note: UserApiService không có createUser method
+  // Component hiện tại không sử dụng create action nên có thể bỏ qua
 
   // === Update User Effect ===
   updateUser$ = createEffect(() =>
@@ -94,7 +83,7 @@ export class UserEffects {
     this.actions$.pipe(
       ofType(UserActions.assignRolesToUser),
       switchMap(({ userId, roleIds }) =>
-        this.userApiService.assignRoles({ userId, roleIds }).pipe(
+        this.userApiService.assignRolesToUser(userId, roleIds).pipe(
           map(() => UserActions.assignRolesToUserSuccess({ userId, roleIds })),
           catchError(error => of(UserActions.assignRolesToUserFailure({ 
             error: error.message || 'Lỗi khi gán vai trò' 
@@ -109,8 +98,8 @@ export class UserEffects {
     this.actions$.pipe(
       ofType(UserActions.toggleUserActive),
       switchMap(({ id, isActive }) =>
-        this.userApiService.toggleActive({ userId: id, isActive }).pipe(
-          map(() => UserActions.toggleUserActiveSuccess({ id, isActive })),
+        this.userApiService.setActive(id, isActive).pipe(
+          map((user) => UserActions.toggleUserActiveSuccess({ user })),
           catchError(error => of(UserActions.toggleUserActiveFailure({ 
             error: error.message || 'Lỗi khi thay đổi trạng thái người dùng' 
           })))
@@ -123,8 +112,8 @@ export class UserEffects {
   validateUsername$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UserActions.validateUsername),
-      switchMap(({ username, excludeId }) =>
-        this.userApiService.validateUsername(username, excludeId).pipe(
+      switchMap(({ userName, excludeId }) =>
+        this.userApiService.isUserNameExist(userName, excludeId).pipe(
           map(exists => UserActions.validateUsernameSuccess({ exists })),
           catchError(error => of(UserActions.validateUsernameFailure({ 
             error: error.message || 'Lỗi khi kiểm tra tên đăng nhập' 
@@ -138,7 +127,7 @@ export class UserEffects {
     this.actions$.pipe(
       ofType(UserActions.validateEmail),
       switchMap(({ email, excludeId }) =>
-        this.userApiService.validateEmail(email, excludeId).pipe(
+        this.userApiService.isEmailExist(email, excludeId).pipe(
           map(exists => UserActions.validateEmailSuccess({ exists })),
           catchError(error => of(UserActions.validateEmailFailure({ 
             error: error.message || 'Lỗi khi kiểm tra email' 
@@ -152,7 +141,7 @@ export class UserEffects {
     this.actions$.pipe(
       ofType(UserActions.validateEmployeeCode),
       switchMap(({ employeeCode, excludeId }) =>
-        this.userApiService.validateEmployeeCode(employeeCode, excludeId).pipe(
+        this.userApiService.isEmployeeCodeExist(employeeCode, excludeId).pipe(
           map(exists => UserActions.validateEmployeeCodeSuccess({ exists })),
           catchError(error => of(UserActions.validateEmployeeCodeFailure({ 
             error: error.message || 'Lỗi khi kiểm tra mã nhân viên' 

@@ -103,6 +103,17 @@ export const selectRoleDialogMode = createSelector(
   (state: RoleState) => state.dialogMode
 );
 
+export const selectRoleDialogState = createSelector(
+  selectIsRoleDialogOpen,
+  selectRoleDialogMode,
+  selectSelectedRole,
+  (isOpen, mode, selectedRole) => ({
+    isOpen,
+    mode,
+    selectedRole
+  })
+);
+
 // === Validation Selectors ===
 export const selectIsValidatingRoleName = createSelector(
   selectRoleFeature,

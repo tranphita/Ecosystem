@@ -1,0 +1,129 @@
+<div class="role-dialog">
+  <!-- Dialog Header -->
+  <div mat-dialog-title class="dialog-header">
+    <h2>{{ dialogTitle | translate }}</h2>
+    <button 
+      mat-icon-button 
+      [mat-dialog-close]=""
+      class="close-button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <!-- Dialog Content -->
+  <div mat-dialog-content class="dialog-content">
+    <form [formGroup]="roleForm" (ngSubmit)="onSubmit()">
+      <!-- Display Name Field -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'roles.displayName' | translate }} *</mat-label>
+        <input 
+          matInput 
+          formControlName="displayName"
+          [placeholder]="'roles.displayNamePlaceholder' | translate"
+          (input)="onDisplayNameChange()">
+        <mat-error *ngIf="hasError('displayName', 'required')">
+          {{ getErrorMessage('displayName') | translate }}
+        </mat-error>
+        <mat-error *ngIf="hasError('displayName', 'maxlength')">
+          {{ getErrorMessage('displayName') | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Name Field -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'roles.name' | translate }} *</mat-label>
+        <input 
+          matInput 
+          formControlName="name"
+          [placeholder]="'roles.namePlaceholder' | translate">
+        <mat-hint *ngIf="isCreateMode">
+          {{ 'roles.nameHint' | translate }}
+        </mat-hint>
+        <mat-error *ngIf="hasError('name', 'required')">
+          {{ getErrorMessage('name') | translate }}
+        </mat-error>
+        <mat-error *ngIf="hasError('name', 'maxlength')">
+          {{ getErrorMessage('name') | translate }}
+        </mat-error>
+        <mat-error *ngIf="hasError('name', 'pattern')">
+          {{ getErrorMessage('name') | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Description Field -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'roles.description' | translate }}</mat-label>
+        <textarea 
+          matInput 
+          formControlName="description"
+          [placeholder]="'roles.descriptionPlaceholder' | translate"
+          rows="3">
+        </textarea>
+        <mat-error *ngIf="hasError('description', 'maxlength')">
+          {{ getErrorMessage('description') | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Display Order Field -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'roles.displayOrder' | translate }}</mat-label>
+        <input 
+          matInput 
+          type="number"
+          formControlName="displayOrder"
+          [placeholder]="'roles.displayOrderPlaceholder' | translate">
+        <mat-hint>{{ 'roles.displayOrderHint' | translate }}</mat-hint>
+        <mat-error *ngIf="hasError('displayOrder', 'min')">
+          {{ getErrorMessage('displayOrder') | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Active Checkbox -->
+      <div class="checkbox-container" *ngIf="!isReadOnly">
+        <mat-checkbox formControlName="isActive">
+          {{ 'roles.isActive' | translate }}
+        </mat-checkbox>
+        <span class="checkbox-hint">
+          {{ 'roles.isActiveHint' | translate }}
+        </span>
+      </div>
+
+      <!-- System Role Info (nếu là system role) -->
+      <div class="system-role-info" *ngIf="data.role?.isSystem">
+        <mat-icon color="accent">info</mat-icon>
+        <span>{{ 'roles.systemRoleInfo' | translate }}</span>
+      </div>
+    </form>
+  </div>
+
+  <!-- Dialog Actions -->
+  <div mat-dialog-actions class="dialog-actions">
+    <button 
+      type="button"
+      mat-button 
+      (click)="onCancel()"
+      class="cancel-btn">
+      {{ 'common.cancel' | translate }}
+    </button>
+
+    <button 
+      type="submit"
+      mat-raised-button 
+      color="primary"
+      (click)="onSubmit()"
+      [disabled]="roleForm.invalid || (isSubmitting$ | async) || isReadOnly"
+      class="submit-btn">
+      <mat-spinner 
+        *ngIf="isSubmitting$ | async" 
+        diameter="20" 
+        class="button-spinner">
+      </mat-spinner>
+      <span *ngIf="!(isSubmitting$ | async)">
+        {{ (isCreateMode ? 'common.create' : 'common.save') | translate }}
+      </span>
+      <span *ngIf="isSubmitting$ | async">
+        {{ 'common.saving' | translate }}
+      </span>
+    </button>
+  </div>
+</div> 

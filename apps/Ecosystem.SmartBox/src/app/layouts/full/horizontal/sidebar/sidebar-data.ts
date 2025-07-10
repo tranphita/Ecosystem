@@ -10,17 +10,20 @@ export const navItems: NavItem[] = [
     route: '/starter',
   },
   {
-    navCap: 'System',
+    navCap: 'Administration',
   },
   {
-    displayName: 'Role',
-    iconName: 'solar:user-id-line-duotone',
-    route: '/system/role',
-  },
-  {
-    displayName: 'User',
+    displayName: 'Users',
     iconName: 'solar:users-group-rounded-line-duotone',
-    route: '/system/user',
+    route: '/administration/users',
+  },
+  {
+    displayName: 'Roles',
+    iconName: 'solar:user-id-line-duotone',
+    route: '/administration/roles',
+  },
+  {
+    navCap: 'System',
   },
   {
     displayName: 'Function group',

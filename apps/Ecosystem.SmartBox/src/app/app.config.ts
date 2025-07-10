@@ -3,6 +3,7 @@ import {
   provideZoneChangeDetection,
   importProvidersFrom,
   ErrorHandler,
+  isDevMode,
 } from '@angular/core';
 import {
   HttpClient,
@@ -20,6 +21,19 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideClientHydration } from '@angular/platform-browser';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+// NgRx imports
+import { provideStore } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
+
+// Store imports
+import { userReducer } from './features/administration/users/store/user.reducer';
+import { roleReducer } from './features/administration/roles/store/role.reducer';
+// import { companyReducer } from './features/administration/companies/store/company.reducer';
+import { UserEffects } from './features/administration/users/store/user.effects';
+import { RoleEffects } from './features/administration/roles/store/role.effects';
+// import { CompanyEffects } from './features/administration/companies/store/company.effects';
 
 // icons
 import { TablerIconsModule } from 'angular-tabler-icons';
@@ -67,6 +81,29 @@ export const appConfig: ApplicationConfig = {
     ),
     provideHttpClient(withInterceptorsFromDi()),
     provideAnimationsAsync(),
+
+    // NgRx Store Configuration
+    provideStore({
+      users: userReducer,
+      roles: roleReducer
+      // companies: companyReducer
+    }),
+    
+    // NgRx Effects
+    provideEffects([
+      UserEffects,
+      RoleEffects
+      // CompanyEffects
+    ]),
+    
+    // NgRx DevTools (chỉ trong development)
+    provideStoreDevtools({
+      maxAge: 25,
+      logOnly: !isDevMode(),
+      autoPause: true,
+      trace: false,
+      traceLimit: 75
+    }),
 
     // Global error handling
     {
