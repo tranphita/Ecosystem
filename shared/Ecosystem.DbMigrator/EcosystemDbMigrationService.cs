@@ -43,6 +43,7 @@ public class EcosystemDbMigrationService(
         await EnsureDatabaseAsync<SaaSDbContext>(cancellationToken);
         await EnsureDatabaseAsync<AdministrationDbContext>(cancellationToken);
         await EnsureDatabaseAsync<IdentityServiceDbContext>(cancellationToken);
+        await EnsureDatabaseAsync<SmartBoxDbContext>(cancellationToken);
 
         await uow.CompleteAsync(cancellationToken);
     }
