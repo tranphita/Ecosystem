@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
-using Volo.Abp.AspNetCore.Mvc;
 
 namespace Ecosystem.SmartBox.Controllers;
 
@@ -15,23 +14,16 @@ namespace Ecosystem.SmartBox.Controllers;
 [Area(SmartBoxRemoteServiceConsts.ModuleName)]
 [RemoteService(Name = SmartBoxRemoteServiceConsts.RemoteServiceName)]
 [Route("api/smartbox/roles")]
-[AllowAnonymous] // Tạm thời cho phép anonymous access để test
-public class SmartBoxRoleController : SmartBoxController, ISmartBoxRoleAppService
+[Authorize]
+public class SmartBoxRoleController(ISmartBoxRoleAppService roleAppService) : SmartBoxController, ISmartBoxRoleAppService
 {
-    private readonly ISmartBoxRoleAppService _roleAppService;
-
-    public SmartBoxRoleController(ISmartBoxRoleAppService roleAppService)
-    {
-        _roleAppService = roleAppService;
-    }
-
     /// <summary>
     /// Lấy danh sách vai trò với phân trang
     /// </summary>
     [HttpGet]
     public virtual Task<PagedResultDto<SmartBoxRoleDto>> GetListAsync(GetSmartBoxRolesInput input)
     {
-        return _roleAppService.GetListAsync(input);
+        return roleAppService.GetListAsync(input);
     }
 
     /// <summary>
@@ -40,7 +32,7 @@ public class SmartBoxRoleController : SmartBoxController, ISmartBoxRoleAppServic
     [HttpGet("{id}")]
     public virtual Task<SmartBoxRoleDto> GetAsync(Guid id)
     {
-        return _roleAppService.GetAsync(id);
+        return roleAppService.GetAsync(id);
     }
 
     /// <summary>
@@ -49,7 +41,7 @@ public class SmartBoxRoleController : SmartBoxController, ISmartBoxRoleAppServic
     [HttpPost]
     public virtual Task<SmartBoxRoleDto> CreateAsync(CreateUpdateSmartBoxRoleDto input)
     {
-        return _roleAppService.CreateAsync(input);
+        return roleAppService.CreateAsync(input);
     }
 
     /// <summary>
@@ -58,7 +50,7 @@ public class SmartBoxRoleController : SmartBoxController, ISmartBoxRoleAppServic
     [HttpPut("{id}")]
     public virtual Task<SmartBoxRoleDto> UpdateAsync(Guid id, CreateUpdateSmartBoxRoleDto input)
     {
-        return _roleAppService.UpdateAsync(id, input);
+        return roleAppService.UpdateAsync(id, input);
     }
 
     /// <summary>
@@ -67,7 +59,7 @@ public class SmartBoxRoleController : SmartBoxController, ISmartBoxRoleAppServic
     [HttpDelete("{id}")]
     public virtual Task DeleteAsync(Guid id)
     {
-        return _roleAppService.DeleteAsync(id);
+        return roleAppService.DeleteAsync(id);
     }
 
     /// <summary>
@@ -76,7 +68,7 @@ public class SmartBoxRoleController : SmartBoxController, ISmartBoxRoleAppServic
     [HttpGet("active")]
     public virtual Task<ListResultDto<SmartBoxRoleDto>> GetActiveRolesAsync()
     {
-        return _roleAppService.GetActiveRolesAsync();
+        return roleAppService.GetActiveRolesAsync();
     }
 
     /// <summary>
@@ -85,7 +77,7 @@ public class SmartBoxRoleController : SmartBoxController, ISmartBoxRoleAppServic
     [HttpGet("by-user/{userId}")]
     public virtual Task<ListResultDto<SmartBoxRoleDto>> GetRolesByUserIdAsync(Guid userId)
     {
-        return _roleAppService.GetRolesByUserIdAsync(userId);
+        return roleAppService.GetRolesByUserIdAsync(userId);
     }
 
     /// <summary>
@@ -94,7 +86,7 @@ public class SmartBoxRoleController : SmartBoxController, ISmartBoxRoleAppServic
     [HttpGet("check-name")]
     public virtual Task<bool> IsNameExistAsync(string name, Guid? excludeId = null)
     {
-        return _roleAppService.IsNameExistAsync(name, excludeId);
+        return roleAppService.IsNameExistAsync(name, excludeId);
     }
 
     /// <summary>
@@ -103,6 +95,6 @@ public class SmartBoxRoleController : SmartBoxController, ISmartBoxRoleAppServic
     [HttpGet("check-display-name")]
     public virtual Task<bool> IsDisplayNameExistAsync(string displayName, Guid? excludeId = null)
     {
-        return _roleAppService.IsDisplayNameExistAsync(displayName, excludeId);
+        return roleAppService.IsDisplayNameExistAsync(displayName, excludeId);
     }
-} 
+}

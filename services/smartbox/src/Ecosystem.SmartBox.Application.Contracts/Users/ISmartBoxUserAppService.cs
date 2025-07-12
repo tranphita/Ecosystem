@@ -22,6 +22,11 @@ public interface ISmartBoxUserAppService : IApplicationService
     Task<SmartBoxUserDto> GetAsync(Guid id);
 
     /// <summary>
+    /// Tạo người dùng mới (bao gồm tạo account trong Identity Service)
+    /// </summary>
+    Task<SmartBoxUserDto> CreateAsync(CreateSmartBoxUserDto input);
+
+    /// <summary>
     /// Lấy thông tin người dùng hiện tại (từ JWT claims)
     /// </summary>
     Task<SmartBoxUserDto> GetCurrentUserAsync();

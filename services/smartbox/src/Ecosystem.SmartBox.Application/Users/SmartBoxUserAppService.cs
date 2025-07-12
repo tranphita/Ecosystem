@@ -5,48 +5,34 @@ using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 using Ecosystem.SmartBox.Entities;
 using Ecosystem.SmartBox.Repositories;
+using Ecosystem.SmartBox.Services;
+using Ecosystem.SmartBox.Users;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Logging;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Domain.Entities;
 using Volo.Abp.Domain.Repositories;
+using Volo.Abp.EventBus.Distributed;
 using Volo.Abp.Users;
 
 namespace Ecosystem.SmartBox.Users;
 
-/// <summary>
-/// Application Service cho quản lý người dùng SmartBox
-/// </summary>
-// [Authorize(SmartBoxPermissions.Users.Default)] // Tạm comment out để test
-public class SmartBoxUserAppService : SmartBoxAppService, ISmartBoxUserAppService
+[Authorize(SmartBoxPermissions.Users.Default)]
+public class SmartBoxUserAppService(
+    ISmartBoxUserRepository userRepository,
+    IRepository<SmartBoxUser, Guid> userBaseRepository,
+    IRepository<SmartBoxUserRole> userRoleRepository,
+    IUserBidirectionalSyncService bidirectionalSyncService,
+    IDistributedEventBus distributedEventBus) : SmartBoxAppService, ISmartBoxUserAppService
 {
-    private readonly ISmartBoxUserRepository _userRepository;
-    private readonly ISmartBoxRoleRepository _roleRepository;
-    private readonly IRepository<SmartBoxUser, Guid> _userBaseRepository;
-    private readonly IRepository<SmartBoxUserRole> _userRoleRepository;
-
-    public SmartBoxUserAppService(
-        ISmartBoxUserRepository userRepository,
-        ISmartBoxRoleRepository roleRepository,
-        IRepository<SmartBoxUser, Guid> userBaseRepository,
-        IRepository<SmartBoxUserRole> userRoleRepository)
-    {
-        _userRepository = userRepository;
-        _roleRepository = roleRepository;
-        _userBaseRepository = userBaseRepository;
-        _userRoleRepository = userRoleRepository;
-    }
-
-    /// <summary>
-    /// Lấy danh sách người dùng với phân trang
-    /// </summary>
     public virtual async Task<PagedResultDto<SmartBoxUserDto>> GetListAsync(GetSmartBoxUsersInput input)
     {
-        var queryable = await _userBaseRepository.GetQueryableAsync();
+        var queryable = await userBaseRepository.GetQueryableAsync();
 
-        // Áp dụng filter
         if (!string.IsNullOrWhiteSpace(input.Filter))
         {
-            queryable = queryable.Where(x => 
+            queryable = queryable.Where(x =>
                 x.FullName != null && x.FullName.Contains(input.Filter) ||
                 x.UserName.Contains(input.Filter) ||
                 x.Email.Contains(input.Filter) ||
@@ -63,49 +49,6 @@ public class SmartBoxUserAppService : SmartBoxAppService, ISmartBoxUserAppServic
             queryable = queryable.Where(x => x.CompanyId == input.CompanyId.Value);
         }
 
-        if (!string.IsNullOrWhiteSpace(input.Department))
-        {
-            queryable = queryable.Where(x => x.Department != null && x.Department.Contains(input.Department));
-        }
-
-        if (!string.IsNullOrWhiteSpace(input.Position))
-        {
-            queryable = queryable.Where(x => x.Position != null && x.Position.Contains(input.Position));
-        }
-
-        // Áp dụng sorting
-        if (!string.IsNullOrWhiteSpace(input.Sorting))
-        {
-            var allowedSortFields = new[] { "FullName", "UserName", "Email", "CreationTime", "LastLoginTime", "IsActive" };
-            var sortingParts = input.Sorting.Split(',', StringSplitOptions.RemoveEmptyEntries);
-            var validSortings = new List<string>();
-            
-            foreach (var part in sortingParts)
-            {
-                var sortField = part.Trim();
-                var isDescending = sortField.EndsWith(" desc", StringComparison.OrdinalIgnoreCase);
-                var fieldName = isDescending ? sortField[..^5].Trim() : sortField;
-                
-                if (allowedSortFields.Contains(fieldName, StringComparer.OrdinalIgnoreCase))
-                {
-                    validSortings.Add(isDescending ? $"{fieldName} descending" : fieldName);
-                }
-            }
-            
-            if (validSortings.Count > 0)
-            {
-                queryable = queryable.OrderBy(string.Join(", ", validSortings));
-            }
-            else
-            {
-                queryable = queryable.OrderBy(x => x.FullName);
-            }
-        }
-        else
-        {
-            queryable = queryable.OrderBy(x => x.FullName);
-        }
-
         var totalCount = queryable.Count();
         var items = queryable.Skip(input.SkipCount).Take(input.MaxResultCount).ToList();
 
@@ -115,44 +58,85 @@ public class SmartBoxUserAppService : SmartBoxAppService, ISmartBoxUserAppServic
         );
     }
 
-    /// <summary>
-    /// Lấy thông tin người dùng theo ID
-    /// </summary>
     public virtual async Task<SmartBoxUserDto> GetAsync(Guid id)
     {
-        var user = await _userRepository.GetWithDetailsAsync(id);
-        if (user == null)
-        {
-            throw new EntityNotFoundException(typeof(SmartBoxUser), id);
-        }
-        return ObjectMapper.Map<SmartBoxUser, SmartBoxUserDto>(user);
+        var user = await userRepository.GetWithDetailsAsync(id);
+        return user == null
+            ? throw new EntityNotFoundException(typeof(SmartBoxUser), id)
+            : ObjectMapper.Map<SmartBoxUser, SmartBoxUserDto>(user);
     }
 
-    /// <summary>
-    /// Lấy thông tin người dùng hiện tại
-    /// </summary>
     public virtual async Task<SmartBoxUserDto> GetCurrentUserAsync()
     {
         var currentUserId = CurrentUser.GetId();
-        var user = await _userRepository.FindByAuthUserIdAsync(currentUserId);
-        
-        if (user == null)
-        {
-            throw new BusinessException("USER_NOT_FOUND", "Không tìm thấy thông tin người dùng hiện tại");
-        }
+        var user = await userRepository.FindByAuthUserIdAsync(currentUserId);
 
-        return ObjectMapper.Map<SmartBoxUser, SmartBoxUserDto>(user);
+        return user == null
+            ? throw new BusinessException("USER_NOT_FOUND", "Kh�ng t�m th?y th�ng tin ng??i d�ng hi?n t?i")
+            : ObjectMapper.Map<SmartBoxUser, SmartBoxUserDto>(user);
     }
 
-    /// <summary>
-    /// Cập nhật thông tin người dùng
-    /// </summary>
-    // [Authorize(SmartBoxPermissions.Users.Edit)] // Tạm comment out
+    [Authorize(SmartBoxPermissions.Users.Create)]
+    public virtual async Task<SmartBoxUserDto> CreateAsync(CreateSmartBoxUserDto input)
+    {
+        if (await userRepository.IsUserNameExistAsync(input.UserName))
+        {
+            throw new BusinessException("USERNAME_ALREADY_EXISTS", $"T�n ??ng nh?p '{input.UserName}' ?� t?n t?i");
+        }
+
+        if (await userRepository.IsEmailExistAsync(input.Email))
+        {
+            throw new BusinessException("EMAIL_ALREADY_EXISTS", $"Email '{input.Email}' ?� t?n t?i");
+        }
+
+        var (authUserId, smartBoxUser) = await bidirectionalSyncService.CreateUserInIdentityAsync(
+            input.UserName,
+            input.Email,
+            input.Password,
+            input.FullName,
+            input.PhoneNumber,
+            input.IsActive,
+            input.RequirePasswordChange
+        );
+
+        smartBoxUser.DateOfBirth = input.DateOfBirth;
+        smartBoxUser.Gender = input.Gender;
+        smartBoxUser.Avatar = input.Avatar;
+        smartBoxUser.CompanyId = input.CompanyId;
+        smartBoxUser.Position = input.Position;
+        smartBoxUser.Department = input.Department;
+        smartBoxUser.EmployeeCode = input.EmployeeCode;
+        smartBoxUser.StartDate = input.StartDate;
+        smartBoxUser.Salary = input.Salary;
+        smartBoxUser.Address = input.Address;
+        smartBoxUser.Notes = input.Notes;
+
+        if (input.RoleIds.Count != 0)
+        {
+            await UpdateUserRolesAsync(smartBoxUser.Id, input.RoleIds);
+        }
+
+        smartBoxUser = await userBaseRepository.UpdateAsync(smartBoxUser, autoSave: true);
+
+        await distributedEventBus.PublishAsync(new UserCreatedIntegrationEvent
+        {
+            SmartBoxUserId = smartBoxUser.Id,
+            AuthUserId = authUserId,
+            UserName = input.UserName,
+            Email = input.Email,
+            FullName = input.FullName,
+            PhoneNumber = input.PhoneNumber,
+            TenantId = CurrentTenant.Id
+        });
+
+        return ObjectMapper.Map<SmartBoxUser, SmartBoxUserDto>(smartBoxUser);
+    }
+
+    [Authorize(SmartBoxPermissions.Users.Edit)]
     public virtual async Task<SmartBoxUserDto> UpdateAsync(Guid id, CreateUpdateSmartBoxUserDto input)
     {
-        var user = await _userBaseRepository.GetAsync(id);
+        var user = await userBaseRepository.GetAsync(id);
 
-        // Cập nhật thông tin cơ bản
         user.FullName = input.FullName;
         user.PhoneNumber = input.PhoneNumber;
         user.DateOfBirth = input.DateOfBirth;
@@ -168,30 +152,31 @@ public class SmartBoxUserAppService : SmartBoxAppService, ISmartBoxUserAppServic
         user.Notes = input.Notes;
         user.IsActive = input.IsActive;
 
-        // Cập nhật roles nếu có
-        if (input.RoleIds.Any())
+        if (input.RoleIds.Count != 0)
         {
             await UpdateUserRolesAsync(user.Id, input.RoleIds);
         }
 
-        user = await _userBaseRepository.UpdateAsync(user, autoSave: true);
+        user = await userBaseRepository.UpdateAsync(user, autoSave: true);
+
+        try
+        {
+            await bidirectionalSyncService.SyncSmartBoxUserToIdentityAsync(user, true, true);
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "L?i khi ??ng b? user {AuthUserId} sang Identity Service", user.AuthUserId);
+        }
+
         return ObjectMapper.Map<SmartBoxUser, SmartBoxUserDto>(user);
     }
 
-    /// <summary>
-    /// Cập nhật thông tin cá nhân của user hiện tại
-    /// </summary>
     public virtual async Task<SmartBoxUserDto> UpdateCurrentUserAsync(CreateUpdateSmartBoxUserDto input)
     {
         var currentUserId = CurrentUser.GetId();
-        var user = await _userRepository.FindByAuthUserIdAsync(currentUserId);
-        
-        if (user == null)
-        {
-            throw new BusinessException("USER_NOT_FOUND", "Không tìm thấy thông tin người dùng hiện tại");
-        }
+        var user = await userRepository.FindByAuthUserIdAsync(currentUserId) ?? 
+            throw new BusinessException("USER_NOT_FOUND", "Kh�ng t�m th?y th�ng tin ng??i d�ng hi?n t?i");
 
-        // Chỉ cho phép cập nhật một số thông tin cá nhân
         user.FullName = input.FullName;
         user.PhoneNumber = input.PhoneNumber;
         user.DateOfBirth = input.DateOfBirth;
@@ -199,58 +184,60 @@ public class SmartBoxUserAppService : SmartBoxAppService, ISmartBoxUserAppServic
         user.Avatar = input.Avatar;
         user.Address = input.Address;
 
-        user = await _userBaseRepository.UpdateAsync(user, autoSave: true);
+        user = await userBaseRepository.UpdateAsync(user, autoSave: true);
         return ObjectMapper.Map<SmartBoxUser, SmartBoxUserDto>(user);
     }
 
-    /// <summary>
-    /// Xóa người dùng (soft delete)
-    /// </summary>
-    // [Authorize(SmartBoxPermissions.Users.Delete)] // Tạm comment out
+    [Authorize(SmartBoxPermissions.Users.Delete)]
     public virtual async Task DeleteAsync(Guid id)
     {
-        await _userBaseRepository.DeleteAsync(id, autoSave: true);
+        var user = await userBaseRepository.GetAsync(id);
+        await userBaseRepository.DeleteAsync(id, autoSave: true);
+
+        try
+        {
+            await bidirectionalSyncService.SetUserActiveInIdentityAsync(user.AuthUserId, false);
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "L?i khi v� hi?u h�a user {AuthUserId} trong Identity Service", user.AuthUserId);
+        }
     }
 
-    /// <summary>
-    /// Kích hoạt/Vô hiệu hóa người dùng
-    /// </summary>
-    // [Authorize(SmartBoxPermissions.Users.Edit)] // Tạm comment out
+    [Authorize(SmartBoxPermissions.Users.Edit)]
     public virtual async Task<SmartBoxUserDto> SetActiveAsync(Guid id, bool isActive)
     {
-        var user = await _userBaseRepository.GetAsync(id);
+        var user = await userBaseRepository.GetAsync(id);
         user.IsActive = isActive;
-        
-        user = await _userBaseRepository.UpdateAsync(user, autoSave: true);
+        user = await userBaseRepository.UpdateAsync(user, autoSave: true);
+
+        try
+        {
+            await bidirectionalSyncService.SetUserActiveInIdentityAsync(user.AuthUserId, isActive);
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "L?i khi c?p nh?t tr?ng th�i user {AuthUserId} trong Identity Service", user.AuthUserId);
+        }
+
         return ObjectMapper.Map<SmartBoxUser, SmartBoxUserDto>(user);
     }
 
-    /// <summary>
-    /// Gán vai trò cho người dùng
-    /// </summary>
-    // [Authorize(SmartBoxPermissions.Users.ManageRoles)] // Tạm comment out
-    public virtual async Task AssignRolesToUserAsync(Guid userId, List<Guid> roleIds)
+    [Authorize(SmartBoxPermissions.Users.ManageRoles)]
+    public virtual Task AssignRolesToUserAsync(Guid userId, List<Guid> roleIds)
     {
-        await UpdateUserRolesAsync(userId, roleIds);
+        return UpdateUserRolesAsync(userId, roleIds);
     }
 
-    /// <summary>
-    /// Lấy danh sách người dùng theo công ty
-    /// </summary>
-    public virtual async Task<PagedResultDto<SmartBoxUserDto>> GetUsersByCompanyAsync(Guid companyId, GetSmartBoxUsersInput input)
+    public virtual Task<PagedResultDto<SmartBoxUserDto>> GetUsersByCompanyAsync(Guid companyId, GetSmartBoxUsersInput input)
     {
         input.CompanyId = companyId;
-        return await GetListAsync(input);
+        return GetListAsync(input);
     }
 
-    /// <summary>
-    /// Lấy danh sách người dùng theo vai trò
-    /// </summary>
     public virtual async Task<PagedResultDto<SmartBoxUserDto>> GetUsersByRoleAsync(Guid roleId, GetSmartBoxUsersInput input)
     {
-        input.RoleId = roleId;
-        
-        var users = await _userRepository.GetUsersByRoleAsync(
+        var users = await userRepository.GetUsersByRoleAsync(
             roleId,
             input.Filter,
             input.SkipCount,
@@ -258,42 +245,29 @@ public class SmartBoxUserAppService : SmartBoxAppService, ISmartBoxUserAppServic
             input.Sorting ?? "FullName"
         );
 
-        // Đếm tổng số
-        var totalUsers = await _userRepository.GetUsersByRoleAsync(roleId, input.Filter);
-        
+        var totalUsers = await userRepository.GetUsersByRoleAsync(roleId, input.Filter);
+
         return new PagedResultDto<SmartBoxUserDto>(
             totalUsers.Count,
             ObjectMapper.Map<List<SmartBoxUser>, List<SmartBoxUserDto>>(users)
         );
     }
 
-    /// <summary>
-    /// Kiểm tra tên đăng nhập đã tồn tại chưa
-    /// </summary>
-    public virtual async Task<bool> IsUserNameExistAsync(string userName, Guid? excludeId = null)
+    public virtual Task<bool> IsUserNameExistAsync(string userName, Guid? excludeId = null)
     {
-        return await _userRepository.IsUserNameExistAsync(userName, excludeId);
+        return userRepository.IsUserNameExistAsync(userName, excludeId);
     }
 
-    /// <summary>
-    /// Kiểm tra email đã tồn tại chưa
-    /// </summary>
-    public virtual async Task<bool> IsEmailExistAsync(string email, Guid? excludeId = null)
+    public virtual Task<bool> IsEmailExistAsync(string email, Guid? excludeId = null)
     {
-        return await _userRepository.IsEmailExistAsync(email, excludeId);
+        return userRepository.IsEmailExistAsync(email, excludeId);
     }
 
-    /// <summary>
-    /// Kiểm tra mã nhân viên đã tồn tại chưa
-    /// </summary>
-    public virtual async Task<bool> IsEmployeeCodeExistAsync(string employeeCode, Guid? excludeId = null)
+    public virtual Task<bool> IsEmployeeCodeExistAsync(string employeeCode, Guid? excludeId = null)
     {
-        return await _userRepository.IsEmployeeCodeExistAsync(employeeCode, excludeId);
+        return userRepository.IsEmployeeCodeExistAsync(employeeCode, excludeId);
     }
 
-    /// <summary>
-    /// Đồng bộ thông tin user từ AuthServer
-    /// </summary>
     public virtual async Task<SmartBoxUserDto> SyncCurrentUserAsync()
     {
         var currentUserId = CurrentUser.GetId();
@@ -302,69 +276,42 @@ public class SmartBoxUserAppService : SmartBoxAppService, ISmartBoxUserAppServic
 
         if (string.IsNullOrEmpty(currentUserName) || string.IsNullOrEmpty(currentEmail))
         {
-            throw new BusinessException("INVALID_USER_INFO", "Thông tin người dùng không hợp lệ");
+            throw new BusinessException("INVALID_USER_INFO", "Th�ng tin ng??i d�ng kh�ng h?p l?");
         }
 
-        var user = await _userRepository.FindByAuthUserIdAsync(currentUserId);
-        
-        if (user == null)
-        {
-            // Tạo user mới nếu chưa tồn tại
-            user = new SmartBoxUser(
-                GuidGenerator.Create(),
-                currentUserId,
-                currentUserName,
-                currentEmail,
-                null, // fullName
-                null, // companyId
-                CurrentTenant.Id
-            );
-            
-            user = await _userBaseRepository.InsertAsync(user, autoSave: true);
-        }
-        else
-        {
-            // Cập nhật thông tin từ AuthServer
-            user.UserName = currentUserName;
-            user.Email = currentEmail;
-            user.LastLoginTime = Clock.Now;
-            
-            user = await _userBaseRepository.UpdateAsync(user, autoSave: true);
-        }
+        var user = await bidirectionalSyncService.SyncIdentityUserToSmartBoxAsync(
+            currentUserId,
+            currentUserName,
+            currentEmail,
+            CurrentUser.Name,
+            CurrentUser.PhoneNumber,
+            true
+        );
+
+        user.UpdateLastLoginTime();
+        await userBaseRepository.UpdateAsync(user, autoSave: true);
 
         return ObjectMapper.Map<SmartBoxUser, SmartBoxUserDto>(user);
     }
 
-    /// <summary>
-    /// Cập nhật avatar cho user hiện tại
-    /// </summary>
     public virtual async Task<SmartBoxUserDto> UpdateAvatarAsync(string avatar)
     {
         var currentUserId = CurrentUser.GetId();
-        var user = await _userRepository.FindByAuthUserIdAsync(currentUserId);
+        var user = await userRepository.FindByAuthUserIdAsync(currentUserId) ?? 
+            throw new BusinessException("USER_NOT_FOUND", "Kh�ng t�m th?y th�ng tin ng??i d�ng hi?n t?i");
         
-        if (user == null)
-        {
-            throw new BusinessException("USER_NOT_FOUND", "Không tìm thấy thông tin người dùng hiện tại");
-        }
-
         user.Avatar = avatar;
-        user = await _userBaseRepository.UpdateAsync(user, autoSave: true);
-        
+        user = await userBaseRepository.UpdateAsync(user, autoSave: true);
+
         return ObjectMapper.Map<SmartBoxUser, SmartBoxUserDto>(user);
     }
 
-    /// <summary>
-    /// Helper method để cập nhật roles của user
-    /// </summary>
     private async Task UpdateUserRolesAsync(Guid userId, List<Guid> roleIds)
     {
-        // Xóa tất cả roles hiện tại
-        var currentUserRoles = await _userRoleRepository.GetListAsync(ur => ur.UserId == userId);
-        await _userRoleRepository.DeleteManyAsync(currentUserRoles);
+        var currentUserRoles = await userRoleRepository.GetListAsync(ur => ur.UserId == userId);
+        await userRoleRepository.DeleteManyAsync(currentUserRoles);
 
-        // Thêm roles mới
-        if (roleIds.Any())
+        if (roleIds.Count != 0)
         {
             var newUserRoles = roleIds.Select(roleId => new SmartBoxUserRole(
                 userId,
@@ -373,7 +320,7 @@ public class SmartBoxUserAppService : SmartBoxAppService, ISmartBoxUserAppServic
                 CurrentTenant.Id
             )).ToList();
 
-            await _userRoleRepository.InsertManyAsync(newUserRoles, autoSave: true);
+            await userRoleRepository.InsertManyAsync(newUserRoles, autoSave: true);
         }
     }
-} 
+}

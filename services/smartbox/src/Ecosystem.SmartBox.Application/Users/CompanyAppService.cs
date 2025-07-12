@@ -15,14 +15,9 @@ namespace Ecosystem.SmartBox.Users;
 /// Application Service implementation cho quản lý công ty
 /// </summary>
 [Authorize(SmartBoxPermissions.Companies.Default)]
-public class CompanyAppService : ApplicationService, ICompanyAppService
+public class CompanyAppService(ICompanyRepository companyRepository) : ApplicationService, ICompanyAppService
 {
-    private readonly ICompanyRepository _companyRepository;
-
-    public CompanyAppService(ICompanyRepository companyRepository)
-    {
-        _companyRepository = companyRepository;
-    }
+    private readonly ICompanyRepository _companyRepository = companyRepository;
 
     public virtual async Task<PagedResultDto<CompanyDto>> GetListAsync(GetCompaniesInput input)
     {
@@ -31,13 +26,13 @@ public class CompanyAppService : ApplicationService, ICompanyAppService
 
         var query = await _companyRepository.GetQueryableAsync();
 
-        // Apply filters
+        // Apply filters  
         if (!string.IsNullOrWhiteSpace(filter))
         {
-            query = query.Where(x => 
-                x.Name.Contains(filter) || 
-                x.TaxCode.Contains(filter) || 
-                x.Email.Contains(filter));
+            query = query.Where(x =>
+                x.Name.Contains(filter) ||
+                (x.TaxCode != null && x.TaxCode.Contains(filter)) ||
+                (x.Email != null && x.Email.Contains(filter)));
         }
 
         if (input.IsActive.HasValue)
@@ -45,11 +40,11 @@ public class CompanyAppService : ApplicationService, ICompanyAppService
             query = query.Where(x => x.IsActive == input.IsActive.Value);
         }
 
-        // Apply sorting and paging
+        // Apply sorting and paging  
         var totalCount = query.Count();
-        
-        // Apply manual sorting since OrderBy(string) is not available in LINQ to Objects
-        if (sorting.ToLowerInvariant().Contains("desc"))
+
+        // Apply manual sorting since OrderBy(string) is not available in LINQ to Objects  
+        if (sorting.Contains("desc", StringComparison.InvariantCultureIgnoreCase))
         {
             query = query.OrderByDescending(x => x.Name);
         }
@@ -57,7 +52,7 @@ public class CompanyAppService : ApplicationService, ICompanyAppService
         {
             query = query.OrderBy(x => x.Name);
         }
-        
+
         var companies = await AsyncExecuter.ToListAsync(
             query.Skip(input.SkipCount)
                 .Take(input.MaxResultCount));
@@ -83,7 +78,7 @@ public class CompanyAppService : ApplicationService, ICompanyAppService
         }
 
         // Kiểm tra mã số thuế đã tồn tại (nếu có)
-        if (!string.IsNullOrEmpty(input.TaxCode) && 
+        if (!string.IsNullOrEmpty(input.TaxCode) &&
             await _companyRepository.IsTaxCodeExistAsync(input.TaxCode))
         {
             throw new UserFriendlyException(L["CompanyTaxCodeAlreadyExists", input.TaxCode]);
@@ -101,9 +96,9 @@ public class CompanyAppService : ApplicationService, ICompanyAppService
 
         // Map remaining properties
         ObjectMapper.Map(input, company);
-        
+
         await _companyRepository.InsertAsync(company, autoSave: true);
-        
+
         return ObjectMapper.Map<Company, CompanyDto>(company);
     }
 
@@ -119,16 +114,16 @@ public class CompanyAppService : ApplicationService, ICompanyAppService
         }
 
         // Kiểm tra mã số thuế đã tồn tại (nếu có và trừ chính nó)
-        if (!string.IsNullOrEmpty(input.TaxCode) && 
+        if (!string.IsNullOrEmpty(input.TaxCode) &&
             await _companyRepository.IsTaxCodeExistAsync(input.TaxCode, id))
         {
             throw new UserFriendlyException(L["CompanyTaxCodeAlreadyExists", input.TaxCode]);
         }
 
         ObjectMapper.Map(input, company);
-        
+
         await _companyRepository.UpdateAsync(company, autoSave: true);
-        
+
         return ObjectMapper.Map<Company, CompanyDto>(company);
     }
 
@@ -136,7 +131,7 @@ public class CompanyAppService : ApplicationService, ICompanyAppService
     public virtual async Task DeleteAsync(Guid id)
     {
         var company = await _companyRepository.GetAsync(id);
-        
+
         // TODO: Kiểm tra xem có user nào đang thuộc công ty này không
         // var hasUsers = await _userRepository.GetCountAsync(x => x.CompanyId == id);
         // if (hasUsers > 0)
@@ -155,7 +150,7 @@ public class CompanyAppService : ApplicationService, ICompanyAppService
         );
 
         var companyDtos = ObjectMapper.Map<List<Company>, List<CompanyDto>>(companies);
-        
+
         return new ListResultDto<CompanyDto>(companyDtos);
     }
 
@@ -168,4 +163,4 @@ public class CompanyAppService : ApplicationService, ICompanyAppService
     {
         return _companyRepository.IsTaxCodeExistAsync(taxCode, excludeId);
     }
-} 
+}

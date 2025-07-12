@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
-using Volo.Abp.AspNetCore.Mvc;
 
 namespace Ecosystem.SmartBox.Controllers;
 
@@ -16,23 +15,16 @@ namespace Ecosystem.SmartBox.Controllers;
 [Area(SmartBoxRemoteServiceConsts.ModuleName)]
 [RemoteService(Name = SmartBoxRemoteServiceConsts.RemoteServiceName)]
 [Route("api/smartbox/users")]
-[AllowAnonymous] // Tạm thời cho phép anonymous access để test
-public class SmartBoxUserController : SmartBoxController, ISmartBoxUserAppService
+[Authorize]
+public class SmartBoxUserController(ISmartBoxUserAppService userAppService) : SmartBoxController, ISmartBoxUserAppService
 {
-    private readonly ISmartBoxUserAppService _userAppService;
-
-    public SmartBoxUserController(ISmartBoxUserAppService userAppService)
-    {
-        _userAppService = userAppService;
-    }
-
     /// <summary>
     /// Lấy danh sách người dùng với phân trang
     /// </summary>
     [HttpGet]
     public virtual Task<PagedResultDto<SmartBoxUserDto>> GetListAsync(GetSmartBoxUsersInput input)
     {
-        return _userAppService.GetListAsync(input);
+        return userAppService.GetListAsync(input);
     }
 
     /// <summary>
@@ -41,7 +33,16 @@ public class SmartBoxUserController : SmartBoxController, ISmartBoxUserAppServic
     [HttpGet("{id}")]
     public virtual Task<SmartBoxUserDto> GetAsync(Guid id)
     {
-        return _userAppService.GetAsync(id);
+        return userAppService.GetAsync(id);
+    }
+
+    /// <summary>
+    /// Tạo người dùng mới (bao gồm tạo account trong Identity Service)
+    /// </summary>
+    [HttpPost]
+    public virtual Task<SmartBoxUserDto> CreateAsync(CreateSmartBoxUserDto input)
+    {
+        return userAppService.CreateAsync(input);
     }
 
     /// <summary>
@@ -50,7 +51,7 @@ public class SmartBoxUserController : SmartBoxController, ISmartBoxUserAppServic
     [HttpGet("current")]
     public virtual Task<SmartBoxUserDto> GetCurrentUserAsync()
     {
-        return _userAppService.GetCurrentUserAsync();
+        return userAppService.GetCurrentUserAsync();
     }
 
     /// <summary>
@@ -59,7 +60,7 @@ public class SmartBoxUserController : SmartBoxController, ISmartBoxUserAppServic
     [HttpPut("{id}")]
     public virtual Task<SmartBoxUserDto> UpdateAsync(Guid id, CreateUpdateSmartBoxUserDto input)
     {
-        return _userAppService.UpdateAsync(id, input);
+        return userAppService.UpdateAsync(id, input);
     }
 
     /// <summary>
@@ -68,7 +69,7 @@ public class SmartBoxUserController : SmartBoxController, ISmartBoxUserAppServic
     [HttpPut("current")]
     public virtual Task<SmartBoxUserDto> UpdateCurrentUserAsync(CreateUpdateSmartBoxUserDto input)
     {
-        return _userAppService.UpdateCurrentUserAsync(input);
+        return userAppService.UpdateCurrentUserAsync(input);
     }
 
     /// <summary>
@@ -77,7 +78,7 @@ public class SmartBoxUserController : SmartBoxController, ISmartBoxUserAppServic
     [HttpDelete("{id}")]
     public virtual Task DeleteAsync(Guid id)
     {
-        return _userAppService.DeleteAsync(id);
+        return userAppService.DeleteAsync(id);
     }
 
     /// <summary>
@@ -86,7 +87,7 @@ public class SmartBoxUserController : SmartBoxController, ISmartBoxUserAppServic
     [HttpPut("{id}/set-active")]
     public virtual Task<SmartBoxUserDto> SetActiveAsync(Guid id, bool isActive)
     {
-        return _userAppService.SetActiveAsync(id, isActive);
+        return userAppService.SetActiveAsync(id, isActive);
     }
 
     /// <summary>
@@ -95,7 +96,7 @@ public class SmartBoxUserController : SmartBoxController, ISmartBoxUserAppServic
     [HttpPost("{userId}/assign-roles")]
     public virtual Task AssignRolesToUserAsync(Guid userId, List<Guid> roleIds)
     {
-        return _userAppService.AssignRolesToUserAsync(userId, roleIds);
+        return userAppService.AssignRolesToUserAsync(userId, roleIds);
     }
 
     /// <summary>
@@ -104,7 +105,7 @@ public class SmartBoxUserController : SmartBoxController, ISmartBoxUserAppServic
     [HttpGet("by-company/{companyId}")]
     public virtual Task<PagedResultDto<SmartBoxUserDto>> GetUsersByCompanyAsync(Guid companyId, GetSmartBoxUsersInput input)
     {
-        return _userAppService.GetUsersByCompanyAsync(companyId, input);
+        return userAppService.GetUsersByCompanyAsync(companyId, input);
     }
 
     /// <summary>
@@ -113,7 +114,7 @@ public class SmartBoxUserController : SmartBoxController, ISmartBoxUserAppServic
     [HttpGet("by-role/{roleId}")]
     public virtual Task<PagedResultDto<SmartBoxUserDto>> GetUsersByRoleAsync(Guid roleId, GetSmartBoxUsersInput input)
     {
-        return _userAppService.GetUsersByRoleAsync(roleId, input);
+        return userAppService.GetUsersByRoleAsync(roleId, input);
     }
 
     /// <summary>
@@ -122,7 +123,7 @@ public class SmartBoxUserController : SmartBoxController, ISmartBoxUserAppServic
     [HttpGet("check-username")]
     public virtual Task<bool> IsUserNameExistAsync(string userName, Guid? excludeId = null)
     {
-        return _userAppService.IsUserNameExistAsync(userName, excludeId);
+        return userAppService.IsUserNameExistAsync(userName, excludeId);
     }
 
     /// <summary>
@@ -131,7 +132,7 @@ public class SmartBoxUserController : SmartBoxController, ISmartBoxUserAppServic
     [HttpGet("check-email")]
     public virtual Task<bool> IsEmailExistAsync(string email, Guid? excludeId = null)
     {
-        return _userAppService.IsEmailExistAsync(email, excludeId);
+        return userAppService.IsEmailExistAsync(email, excludeId);
     }
 
     /// <summary>
@@ -140,7 +141,7 @@ public class SmartBoxUserController : SmartBoxController, ISmartBoxUserAppServic
     [HttpGet("check-employee-code")]
     public virtual Task<bool> IsEmployeeCodeExistAsync(string employeeCode, Guid? excludeId = null)
     {
-        return _userAppService.IsEmployeeCodeExistAsync(employeeCode, excludeId);
+        return userAppService.IsEmployeeCodeExistAsync(employeeCode, excludeId);
     }
 
     /// <summary>
@@ -149,7 +150,7 @@ public class SmartBoxUserController : SmartBoxController, ISmartBoxUserAppServic
     [HttpPost("sync-current")]
     public virtual Task<SmartBoxUserDto> SyncCurrentUserAsync()
     {
-        return _userAppService.SyncCurrentUserAsync();
+        return userAppService.SyncCurrentUserAsync();
     }
 
     /// <summary>
@@ -158,6 +159,6 @@ public class SmartBoxUserController : SmartBoxController, ISmartBoxUserAppServic
     [HttpPut("current/avatar")]
     public virtual Task<SmartBoxUserDto> UpdateAvatarAsync([FromBody] string avatar)
     {
-        return _userAppService.UpdateAvatarAsync(avatar);
+        return userAppService.UpdateAvatarAsync(avatar);
     }
-} 
+}

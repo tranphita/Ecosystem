@@ -8,7 +8,6 @@ using Ecosystem.SmartBox.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
-using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
 
 namespace Ecosystem.SmartBox.Users;
@@ -16,26 +15,18 @@ namespace Ecosystem.SmartBox.Users;
 /// <summary>
 /// Application Service cho quản lý vai trò SmartBox
 /// </summary>
-// [Authorize(SmartBoxPermissions.Roles.Default)] // Tạm thời comment out để test
-public class SmartBoxRoleAppService : SmartBoxAppService, ISmartBoxRoleAppService
+[Authorize(SmartBoxPermissions.Roles.Default)]
+public class SmartBoxRoleAppService(
+    ISmartBoxRoleRepository roleRepository,
+    IRepository<SmartBoxRole, Guid> roleBaseRepository) : SmartBoxAppService, ISmartBoxRoleAppService
 {
-    private readonly ISmartBoxRoleRepository _roleRepository;
-    private readonly IRepository<SmartBoxRole, Guid> _roleBaseRepository;
-
-    public SmartBoxRoleAppService(
-        ISmartBoxRoleRepository roleRepository,
-        IRepository<SmartBoxRole, Guid> roleBaseRepository)
-    {
-        _roleRepository = roleRepository;
-        _roleBaseRepository = roleBaseRepository;
-    }
 
     /// <summary>
     /// Lấy danh sách vai trò với phân trang
     /// </summary>
     public virtual async Task<PagedResultDto<SmartBoxRoleDto>> GetListAsync(GetSmartBoxRolesInput input)
     {
-        var queryable = await _roleBaseRepository.GetQueryableAsync();
+        var queryable = await roleBaseRepository.GetQueryableAsync();
 
         // Áp dụng filter
         if (!string.IsNullOrWhiteSpace(input.Filter))
@@ -104,23 +95,23 @@ public class SmartBoxRoleAppService : SmartBoxAppService, ISmartBoxRoleAppServic
     /// </summary>
     public virtual async Task<SmartBoxRoleDto> GetAsync(Guid id)
     {
-        var role = await _roleBaseRepository.GetAsync(id);
+        var role = await roleBaseRepository.GetAsync(id);
         return ObjectMapper.Map<SmartBoxRole, SmartBoxRoleDto>(role);
     }
 
     /// <summary>
     /// Tạo vai trò mới
     /// </summary>
-    // [Authorize(SmartBoxPermissions.Roles.Create)] // Tạm thời comment out
+    [Authorize(SmartBoxPermissions.Roles.Create)] 
     public virtual async Task<SmartBoxRoleDto> CreateAsync(CreateUpdateSmartBoxRoleDto input)
     {
         // Kiểm tra tên đã tồn tại chưa
-        if (await _roleRepository.IsNameExistAsync(input.Name))
+        if (await roleRepository.IsNameExistAsync(input.Name))
         {
             throw new UserFriendlyException($"Tên vai trò '{input.Name}' đã tồn tại");
         }
 
-        if (await _roleRepository.IsDisplayNameExistAsync(input.DisplayName))
+        if (await roleRepository.IsDisplayNameExistAsync(input.DisplayName))
         {
             throw new UserFriendlyException($"Tên hiển thị '{input.DisplayName}' đã tồn tại");
         }
@@ -138,17 +129,17 @@ public class SmartBoxRoleAppService : SmartBoxAppService, ISmartBoxRoleAppServic
             DisplayOrder = input.DisplayOrder
         };
 
-        role = await _roleBaseRepository.InsertAsync(role, autoSave: true);
+        role = await roleBaseRepository.InsertAsync(role, autoSave: true);
         return ObjectMapper.Map<SmartBoxRole, SmartBoxRoleDto>(role);
     }
 
     /// <summary>
     /// Cập nhật thông tin vai trò
     /// </summary>
-    // [Authorize(SmartBoxPermissions.Roles.Edit)] // Tạm thời comment out
+    [Authorize(SmartBoxPermissions.Roles.Edit)] 
     public virtual async Task<SmartBoxRoleDto> UpdateAsync(Guid id, CreateUpdateSmartBoxRoleDto input)
     {
-        var role = await _roleBaseRepository.GetAsync(id);
+        var role = await roleBaseRepository.GetAsync(id);
 
         // Không cho phép sửa vai trò hệ thống
         if (role.IsSystem)
@@ -157,12 +148,12 @@ public class SmartBoxRoleAppService : SmartBoxAppService, ISmartBoxRoleAppServic
         }
 
         // Kiểm tra tên đã tồn tại chưa (trừ chính nó)
-        if (await _roleRepository.IsNameExistAsync(input.Name, id))
+        if (await roleRepository.IsNameExistAsync(input.Name, id))
         {
             throw new UserFriendlyException($"Tên vai trò '{input.Name}' đã tồn tại");
         }
 
-        if (await _roleRepository.IsDisplayNameExistAsync(input.DisplayName, id))
+        if (await roleRepository.IsDisplayNameExistAsync(input.DisplayName, id))
         {
             throw new UserFriendlyException($"Tên hiển thị '{input.DisplayName}' đã tồn tại");
         }
@@ -173,17 +164,17 @@ public class SmartBoxRoleAppService : SmartBoxAppService, ISmartBoxRoleAppServic
         role.IsActive = input.IsActive;
         role.DisplayOrder = input.DisplayOrder;
 
-        role = await _roleBaseRepository.UpdateAsync(role, autoSave: true);
+        role = await roleBaseRepository.UpdateAsync(role, autoSave: true);
         return ObjectMapper.Map<SmartBoxRole, SmartBoxRoleDto>(role);
     }
 
     /// <summary>
     /// Xóa vai trò (chỉ có thể xóa role không phải hệ thống)
     /// </summary>
-    // [Authorize(SmartBoxPermissions.Roles.Delete)] // Tạm thời comment out
+    [Authorize(SmartBoxPermissions.Roles.Delete)] 
     public virtual async Task DeleteAsync(Guid id)
     {
-        var role = await _roleBaseRepository.GetAsync(id);
+        var role = await roleBaseRepository.GetAsync(id);
 
         if (role.IsSystem)
         {
@@ -192,7 +183,7 @@ public class SmartBoxRoleAppService : SmartBoxAppService, ISmartBoxRoleAppServic
 
         // TODO: Kiểm tra xem có user nào đang sử dụng role này không
         
-        await _roleBaseRepository.DeleteAsync(id, autoSave: true);
+        await roleBaseRepository.DeleteAsync(id, autoSave: true);
     }
 
     /// <summary>
@@ -200,7 +191,7 @@ public class SmartBoxRoleAppService : SmartBoxAppService, ISmartBoxRoleAppServic
     /// </summary>
     public virtual async Task<ListResultDto<SmartBoxRoleDto>> GetActiveRolesAsync()
     {
-        var roles = await _roleRepository.GetActiveRolesAsync();
+        var roles = await roleRepository.GetActiveRolesAsync();
         return new ListResultDto<SmartBoxRoleDto>(
             ObjectMapper.Map<List<SmartBoxRole>, List<SmartBoxRoleDto>>(roles)
         );
@@ -211,7 +202,7 @@ public class SmartBoxRoleAppService : SmartBoxAppService, ISmartBoxRoleAppServic
     /// </summary>
     public virtual async Task<ListResultDto<SmartBoxRoleDto>> GetRolesByUserIdAsync(Guid userId)
     {
-        var roles = await _roleRepository.GetRolesByUserIdAsync(userId);
+        var roles = await roleRepository.GetRolesByUserIdAsync(userId);
         return new ListResultDto<SmartBoxRoleDto>(
             ObjectMapper.Map<List<SmartBoxRole>, List<SmartBoxRoleDto>>(roles)
         );
@@ -220,16 +211,16 @@ public class SmartBoxRoleAppService : SmartBoxAppService, ISmartBoxRoleAppServic
     /// <summary>
     /// Kiểm tra tên vai trò đã tồn tại chưa
     /// </summary>
-    public virtual async Task<bool> IsNameExistAsync(string name, Guid? excludeId = null)
+    public virtual Task<bool> IsNameExistAsync(string name, Guid? excludeId = null)
     {
-        return await _roleRepository.IsNameExistAsync(name, excludeId);
+        return roleRepository.IsNameExistAsync(name, excludeId);
     }
 
     /// <summary>
     /// Kiểm tra tên hiển thị đã tồn tại chưa
     /// </summary>
-    public virtual async Task<bool> IsDisplayNameExistAsync(string displayName, Guid? excludeId = null)
+    public virtual Task<bool> IsDisplayNameExistAsync(string displayName, Guid? excludeId = null)
     {
-        return await _roleRepository.IsDisplayNameExistAsync(displayName, excludeId);
+        return roleRepository.IsDisplayNameExistAsync(displayName, excludeId);
     }
 } 

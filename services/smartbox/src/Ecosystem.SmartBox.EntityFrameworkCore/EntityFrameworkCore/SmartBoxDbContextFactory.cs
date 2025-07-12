@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
@@ -20,18 +21,26 @@ public class SmartBoxDbContextFactory : IDesignTimeDbContextFactory<SmartBoxDbCo
 
     private static string GetConnectionStringFromConfiguration()
     {
-        return BuildConfiguration().GetConnectionString(SmartBoxDbProperties.ConnectionStringName);
+        var connectionString = BuildConfiguration().GetConnectionString(SmartBoxDbProperties.ConnectionStringName);
+        if (connectionString == null)
+        {
+            throw new InvalidOperationException("Connection string not found.");
+        }
+        return connectionString;
     }
 
     private static IConfigurationRoot BuildConfiguration()
     {
+        var currentDirectory = Directory.GetCurrentDirectory();
+        var parentDirectory = Directory.GetParent(currentDirectory)?.Parent?.FullName;
+
+        if (parentDirectory == null)
+        {
+            throw new InvalidOperationException("Unable to determine the parent directory.");
+        }
+
         var builder = new ConfigurationBuilder()
-            .SetBasePath(
-                Path.Combine(
-                    Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName,
-                    $"host{Path.DirectorySeparatorChar}Ecosystem.SmartBox.HttpApi.Host"
-                )
-            )
+            .SetBasePath(Path.Combine(parentDirectory, $"host{Path.DirectorySeparatorChar}Ecosystem.SmartBox.HttpApi.Host"))
             .AddJsonFile("appsettings.json", false);
 
         return builder.Build();
