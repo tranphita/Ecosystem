@@ -45,8 +45,19 @@ export class UserEffects {
   );
 
   // === Create User Effect ===
-  // Note: UserApiService không có createUser method
-  // Component hiện tại không sử dụng create action nên có thể bỏ qua
+  createUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UserActions.createUser),
+      switchMap(({ input }) =>
+        this.userApiService.createUser(input).pipe(
+          map(user => UserActions.createUserSuccess({ user })),
+          catchError(error => of(UserActions.createUserFailure({ 
+            error: error.message || 'Lỗi khi tạo người dùng' 
+          })))
+        )
+      )
+    )
+  );
 
   // === Update User Effect ===
   updateUser$ = createEffect(() =>

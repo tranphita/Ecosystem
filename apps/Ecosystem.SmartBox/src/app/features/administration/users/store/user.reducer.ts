@@ -76,6 +76,31 @@ export const userReducer = createReducer(
     error
   })),
 
+  // === Create User Actions ===
+  on(UserActions.createUser, (state) => ({
+    ...state,
+    isLoading: true,
+    error: null
+  })),
+
+  on(UserActions.createUserSuccess, (state, { user }) => ({
+    ...state,
+    users: [...state.users, user],
+    totalCount: state.totalCount + 1,
+    totalPages: Math.ceil((state.totalCount + 1) / state.pageSize),
+    selectedUser: user,
+    isLoading: false,
+    error: null,
+    isDialogOpen: false,
+    dialogMode: null
+  })),
+
+  on(UserActions.createUserFailure, (state, { error }) => ({
+    ...state,
+    isLoading: false,
+    error
+  })),
+
   // === Update User Actions ===
   on(UserActions.updateUser, (state) => ({
     ...state,

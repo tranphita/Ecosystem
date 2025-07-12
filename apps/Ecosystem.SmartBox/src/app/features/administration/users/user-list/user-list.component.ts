@@ -12,7 +12,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCardModule } from '@angular/material/card';
+import { MatDialog } from '@angular/material/dialog';
 import { TranslateModule } from '@ngx-translate/core';
+import { TablerIconsModule } from 'angular-tabler-icons';
 import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil, debounceTime, distinctUntilChanged } from 'rxjs/operators';
@@ -20,6 +22,7 @@ import { takeUntil, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { SmartBoxUserDto } from '../../../../shared/models';
 import * as UserActions from '../store/user.actions';
 import * as UserSelectors from '../store/user.selectors';
+import { UserDialogComponent, UserDialogData } from '../user-dialog/user-dialog.component';
 
 /**
  * Component hiển thị danh sách users với tính năng filter, sort và pagination
@@ -41,10 +44,10 @@ import * as UserSelectors from '../store/user.selectors';
     MatChipsModule,
     MatTooltipModule,
     MatCardModule,
-    TranslateModule
+    TranslateModule,
+    TablerIconsModule
   ],
   templateUrl: './user-list.component.html',
-  styleUrl: './user-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserListComponent implements OnInit, OnDestroy {
@@ -58,31 +61,24 @@ export class UserListComponent implements OnInit, OnDestroy {
   pagination$ = this.store.select(UserSelectors.selectPaginationInfo);
   filter$ = this.store.select(UserSelectors.selectFilter);
   userStats$ = this.store.select(UserSelectors.selectUserStats);
+  companies$ = this.store.select(UserSelectors.selectUniqueCompanies);
 
   // === UI Properties ===
   displayedColumns: string[] = [
-    'avatar',
     'fullName',
     'userName',
     'email',
     'company',
-    'position',
     'isActive',
     'actions'
   ];
 
   searchTerm = '';
-  selectedActiveFilter: boolean | undefined = undefined;
-  selectedCompanyFilter: string | undefined = undefined;
 
-  // === Filter Options ===
-  activeFilterOptions = [
-    { value: undefined, label: 'users.filter.allStatuses' },
-    { value: true, label: 'users.filter.active' },
-    { value: false, label: 'users.filter.inactive' }
-  ];
-
-  constructor(private store: Store) {
+  constructor(
+    private store: Store,
+    private dialog: MatDialog
+  ) {
     // Setup search debouncing
     this.searchSubject.pipe(
       debounceTime(300),
@@ -100,8 +96,6 @@ export class UserListComponent implements OnInit, OnDestroy {
     // Subscribe to filter changes
     this.filter$.pipe(takeUntil(this.destroy$)).subscribe(filter => {
       this.searchTerm = filter.searchTerm;
-      this.selectedActiveFilter = filter.isActive;
-      this.selectedCompanyFilter = filter.companyId;
     });
   }
 
@@ -131,24 +125,7 @@ export class UserListComponent implements OnInit, OnDestroy {
     }));
   }
 
-  onActiveFilterChange(isActive: boolean | undefined): void {
-    this.store.dispatch(UserActions.updateFilter({
-      filter: { isActive }
-    }));
-  }
 
-  onCompanyFilterChange(companyId: string | undefined): void {
-    this.store.dispatch(UserActions.updateFilter({
-      filter: { companyId }
-    }));
-  }
-
-  onClearFilters(): void {
-    this.searchTerm = '';
-    this.selectedActiveFilter = undefined;
-    this.selectedCompanyFilter = undefined;
-    this.store.dispatch(UserActions.clearFilter());
-  }
 
   // === Pagination ===
   onPageChange(event: PageEvent): void {
@@ -162,23 +139,65 @@ export class UserListComponent implements OnInit, OnDestroy {
   }
 
   // === Row Actions ===
+  onCreateUser(): void {
+    const dialogData: UserDialogData = {
+      mode: 'create'
+    };
+
+    const dialogRef = this.dialog.open(UserDialogComponent, {
+      width: '800px',
+      data: dialogData,
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.loadUsers(); // Reload data after successful create
+      }
+    });
+  }
+
   onViewUser(user: SmartBoxUserDto): void {
-    this.store.dispatch(UserActions.openUserDialog({
+    const dialogData: UserDialogData = {
       mode: 'view',
       user
-    }));
+    };
+
+    this.dialog.open(UserDialogComponent, {
+      width: '800px',
+      data: dialogData
+    });
   }
 
   onEditUser(user: SmartBoxUserDto): void {
-    this.store.dispatch(UserActions.openUserDialog({
+    const dialogData: UserDialogData = {
       mode: 'edit',
       user
-    }));
+    };
+
+    const dialogRef = this.dialog.open(UserDialogComponent, {
+      width: '800px',
+      data: dialogData,
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.loadUsers(); // Reload data after successful edit
+      }
+    });
   }
 
   onManageRoles(user: SmartBoxUserDto): void {
     this.store.dispatch(UserActions.openRoleDialog({
       user
+    }));
+  }
+
+  onDeleteUser(user: SmartBoxUserDto): void {
+    // TODO: Thêm confirmation dialog
+    this.store.dispatch(UserActions.deleteUser({
+      id: user.id
     }));
   }
 

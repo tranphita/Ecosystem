@@ -49,6 +49,7 @@ import { AuthModule, LogLevel } from 'angular-auth-oidc-client';
 // Core services và error handling
 import { ErrorHandlerService } from './core/errors/error-handler.service';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 
 export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -57,14 +58,15 @@ export function HttpLoaderFactory(http: HttpClient): any {
 export function getOidcConfig() {
   const cfg = (window as any)['appConfig']?.oidc;
   return {
-    authority: cfg.authority,
-    clientId: cfg.clientId,
-    redirectUrl: cfg.redirectUrl,
-    postLogoutRedirectUri: cfg.postLogoutRedirectUri,
-    scope: cfg.scope,
-    responseType: cfg.responseType,
-    useRefreshToken: true,
+    authority: cfg?.authority || 'https://localhost:7600',
+    clientId: cfg?.clientId || 'SmartBox_Angular',
+    redirectUrl: cfg?.redirectUrl || 'http://localhost:4300/callback',
+    postLogoutRedirectUri: cfg?.postLogoutRedirectUri || 'http://localhost:4300',
+    scope: cfg?.scope || 'openid profile email address phone offline_access EcosystemSmartBox',
+    responseType: cfg?.responseType || 'code',
+    useRefreshToken: cfg?.useRefreshToken ?? true,
     logLevel: LogLevel.Error,
+    secureRoutes: ['https://localhost:7500/api']
   };
 }
 
@@ -88,14 +90,14 @@ export const appConfig: ApplicationConfig = {
       roles: roleReducer
       // companies: companyReducer
     }),
-    
+
     // NgRx Effects
     provideEffects([
       UserEffects,
       RoleEffects
       // CompanyEffects
     ]),
-    
+
     // NgRx DevTools (chỉ trong development)
     provideStoreDevtools({
       maxAge: 25,
@@ -109,6 +111,13 @@ export const appConfig: ApplicationConfig = {
     {
       provide: ErrorHandler,
       useClass: ErrorHandlerService
+    },
+
+    // HTTP Interceptors
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
     },
     {
       provide: HTTP_INTERCEPTORS,
@@ -130,7 +139,7 @@ export const appConfig: ApplicationConfig = {
         },
       }),
       AuthModule.forRoot({
-        config: (window as any)['appConfig']?.oidc,
+        config: getOidcConfig(),
       })
     ),
   ],

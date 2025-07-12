@@ -253,4 +253,18 @@ export const selectIsLoadingOrValidating = createSelector(
   selectIsLoading,
   selectValidationStates,
   (isLoading, validationStates) => isLoading || validationStates.isValidating
+);
+
+export const selectUniqueCompanies = createSelector(
+  selectUsers,
+  (users: SmartBoxUserDto[]) => {
+    const companies = users
+      .filter(user => user.company)
+      .map(user => user.company!)
+      .filter((company, index, self) => 
+        self.findIndex(c => c.id === company.id) === index
+      );
+    
+    return companies;
+  }
 ); 

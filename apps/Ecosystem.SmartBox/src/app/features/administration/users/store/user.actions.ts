@@ -52,6 +52,22 @@ export const loadCurrentUserFailure = createAction(
   props<{ error: string }>()
 );
 
+// === Create User Actions ===
+export const createUser = createAction(
+  '[User] Create User',
+  props<{ input: CreateUpdateSmartBoxUserDto }>()
+);
+
+export const createUserSuccess = createAction(
+  '[User] Create User Success',
+  props<{ user: SmartBoxUserDto }>()
+);
+
+export const createUserFailure = createAction(
+  '[User] Create User Failure',
+  props<{ error: string }>()
+);
+
 // === Update User Actions ===
 export const updateUser = createAction(
   '[User] Update User',

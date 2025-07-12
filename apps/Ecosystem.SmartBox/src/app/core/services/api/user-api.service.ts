@@ -40,6 +40,13 @@ export class UserApiService extends BaseApiService {
   }
 
   /**
+   * Tạo user mới
+   */
+  createUser(input: CreateUpdateSmartBoxUserDto): Observable<SmartBoxUserDto> {
+    return this.post<SmartBoxUserDto>(this.endpoint, input);
+  }
+
+  /**
    * Cập nhật thông tin user
    */
   updateUser(id: string, input: CreateUpdateSmartBoxUserDto): Observable<SmartBoxUserDto> {

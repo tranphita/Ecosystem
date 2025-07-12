@@ -14,6 +14,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { TranslateModule } from '@ngx-translate/core';
+import { TablerIconsModule } from 'angular-tabler-icons';
 import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil, debounceTime, distinctUntilChanged } from 'rxjs/operators';
@@ -44,10 +45,10 @@ import { RoleDialogComponent } from '../role-dialog/role-dialog.component';
     MatTooltipModule,
     MatCardModule,
     MatDialogModule,
-    TranslateModule
+    TranslateModule,
+    TablerIconsModule
   ],
   templateUrl: './role-list.component.html',
-  styleUrl: './role-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RoleListComponent implements OnInit, OnDestroy {
@@ -77,6 +78,7 @@ export class RoleListComponent implements OnInit, OnDestroy {
   searchTerm = '';
   selectedActiveFilter: boolean | undefined = undefined;
   selectedSystemFilter: boolean | undefined = undefined;
+  showFilters = true;
 
   // === Filter Options ===
   activeFilterOptions = [

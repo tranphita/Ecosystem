@@ -69,6 +69,7 @@ export interface GetSmartBoxRolesInput extends PagedAndSortedResultRequestDto {
 
 // === User Models ===
 export interface SmartBoxUserDto extends BaseAuditedEntityDto {
+  tenantId?: string;
   userName: string;
   email: string;
   fullName?: string;
@@ -82,10 +83,13 @@ export interface SmartBoxUserDto extends BaseAuditedEntityDto {
   department?: string;
   employeeCode?: string;
   startDate?: Date;
+  salary?: number;
   address?: string;
   notes?: string;
   isActive: boolean;
   lastLoginTime?: Date;
+  extraProperties?: Record<string, any>;
+  concurrencyStamp?: string;
   roles: SmartBoxRoleDto[];
 }
 
@@ -103,9 +107,11 @@ export interface CreateUpdateSmartBoxUserDto {
   department?: string;
   employeeCode?: string;
   startDate?: Date;
+  salary?: number;
   address?: string;
   notes?: string;
   isActive: boolean;
+  extraProperties?: Record<string, any>;
   roleIds: string[];
 }
 

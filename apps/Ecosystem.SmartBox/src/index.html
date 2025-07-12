@@ -16,6 +16,35 @@
       rel="stylesheet"
     />
     <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
+    
+    <!-- Load app configuration trước khi start Angular app -->
+    <script>
+      (function() {
+        // Load appsettings.json và store vào window object
+        fetch('./assets/appsettings.json')
+          .then(response => response.json())
+          .then(config => {
+            window.appConfig = config;
+            console.log('✅ App config loaded:', config);
+          })
+          .catch(error => {
+            console.error('❌ Failed to load app config:', error);
+            // Fallback config nếu không load được
+            window.appConfig = {
+              oidc: {
+                authority: 'https://localhost:7600',
+                clientId: 'SmartBox_Angular',
+                responseType: 'code',
+                scope: 'openid profile email address phone offline_access EcosystemSmartBox',
+                redirectUrl: 'http://localhost:4300/callback',
+                postLogoutRedirectUri: 'http://localhost:4300',
+                silentRenew: false,
+                useRefreshToken: true
+              }
+            };
+          });
+      })();
+    </script>
   </head>
   <body class="mat-typography">
     <app-root></app-root>

@@ -23,7 +23,9 @@
     "dismiss": "Đóng",
     "noDataFound": "Không có dữ liệu",
     "notSpecified": "Chưa xác định",
-    "noDescription": "Không có mô tả"
+    "noDescription": "Không có mô tả",
+    "filters": "Bộ lọc",
+    "close": "Đóng"
   },
   "users": {
     "title": "Quản lý người dùng",
@@ -38,6 +40,7 @@
     "fullName": "Họ tên",
     "userName": "Tên đăng nhập",
     "email": "Email",
+    "password": "Mật khẩu",
     "company": "Công ty",
     "position": "Chức vụ",
     "department": "Phòng ban",
@@ -47,8 +50,15 @@
     "gender": "Giới tính",
     "address": "Địa chỉ",
     "startDate": "Ngày bắt đầu",
+    "salary": "Lương",
     "lastLogin": "Đăng nhập cuối",
     "notes": "Ghi chú",
+    "isActive": "Kích hoạt",
+    "genders": {
+      "male": "Nam",
+      "female": "Nữ",
+      "other": "Khác"
+    },
     "stats": {
       "total": "Tổng số",
       "active": "Hoạt động",
@@ -57,8 +67,13 @@
     },
     "filter": {
       "status": "Trạng thái",
-      "allStatuses": "Tất cả trạng thái"
-    }
+      "allStatuses": "Tất cả trạng thái",
+      "allCompanies": "Tất cả công ty",
+      "active": "Hoạt động",
+      "inactive": "Không hoạt động"
+    },
+    "createFirstUser": "Tạo người dùng đầu tiên",
+    "filters": "Bộ lọc"
   },
   "roles": {
     "title": "Quản lý vai trò",
@@ -169,23 +184,29 @@
       "delete": "Xóa công ty"
     }
   },
-  "validation": {
+      "validation": {
     "required": "Trường này là bắt buộc",
     "email": "Email không hợp lệ",
-    "minLength": "Độ dài tối thiểu {min} ký tự",
-    "maxLength": "Độ dài tối đa {max} ký tự",
+    "minLength": "Độ dài tối thiểu 6 ký tự",
+    "maxLength": "Độ dài tối đa vượt quá giới hạn",
     "pattern": "Định dạng không hợp lệ",
     "unique": "Giá trị này đã tồn tại",
-    "phoneNumber": "Số điện thoại không hợp lệ"
+    "phoneNumber": "Số điện thoại không hợp lệ",
+    "min": "Giá trị phải lớn hơn hoặc bằng 0"
   },
-  "messages": {
+      "messages": {
     "saveSuccess": "Lưu thành công",
     "deleteSuccess": "Xóa thành công",
     "deleteConfirm": "Bạn có chắc chắn muốn xóa?",
     "unsavedChanges": "Có thay đổi chưa được lưu. Bạn có muốn tiếp tục?",
     "accessDenied": "Bạn không có quyền truy cập chức năng này",
     "networkError": "Lỗi kết nối mạng. Vui lòng thử lại.",
-    "serverError": "Lỗi máy chủ. Vui lòng liên hệ quản trị viên."
+    "serverError": "Lỗi máy chủ. Vui lòng liên hệ quản trị viên.",
+    "createUserSuccess": "Tạo người dùng thành công",
+    "updateUserSuccess": "Cập nhật người dùng thành công",
+    "deleteUserSuccess": "Xóa người dùng thành công",
+    "deleteUserConfirm": "Bạn có chắc chắn muốn xóa người dùng này?",
+    "toggleUserActiveSuccess": "Cập nhật trạng thái người dùng thành công"
   },
   "navigation": {
     "home": "Trang chủ",
